@@ -9,9 +9,22 @@ import { fadeUpVariants, defaultViewport } from '@/utils/animations';
 
 export const Contact = () => {
   return (
-    <Section className="bg-primary-700 text-white relative overflow-hidden">
+    <Section className="text-white relative overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundImage: "url('/kim1.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        <div className="absolute inset-0 bg-primary-900/85"></div>
+      </div>
+
       {/* Background decorations - Subtle texture & Logo Pattern */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+      <div className="absolute inset-0 opacity-10 z-0 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start relative z-10">

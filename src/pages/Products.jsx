@@ -66,19 +66,28 @@ export const Products = () => {
       />
       <main className="pt-20 bg-gray-50 min-h-screen">
         {/* Hero Section */}
-        <Section className="bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
-          {/* Background decorations */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-100/30 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-100/30 rounded-full blur-3xl -z-10 -translate-x-1/3 translate-y-1/3"></div>
+        <Section className="relative overflow-hidden py-20">
+          {/* Background Image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+            style={{ backgroundImage: 'url(/ngosiok.jpg)' }}
+          ></div>
 
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-block bg-white text-primary-700 px-4 py-2 rounded-full text-sm font-bold mb-6 border border-primary-100 shadow-sm">
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/70 z-0"></div>
+
+          {/* Background decorations */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl z-0 translate-x-1/3 -translate-y-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl z-0 -translate-x-1/3 translate-y-1/3"></div>
+
+          <div className="text-center max-w-4xl mx-auto relative z-10">
+            <div className="inline-block bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold mb-6 border border-white/30 shadow-sm">
               Our Collection
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold font-heading text-gray-900 mb-6">
-              Premium Quality <span className="text-primary-600">Noodles</span>
+            <h1 className="text-5xl md:text-6xl font-bold font-heading text-white mb-6 drop-shadow-lg">
+              Premium Quality <span className="text-primary-400">Noodles</span>
             </h1>
-            <p className="text-xl text-gray-600 font-medium max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 font-medium max-w-2xl mx-auto drop-shadow-md">
               Discover our range of traditional and innovative noodle products,
               crafted with care and dedication.
             </p>
@@ -183,22 +192,29 @@ export const Products = () => {
           </div>
         </Section>
 
-        {/* Call to Action Section - Light Theme */}
-        <Section className="bg-white border-t border-gray-100">
-          <div className="text-center max-w-4xl mx-auto rounded-3xl bg-gray-50 p-12 border border-gray-100">
-            <h2 className="text-3xl md:text-4xl font-bold font-heading text-gray-900 mb-6">
+        {/* Call to Action Section - Dark Theme Parallax */}
+        <Section className="relative border-t border-gray-100 py-24 pb-32">
+          {/* Parallax Background Images */}
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed z-0"
+            style={{ backgroundImage: 'url(/images/superqpancit.jpg)' }}
+          ></div>
+          <div className="absolute inset-0 bg-primary-900/85 z-0"></div>
+
+          <div className="relative z-10 text-center max-w-4xl mx-auto rounded-3xl bg-primary-800/40 p-12 lg:p-16 border border-white/10 shadow-2xl">
+            <h2 className="text-3xl md:text-5xl font-bold font-heading text-white mb-6 drop-shadow-md">
               Interested in Our Products?
             </h2>
-            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto drop-shadow-sm font-medium">
               Contact us to learn more about our distribution options,
               bulk orders, or to become a retail partner.
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center space-x-2 bg-primary-600 text-white px-8 py-4 rounded-full font-bold hover:bg-primary-700 transition-colors shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40"
+              className="inline-flex items-center justify-center space-x-2 bg-secondary-500 text-white px-8 py-4 rounded-full font-bold hover:bg-secondary-600 transition-colors shadow-lg shadow-secondary/25 hover:shadow-xl hover:shadow-secondary/40 hover:-translate-y-1 transform duration-300"
             >
-              <span>Get in Touch</span>
-              <ArrowRight className="w-5 h-5" />
+              <span className="text-lg">Get in Touch</span>
+              <ArrowRight className="w-5 h-5 md:w-6 md:h-6 hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </Section>

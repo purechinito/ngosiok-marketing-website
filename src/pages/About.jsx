@@ -96,25 +96,34 @@ export const About = () => {
       <main className="pt-20">
 
         {/* HERO SECTION */}
-        <Section className="bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-100/40 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-100/40 rounded-full blur-3xl -z-10 -translate-x-1/3 translate-y-1/3"></div>
+        <Section className="relative overflow-hidden py-20">
+          {/* Background Image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+            style={{ backgroundImage: 'url(/ngosiok.jpg)' }}
+          ></div>
 
-          <div className="text-center max-w-4xl mx-auto px-4">
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/70 z-0"></div>
+
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl z-0 translate-x-1/3 -translate-y-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl z-0 -translate-x-1/3 translate-y-1/3"></div>
+
+          <div className="text-center max-w-4xl mx-auto px-4 relative z-10">
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={defaultViewport}
               variants={fadeUpVariants}
             >
-              <div className="inline-flex items-center space-x-2 bg-white text-primary-700 px-4 py-2 rounded-full text-sm font-bold mb-6 border border-primary-100 shadow-sm">
+              <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold mb-6 border border-white/30 shadow-sm">
                 <History className="w-4 h-4" />
                 <span>Since 1945</span>
               </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-heading text-gray-900 mb-6 leading-tight">
-                About <span className="text-primary-600">Ngosiok Marketing</span>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-heading text-white mb-6 leading-tight drop-shadow-lg">
+                About <span className="text-primary-400">Ngosiok Marketing</span>
               </h1>
-              <p className="text-xl md:text-2xl text-gray-600 leading-relaxed font-medium max-w-2xl mx-auto">
+              <p className="text-xl md:text-2xl text-white/90 leading-relaxed font-medium max-w-2xl mx-auto drop-shadow-md">
                 A legacy of quality, innovation, and trust spanning over 80 years of noodle making excellence.
               </p>
             </motion.div>
@@ -122,9 +131,16 @@ export const About = () => {
         </Section>
 
         {/* THE ORIGIN STORY */}
-        <Section className="bg-white py-20 relative">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
-          <div className="absolute bottom-20 left-0 w-64 h-64 bg-primary-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+        <Section className="relative py-20 overflow-hidden">
+          {/* Parallax Background */}
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed z-0"
+            style={{ backgroundImage: 'url(/oldcover.jpg)' }}
+          ></div>
+          <div className="absolute inset-0 bg-white/95 z-0"></div>
+
+          <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none z-0"></div>
+          <div className="absolute bottom-20 left-0 w-64 h-64 bg-primary-500/10 rounded-full blur-3xl pointer-events-none z-0"></div>
 
           <div className="max-w-4xl mx-auto px-4 relative z-10">
             <div className="text-center mb-16">
@@ -261,71 +277,27 @@ export const About = () => {
           </div>
         </Section>
 
-        {/* MISSION, VISION, VALUES SECTION */}
-        <Section className="bg-gray-50 py-24">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold font-heading text-gray-900 mb-4">Evolution & Growth</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Guided by clear principles, we continue to grow and adapt to the changing needs of Filipino families.
-              </p>
-            </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {[
-                {
-                  icon: Target,
-                  title: "Our Mission",
-                  text: "To provide the highest quality noodle products while continuously innovating our processes to ensure food safety and customer satisfaction.",
-                  color: "from-red-500 to-red-600"
-                },
-                {
-                  icon: Award,
-                  title: "Our Vision",
-                  text: "To be the leading noodle manufacturer in the Philippines and a trusted name in international markets, known for quality and innovation.",
-                  color: "from-yellow-500 to-yellow-600"
-                },
-                {
-                  icon: Users,
-                  title: "Our Values",
-                  text: "Quality, integrity, innovation, and customer satisfaction guide everything we do, from production to distribution.",
-                  color: "from-blue-500 to-blue-600"
-                }
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card hover className="h-full text-center border-t-4 border-t-primary-500 hover:-translate-y-1 transition-transform duration-300">
-                    <CardHeader>
-                      <div className={`w-16 h-16 mx-auto bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-gray-200 transform rotate-3`}>
-                        <item.icon className="w-8 h-8 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                    </CardHeader>
-                    <CardBody>
-                      <p className="text-gray-600 leading-relaxed">
-                        {item.text}
-                      </p>
-                    </CardBody>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </Section>
 
         {/* GLOBAL REACH MAP SECTION */}
-        <Section className="bg-white py-24">
-          <div className="max-w-7xl mx-auto px-4">
+        <Section className="relative py-24 overflow-hidden">
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed z-0"
+            style={{ backgroundImage: 'url(/images/superqprods.jpg)' }}
+          ></div>
+          <div className="absolute inset-0 bg-primary-900/90 z-0"></div>
+
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed z-0 mix-blend-overlay"
+            style={{ backgroundImage: 'url(/world-map.svg)', opacity: 0.15, backgroundSize: 'contain' }}
+          ></div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4">
             <div className="text-center mb-16">
-              <span className="text-secondary-600 font-bold tracking-wider uppercase text-sm mb-2 block">Our Reach</span>
-              <h2 className="text-4xl md:text-5xl font-bold font-heading text-gray-900 mb-6">Nationwide Presence, Global Appeal</h2>
+              <span className="text-secondary-400 font-bold tracking-wider uppercase text-sm mb-2 block">Our Reach</span>
+              <h2 className="text-4xl md:text-5xl font-bold font-heading text-white mb-6">Nationwide Presence, Global Appeal</h2>
               <div className="w-24 h-1 bg-gradient-to-r from-secondary-400 to-primary-500 mx-auto rounded-full mb-8"></div>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-white/90 max-w-3xl mx-auto">
                 From our strategic hub in Cebu, our distribution network spans the entire Philippines and extends to key international markets across the globe.
               </p>
             </div>
