@@ -3,7 +3,7 @@ export const products = [
     id: 1,
     name: 'Super Q Golden Bihon',
     category: 'Cornstarch-based Noodles',
-    description: 'Fine strands with natural yellow color from cornstarch. Rectangular, hard, and compact shape allowing for considerable yield. Cooked product is soft, smooth, and bouncy while retaining distinct bites.',
+    description: `This cornstarch-based noodle features fine, delicate strands with a natural yellow color derived from high-quality cornstarch. It comes in a rectangular, hard, and compact form, ensuring durability during handling and storage. Its compact structure allows for excellent expansion when cooked, delivering a generous yield that is ideal for both household and food service use.\n\nWhen cooked, the noodles become soft, smooth, and pleasantly bouncy while maintaining their distinct bite and texture. They are quick and easy to prepare—perfect even for beginners who want to create delicious, restaurant-quality dishes at home.\n\nOur bihon is produced using a proprietary manufacturing process developed to ensure consistency and superior quality. By minimizing human intervention and eliminating traditional sun-drying methods, we significantly reduce the risk of foreign matter contamination. Manufactured in a strictly controlled environment, our production standards exceed industry expectations, making our bihon the benchmark by which others are compared.\n\nSuper Q Golden Bihon is our premium brand, trusted by customers both locally and internationally. In addition to our branded products, we also offer private label packing for qualified minimum order quantities, providing flexible solutions to meet your business needs.`,
     features: [
       'Natural yellow color',
       'Fine strands',
@@ -16,7 +16,7 @@ export const products = [
     id: 4,
     name: 'Super Q Special Palabok',
     category: 'Cornstarch-based Noodles',
-    description: 'Similar to our First Choice Steamed Noodles with added eggs for richer flavor and golden color. Perfect for premium noodle dishes.',
+    description: `This cornstarch-based noodle is closely similar to our Super Q Golden Bihon in quality and production standards. The key difference lies in the strand size—Palabok noodles are noticeably thicker, giving them a heartier texture and fuller mouthfeel. Due to their thickness, they require a slightly longer cooking time to achieve the ideal softness and consistency.\n\nWell-loved in the Philippines, this noodle variety is traditionally used in classic Filipino dishes and festive recipes. Over time, it has also gained acceptance in international markets, where it is creatively used as a substitute for other thick noodle varieties in different cuisines. Its firm structure and satisfying bite make it especially appealing to those who prefer thicker, more substantial noodles.\n\nProduced in a controlled manufacturing environment using our advanced process technology, this noodle maintains the same high standards of quality, cleanliness, and consistency that define all our products.`,
     features: [
       'Enriched with eggs',
       'Rich flavor',
@@ -29,7 +29,7 @@ export const products = [
     id: 8,
     name: 'Super Q Pancit Canton',
     category: 'Wheat-based Noodles',
-    description: 'Pre-cooked wheat noodles that are perfect for stir-fries. A classic Filipino favorite for celebrations and family gatherings.',
+    description: `Super Q Pancit Canton is a premium wheat-based noodle that is pre-cooked and dried, characterized by its slightly yellowish hue and firm texture. These noodles are carefully crafted using high-quality ingredients, resulting in a product that cooks evenly and retains its springy bite.\n\nAs a classic staple in Filipino cuisine, Pancit Canton is deeply rooted in culinary traditions, often taking center stage during birthdays, fiestas, and family gatherings. The noodles symbolize long life and prosperity, making them an essential part of celebratory feasts. Their excellent absorbing capabilities allow them to soak up savory broths and sauces, perfect for rich and flavorful stir-fry dishes.\n\nManufactured in our state-of-the-art facilities, Super Q Pancit Canton adheres to strict quality controls. Each pack is guaranteed to provide the authentic taste and quality that generations of Filipinos have grown to love and trust, making it a reliable choice for your everyday meals.`,
     features: [
       'Stir-fry ready',
       'Classic taste',
@@ -42,7 +42,7 @@ export const products = [
     id: 2,
     name: 'Super Q Sotanghon',
     category: 'Mung Bean Vermicelli',
-    description: 'Premium cornstarch-based noodles known for their excellent quality and consistency. Perfect for Filipino dishes like pancit bihon.',
+    description: `Super Q Sotanghon, also known as glass noodles, is a delicate and versatile noodle appreciated for its translucent appearance and smooth, slippery texture when cooked. These fine strands are carefully processed to ensure they remain intact and do not easily become mushy during cooking.\n\nHighly versatile, Sotanghon is a favorite ingredient in many Southeast Asian cuisines. Whether used in hearty chicken soups, spring roll fillings, or stir-fried alongside fresh vegetables and savory meats, it imparts a light yet satisfying element to any dish. Its neutral flavor profile makes it an excellent canvas, easily absorbing the rich essences of the ingredients it is cooked with.\n\nOur Sotanghon is produced with a steadfast commitment to quality and hygiene, ensuring that you receive a clean, consistent, and superior product. From comforting home-cooked meals to professional culinary creations, Super Q Sotanghon provides a premium noodle experience you can always rely on.`,
     features: [
       'Premium quality',
       'Consistent texture',
@@ -55,7 +55,7 @@ export const products = [
     id: 3,
     name: 'Super Q Misua',
     category: 'Wheat-based Noodles',
-    description: 'High-quality wheat-based Chinese noodles, steamed to perfection. Ideal for various Asian noodle dishes.',
+    description: `Super Q Misua is a premium flour-based noodle featuring fine, round, off-white strands with a smooth texture when cooked. Crafted from high-quality wheat, it delivers consistent quality and excellent cooking performance.\n\nTraditionally enjoyed in Chinese celebrations, the long strands symbolize longevity, while the circular shape represents family reunion and togetherness. Its delicate texture and subtle flavor make it perfect for soups, festive dishes, or everyday meals.\n\nSuper Q Misua contains wheat and traces of soy and is ready for general consumption. This product is available for both local and export markets, offering dependable quality and cultural significance in every pack.`,
     features: [
       'Authentic Chinese noodles',
       'Steamed process',
@@ -68,7 +68,7 @@ export const products = [
     id: 6,
     name: 'First Choice Fresh Japanese Ramen',
     category: 'Wheat-based Noodles',
-    description: 'Fresh egg noodles perfect for lomi and other soup dishes. Offers a rich, chewy texture that absorbs flavors well.',
+    description: `First Choice Fresh Japanese Ramen features soft, fresh, and slightly chewy egg noodles designed to replicate the authentic noodle experience. Unlike dried alternatives, these fresh noodles offer a superior, robust texture and a rich flavor profile that holds up beautifully in hot broths.\n\nThese noodles are exceptionally well-suited for a variety of beloved dishes, ranging from traditional Japanese ramen bowls with rich tonkotsu or miso broths to local favorites like Filipino Lomi. Their substantial thickness and chewy consistency allow them to deliver a comforting, hearty bite while absorbing the deep, complex flavors of your favorite soups.\n\nProduced under strict quality standards to guarantee optimal freshness, First Choice Fresh Japanese Ramen undergoes meticulous preparation, portioning, and packing. This dedication to quality ensures that every serving brings the restaurant-quality taste and texture straight to your kitchen, elevating your culinary creations with every bowl.`,
     features: [
       'Fresh egg noodles',
       'Rich texture',
@@ -81,7 +81,7 @@ export const products = [
     id: 7,
     name: 'First Choice Flat Japanese Noodles',
     category: 'Wheat-based Noodles',
-    description: 'Very thin, salted wheat flour noodles. delicate and quick to cook, often used in soups or stir-fried dishes.',
+    description: `First Choice Flat Japanese Noodle is a premium wheat-based noodle, also known as Miki-Mami or Hokkien noodles, crafted in the traditional Japanese style. These yellow, flat noodles are pre-cooked and acidified to maintain freshness, offering convenience and consistent quality for soups, stir-fries, and other noodle dishes.\n\nProduced through a meticulous process that includes dough preparation, cutting, cooking, oiling, cooling, and careful packing, these noodles maintain excellent texture, flavor, and appearance in every batch. The packaging features a green design with a clear window, allowing the vibrant yellow noodles to be easily seen.\n\nReady to use straight from the pack, First Choice Flat Japanese Noodles provide versatility, reliability, and consistent performance for households, restaurants, and food service operations seeking authentic Asian-style noodles.`,
     features: [
       'Delicate texture',
       'Quick cooking',

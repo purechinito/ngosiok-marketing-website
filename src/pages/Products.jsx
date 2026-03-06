@@ -268,7 +268,7 @@ export const Products = () => {
                     <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-heading text-gray-900 mb-1 sm:mb-2 md:mb-4 leading-tight">
                       {selectedProduct.name}
                     </h2>
-                    <p className="text-gray-600 text-xs sm:text-sm md:text-lg leading-relaxed">
+                    <p className="text-gray-600 text-xs sm:text-sm md:text-lg leading-relaxed whitespace-pre-wrap">
                       {selectedProduct.description}
                     </p>
                   </div>
