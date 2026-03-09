@@ -8,16 +8,16 @@ export const navigationItems = [
     icon: Home,
   },
   {
-    id: 2,
-    name: 'About',
-    path: '/about',
-    icon: Info,
-  },
-  {
     id: 3,
     name: 'Products',
     path: '/products',
     icon: Package,
+  },
+    {
+    id: 2,
+    name: 'About',
+    path: '/about',
+    icon: Info,
   },
   {
     id: 4,

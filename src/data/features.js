@@ -31,6 +31,6 @@ export const features = [
     title: "Global Reach",
     description:
       "Exporting quality noodles to Asia, Europe, Middle East, and North America. Our products bring authentic Filipino taste to families worldwide, maintaining the same high standards across all markets.",
-    image: "/images/features/global-reach.jpeg",
+    image: "/images/superqprods.jpg",
   },
 ];
