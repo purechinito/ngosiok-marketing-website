@@ -11,6 +11,9 @@ export const products = [
       'Soft and smooth when cooked',
     ],
     image: '/images/products/ngosiok (1).jpg',
+    additionalImages: [
+      '/images/products/newproducts/goldenbihon.jpg',
+    ],
   },
   {
     id: 4,
@@ -24,6 +27,11 @@ export const products = [
       'Premium quality',
     ],
     image: '/images/products/ngosiok (4).jpg',
+    additionalImages: [
+      '/images/products/newproducts/specialpalabok.jpg',
+      '/images/products/newproducts/specialpalabok1.jpg',
+      '/images/products/newproducts/specialpalabok2.jpg',
+    ],
   },
   {
     id: 8,
@@ -37,11 +45,14 @@ export const products = [
       'Party favorite',
     ],
     image: '/images/products/ngosiok (8).jpg',
+    additionalImages: [
+      '/images/products/newproducts/specialpancitcanton.jpg',
+    ],
   },
   {
     id: 2,
     name: 'Super Q Sotanghon',
-    category: 'Mung Bean Vermicelli',
+    category: 'Vermicelli Noodles',
     description: `Super Q Sotanghon, also known as glass noodles, is a delicate and versatile noodle appreciated for its translucent appearance and smooth, slippery texture when cooked. These fine strands are carefully processed to ensure they remain intact and do not easily become mushy during cooking.\n\nHighly versatile, Sotanghon is a favorite ingredient in many Southeast Asian cuisines. Whether used in hearty chicken soups, spring roll fillings, or stir-fried alongside fresh vegetables and savory meats, it imparts a light yet satisfying element to any dish. Its neutral flavor profile makes it an excellent canvas, easily absorbing the rich essences of the ingredients it is cooked with.\n\nOur Sotanghon is produced with a steadfast commitment to quality and hygiene, ensuring that you receive a clean, consistent, and superior product. From comforting home-cooked meals to professional culinary creations, Super Q Sotanghon provides a premium noodle experience you can always rely on.`,
     features: [
       'Premium quality',
@@ -50,6 +61,9 @@ export const products = [
       'Traditional Filipino favorite',
     ],
     image: '/images/products/ngosiok (2).jpg',
+    additionalImages: [
+      '/images/products/newproducts/sotanghon_vermicelli.jpg',
+    ],
   },
   {
     id: 3,
@@ -63,6 +77,11 @@ export const products = [
       'Premium wheat base',
     ],
     image: '/images/products/ngosiok (3).jpg',
+    additionalImages: [
+      '/images/products/newproducts/misua.jpg',
+      '/images/products/newproducts/misua1.jpg',
+      '/images/products/newproducts/misua2.jpg',
+    ],
   },
   {
     id: 6,
@@ -76,6 +95,9 @@ export const products = [
       'Absorbs flavor',
     ],
     image: '/images/products/ngosiok (6).jpg',
+    additionalImages: [
+      '/images/products/newproducts/japaneseramen.jpg',
+    ],
   },
   {
     id: 7,
@@ -89,5 +111,8 @@ export const products = [
       'Versatile usage',
     ],
     image: '/images/products/ngosiok (7).jpg',
+    additionalImages: [
+      '/images/products/newproducts/japanesenoodles.jpg',
+    ],
   },
 ];

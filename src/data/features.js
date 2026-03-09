@@ -7,7 +7,7 @@ export const features = [
     title: "Quality Assured",
     description:
       "Committed to product quality and customer satisfaction with rigorous quality control processes. Every batch undergoes strict testing to ensure we deliver only the finest noodles that meet international standards.",
-    image: "/images/features/quality-assured.jpeg",
+    image: "/images/features/quality-assured.jpg",
   },
   {
     id: 2,

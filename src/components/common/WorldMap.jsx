@@ -7,7 +7,6 @@ import {
     Line,
     ZoomableGroup,
 } from 'react-simple-maps';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Globe } from 'lucide-react';
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
@@ -228,17 +227,8 @@ export const WorldMap = () => {
                                     onMouseLeave={() => setTooltip(null)}
                                     style={{ cursor: 'pointer' }}
                                 >
-                                    {/* pulse halo */}
-                                    <circle fill={cfg.glow}>
-                                        <animate attributeName="r"
-                                            values={`${r * 1.2};${r * 2.6};${r * 1.2}`}
-                                            dur={`${2 + (i % 5) * 0.3}s`}
-                                            repeatCount="indefinite" />
-                                        <animate attributeName="opacity"
-                                            values="0.55;0;0.55"
-                                            dur={`${2 + (i % 5) * 0.3}s`}
-                                            repeatCount="indefinite" />
-                                    </circle>
+                                    {/* static halo */}
+                                    <circle fill={cfg.glow} r={r * 1.8} opacity={0.25} />
 
                                     {/* core */}
                                     <circle
@@ -263,20 +253,13 @@ export const WorldMap = () => {
                 </ComposableMap>
 
                 {/* Tooltip */}
-                <AnimatePresence>
-                    {tooltip && (
-                        <motion.div
-                            key={tooltip}
-                            initial={{ opacity: 0, y: 4 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.15 }}
-                            className="absolute left-1/2 -translate-x-1/2 bottom-3 bg-gray-900/90 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-xl pointer-events-none z-30 whitespace-nowrap"
-                        >
-                            📍 {tooltip}
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                {tooltip && (
+                    <div
+                        className="absolute left-1/2 -translate-x-1/2 bottom-3 bg-gray-900/90 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-xl pointer-events-none z-30 whitespace-nowrap"
+                    >
+                        📍 {tooltip}
+                    </div>
+                )}
 
                 {/* Zoom hint */}
                 <div className="absolute top-2 right-3 text-[10px] text-gray-400 font-medium pointer-events-none select-none">
@@ -286,12 +269,7 @@ export const WorldMap = () => {
 
             {/* ── Info Panel ── */}
             <div className="bg-gradient-to-r from-gray-50 to-white border-t border-gray-100 px-5 py-5 md:px-8 md:py-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                >
+                <div>
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div className="flex items-start gap-3 md:gap-4">
                             <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center shadow-lg">
@@ -323,7 +301,7 @@ export const WorldMap = () => {
                             </div>
                         </div>
                     </div>
-                </motion.div>
+                </div>
             </div>
         </div>
     );

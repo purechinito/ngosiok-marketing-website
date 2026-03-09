@@ -4,7 +4,7 @@ import { Seo } from '@/components/common/Seo';
 import { Section } from '@/components/common/Section';
 import { Button } from '@/components/common/Button';
 import { products } from '@/data/products';
-import { ArrowRight, Star, X, Check, Phone, MessageCircle } from 'lucide-react';
+import { ArrowRight, Star, X, Check, Phone, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { classNames } from '@/utils/helpers';
 import { SEO_CONFIG, COMPANY_INFO } from '@/utils/constants';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,11 +12,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 export const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [galleryScrollPos, setGalleryScrollPos] = useState(0);
 
   // Lock body scroll when modal is open
   useEffect(() => {
     if (selectedProduct) {
       document.body.style.overflow = 'hidden';
+      setSelectedImage(null);
+      setGalleryScrollPos(0);
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -29,6 +33,7 @@ export const Products = () => {
     { id: 'all', name: 'All Products' },
     { id: 'Cornstarch-based Noodles', name: 'Cornstarch-based' },
     { id: 'Wheat-based Noodles', name: 'Wheat-based' },
+    { id: 'Vermicelli Noodles', name: 'Vermicelli' },
   ];
 
   const filteredProducts = selectedCategory === 'all'
@@ -118,14 +123,14 @@ export const Products = () => {
                 key={product.id}
                 className={classNames(
                   "group flex flex-col h-full relative rounded-2xl md:rounded-3xl p-3 md:p-4 transition-all duration-500 cursor-pointer border",
-                  [1, 4, 8].includes(product.id)
+                  [1, 2, 4, 8].includes(product.id)
                     ? "bg-gradient-to-br from-yellow-100 via-yellow-300 to-yellow-500 shadow-xl shadow-yellow-500/20 hover:shadow-yellow-500/40 hover:-translate-y-2 border-yellow-300"
                     : "bg-white border-transparent hover:border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2"
                 )}
                 onClick={() => setSelectedProduct(product)}
               >
                 {/* Floating Top Seller Badge Outward */}
-                {[1, 4, 8].includes(product.id) && (
+                {[1, 2, 4, 8].includes(product.id) && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 md:-top-4 z-20">
                     <span className="bg-gradient-to-r from-yellow-500 to-yellow-700 text-white px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold shadow-lg flex items-center gap-1.5 border-2 border-white/80 whitespace-nowrap">
                       <Star className="w-3 h-3 md:w-3.5 h-3.5 fill-white text-white" />
@@ -162,14 +167,14 @@ export const Products = () => {
                 <div className="flex-1 flex flex-col px-1">
                   <h3 className={classNames(
                     "text-sm md:text-2xl font-bold mb-1 md:mb-2 font-heading transition-colors line-clamp-2",
-                    [1, 4, 8].includes(product.id) ? "text-gray-900 group-hover:text-gray-800" : "text-gray-900 group-hover:text-primary-600"
+                    [1, 2, 4, 8].includes(product.id) ? "text-gray-900 group-hover:text-gray-800" : "text-gray-900 group-hover:text-primary-600"
                   )}>
                     {product.name}
                   </h3>
 
                   <p className={classNames(
                     "mb-2 md:mb-4 line-clamp-2 text-xs md:text-sm font-medium leading-relaxed",
-                    [1, 4, 8].includes(product.id) ? "text-gray-900" : "text-gray-600"
+                    [1, 2, 4, 8].includes(product.id) ? "text-gray-900" : "text-gray-600"
                   )}>
                     {product.description}
                   </p>
@@ -179,7 +184,7 @@ export const Products = () => {
                       {product.features.slice(0, 3).map((feature, idx) => (
                         <li key={idx} className={classNames(
                           "flex items-center text-xs font-semibold px-2 py-1 rounded-md",
-                          [1, 4, 8].includes(product.id) ? "bg-white/60 text-yellow-900" : "bg-primary-50 text-primary-700"
+                          [1, 2, 4, 8].includes(product.id) ? "bg-white/60 text-yellow-900" : "bg-primary-50 text-primary-700"
                         )}>
                           {feature}
                         </li>
@@ -248,14 +253,92 @@ export const Products = () => {
                   <X className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
 
-                {/* Left Side - Image */}
-                <div className="w-full md:w-1/2 h-[38vh] sm:h-[45vh] md:h-auto relative bg-white md:bg-gray-100 p-2 sm:p-4 md:p-0 flex items-center justify-center shrink-0 border-b border-gray-100 md:border-none">
+                {/* Left Side - Image with Gallery Carousel Overlay */}
+                <div className="w-full md:w-1/2 h-[38vh] sm:h-[45vh] md:h-auto relative bg-white md:bg-gray-100 p-2 sm:p-4 md:p-0 flex items-center justify-center shrink-0 border-b border-gray-100 md:border-none group">
                   <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white pointer-events-none md:hidden" />
                   <img
-                    src={selectedProduct.image}
+                    src={selectedImage || selectedProduct.image}
                     alt={selectedProduct.name}
                     className="w-full h-full object-contain md:object-cover relative z-10"
                   />
+
+                  {/* Gallery Carousel - Overlay at Bottom of Image */}
+                  {selectedProduct.additionalImages && selectedProduct.additionalImages.length > 0 && (
+                    <div className="absolute bottom-3 sm:bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-20 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] md:w-[calc(100%-3rem)] max-w-xs">
+                      {/* Gallery Container with Arrow Buttons */}
+                      <div className="flex items-center gap-1.5 md:gap-2">
+                        {/* Left Arrow */}
+                        <button
+                          onClick={() => {
+                            const container = document.getElementById('gallery-scroll');
+                            if (container) {
+                              container.scrollBy({ left: -80, behavior: 'smooth' });
+                              setGalleryScrollPos(Math.max(0, galleryScrollPos - 80));
+                            }
+                          }}
+                          className="flex-shrink-0 bg-white/90 hover:bg-white text-gray-700 hover:text-gray-900 p-1.5 md:p-2 rounded-full shadow-lg transition-all backdrop-blur-sm"
+                        >
+                          <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+                        </button>
+
+                        {/* Gallery Scroll Container */}
+                        <div
+                          id="gallery-scroll"
+                          className="flex-1 flex gap-1.5 md:gap-2 overflow-x-auto scrollbar-hide scroll-smooth"
+                        >
+                          {/* Main product image thumbnail */}
+                          <div
+                            onClick={() => setSelectedImage(null)}
+                            className={classNames(
+                              "flex-shrink-0 w-16 h-16 md:w-20 md:h-20 cursor-pointer rounded-lg overflow-hidden border-2 transition-all",
+                              !selectedImage
+                                ? "border-primary-600 shadow-md ring-2 ring-primary-300"
+                                : "border-gray-300 hover:border-gray-400"
+                            )}
+                          >
+                            <img
+                              src={selectedProduct.image}
+                              alt={`${selectedProduct.name} main`}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          {/* Additional product images */}
+                          {selectedProduct.additionalImages.map((img, idx) => (
+                            <div
+                              key={idx}
+                              onClick={() => setSelectedImage(img)}
+                              className={classNames(
+                                "flex-shrink-0 w-16 h-16 md:w-20 md:h-20 cursor-pointer rounded-lg overflow-hidden border-2 transition-all",
+                                selectedImage === img
+                                  ? "border-primary-600 shadow-md ring-2 ring-primary-300"
+                                  : "border-gray-300 hover:border-gray-400"
+                              )}
+                            >
+                              <img
+                                src={img}
+                                alt={`${selectedProduct.name} ${idx + 1}`}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Right Arrow */}
+                        <button
+                          onClick={() => {
+                            const container = document.getElementById('gallery-scroll');
+                            if (container) {
+                              container.scrollBy({ left: 80, behavior: 'smooth' });
+                              setGalleryScrollPos(galleryScrollPos + 80);
+                            }
+                          }}
+                          className="flex-shrink-0 bg-white/90 hover:bg-white text-gray-700 hover:text-gray-900 p-1.5 md:p-2 rounded-full shadow-lg transition-all backdrop-blur-sm"
+                        >
+                          <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Right Side - Details */}
@@ -271,22 +354,6 @@ export const Products = () => {
                     <p className="text-gray-600 text-xs sm:text-sm md:text-lg leading-relaxed whitespace-pre-wrap">
                       {selectedProduct.description}
                     </p>
-                  </div>
-
-                  <div className="mb-3 md:mb-8 hidden sm:block">
-                    <h3 className="text-xs md:text-sm font-bold text-gray-900 uppercase tracking-wider mb-2 md:mb-4 border-b border-gray-100 pb-2">
-                      Key Features
-                    </h3>
-                    <ul className="grid grid-cols-1 gap-2 md:gap-3">
-                      {selectedProduct.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <div className="bg-green-100 rounded-full p-1 mr-2 md:mr-3 mt-0.5">
-                            <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-green-600" />
-                          </div>
-                          <span className="text-gray-700 text-xs md:text-base font-medium">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
 
                   <div className="mt-auto pt-3 md:pt-6 border-t border-gray-100">
