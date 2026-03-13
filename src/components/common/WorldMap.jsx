@@ -147,7 +147,7 @@ const FOREIGN_PINS = PINS.filter(p => !p.ph);
 
 // ─── Styles ──────────────────────────────────────────────────────────────────
 const PIN_CFG = {
-    hub: { fill: '#D01C1F', glow: 'rgba(208,28,31,0.55)', r: 3.8, rHub: 6 },
+    hub: { fill: '#7e0f00', glow: 'rgba(126,15,0,0.55)', r: 3.8, rHub: 6 },
     major: { fill: '#E3B631', glow: 'rgba(227,182,49,0.55)', r: 2.6 },
     partner: { fill: '#3387D6', glow: 'rgba(51,135,214,0.55)', r: 1.8 },
 };

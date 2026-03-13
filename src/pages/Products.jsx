@@ -123,14 +123,14 @@ export const Products = () => {
                 key={product.id}
                 className={classNames(
                   "group flex flex-col h-full relative rounded-2xl md:rounded-3xl p-3 md:p-4 transition-all duration-500 cursor-pointer border",
-                  [1, 2, 4, 8].includes(product.id)
+                  [1, 2, 4, 8, 9].includes(product.id)
                     ? "bg-gradient-to-br from-yellow-100 via-yellow-300 to-yellow-500 shadow-xl shadow-yellow-500/20 hover:shadow-yellow-500/40 hover:-translate-y-2 border-yellow-300"
                     : "bg-white border-transparent hover:border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2"
                 )}
                 onClick={() => setSelectedProduct(product)}
               >
                 {/* Floating Top Seller Badge Outward */}
-                {[1, 2, 4, 8].includes(product.id) && (
+                {[1, 2, 4, 8, 9].includes(product.id) && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 md:-top-4 z-20">
                     <span className="bg-gradient-to-r from-yellow-500 to-yellow-700 text-white px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold shadow-lg flex items-center gap-1.5 border-2 border-white/80 whitespace-nowrap">
                       <Star className="w-3 h-3 md:w-3.5 h-3.5 fill-white text-white" />
@@ -167,14 +167,14 @@ export const Products = () => {
                 <div className="flex-1 flex flex-col px-1">
                   <h3 className={classNames(
                     "text-sm md:text-2xl font-bold mb-1 md:mb-2 font-heading transition-colors line-clamp-2",
-                    [1, 2, 4, 8].includes(product.id) ? "text-gray-900 group-hover:text-gray-800" : "text-gray-900 group-hover:text-primary-600"
+                    [1, 2, 4, 8, 9].includes(product.id) ? "text-gray-900 group-hover:text-gray-800" : "text-gray-900 group-hover:text-primary-600"
                   )}>
                     {product.name}
                   </h3>
 
                   <p className={classNames(
                     "mb-2 md:mb-4 line-clamp-2 text-xs md:text-sm font-medium leading-relaxed",
-                    [1, 2, 4, 8].includes(product.id) ? "text-gray-900" : "text-gray-600"
+                    [1, 2, 4, 8, 9].includes(product.id) ? "text-gray-900" : "text-gray-600"
                   )}>
                     {product.description}
                   </p>
@@ -184,7 +184,7 @@ export const Products = () => {
                       {product.features.slice(0, 3).map((feature, idx) => (
                         <li key={idx} className={classNames(
                           "flex items-center text-xs font-semibold px-2 py-1 rounded-md",
-                          [1, 2, 4, 8].includes(product.id) ? "bg-white/60 text-yellow-900" : "bg-primary-50 text-primary-700"
+                          [1, 2, 4, 8, 9].includes(product.id) ? "bg-white/60 text-yellow-900" : "bg-primary-50 text-primary-700"
                         )}>
                           {feature}
                         </li>
@@ -355,6 +355,90 @@ export const Products = () => {
                       {selectedProduct.description}
                     </p>
                   </div>
+
+                  {/* Packaging Details */}
+                  {(selectedProduct.localPackaging?.length > 0 || selectedProduct.exportPackaging?.length > 0 || selectedProduct.sharedPackaging?.length > 0 || selectedProduct.customTables?.length > 0) && (
+                    <div className="mb-6 space-y-6">
+                      {(() => {
+                        const renderTable = (data, title, key) => {
+                          if (!data) return null;
+                          if (data.length === 0) {
+                            return (
+                              <div key={key} className="mb-6 last:mb-0">
+                                <h3 className="text-base md:text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-primary-500 hidden sm:block"></span>
+                                  {title}
+                                </h3>
+                                <div className="bg-gray-50 rounded-xl border border-gray-200 p-6 text-center">
+                                  <p className="text-sm text-gray-500 font-medium">No packaging information available yet.</p>
+                                </div>
+                              </div>
+                            );
+                          }
+
+                          const hasUnitPerSack = data.some(p => p.unitPerSack);
+                          const hasPacking = data.some(p => p.packing);
+                          const hasUnitPerBox = data.some(p => p.unitPerBox);
+                          const hasBoxBarcode = data.some(p => p.boxBarcode);
+                          const hasBoxSize = data.some(p => p.boxSize);
+                          const hasAvailability = data.some(p => p.availability !== undefined);
+                          const hasBarcode = data.some(p => p.barcode);
+                          const hasProductBarcode = data.some(p => p.productBarcode);
+
+                          return (
+                            <div key={key} className="mb-6 last:mb-0">
+                              <h3 className="text-base md:text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-primary-500 hidden sm:block"></span>
+                                {title}
+                              </h3>
+                              <div className="overflow-x-auto rounded-xl border border-gray-200">
+                                <table className="w-full text-left text-xs md:text-sm whitespace-nowrap">
+                                  <thead className="bg-gray-50 text-gray-700 font-bold border-b border-gray-200">
+                                    <tr>
+                                      <th className="px-4 py-3">Weight</th>
+                                      {hasProductBarcode && <th className="px-4 py-3">Product Barcode</th>}
+                                      {hasBarcode && <th className="px-4 py-3">Barcode</th>}
+                                      {hasAvailability && <th className="px-4 py-3"></th>}
+                                      {hasUnitPerSack && <th className="px-4 py-3">Unit / Sack</th>}
+                                      {hasPacking && <th className="px-4 py-3">Packing</th>}
+                                      {hasUnitPerBox && <th className="px-4 py-3">Unit / Box</th>}
+                                      {hasBoxBarcode && <th className="px-4 py-3">Box Barcode</th>}
+                                      {hasBoxSize && <th className="px-4 py-3">Box Size*</th>}
+                                    </tr>
+                                  </thead>
+                                  <tbody className="divide-y divide-gray-100 bg-white">
+                                    {data.map((pkg, idx) => (
+                                      <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
+                                        <td className="px-4 py-2.5 text-gray-900 font-medium">{pkg.weight}</td>
+                                        {hasProductBarcode && <td className="px-4 py-2.5 text-gray-600">{pkg.productBarcode || '-'}</td>}
+                                        {hasBarcode && <td className="px-4 py-2.5 text-gray-600">{pkg.barcode || '-'}</td>}
+                                        {hasAvailability && <td className="px-4 py-2.5 text-gray-600 font-medium">{pkg.availability || ''}</td>}
+                                        {hasUnitPerSack && <td className="px-4 py-2.5 text-gray-600">{pkg.unitPerSack || '-'}</td>}
+                                        {hasPacking && <td className="px-4 py-2.5 text-gray-600">{pkg.packing || '-'}</td>}
+                                        {hasUnitPerBox && <td className="px-4 py-2.5 text-gray-600">{pkg.unitPerBox || '-'}</td>}
+                                        {hasBoxBarcode && <td className="px-4 py-2.5 text-gray-600">{pkg.boxBarcode || '-'}</td>}
+                                        {hasBoxSize && <td className="px-4 py-2.5 text-gray-600">{pkg.boxSize || '-'}</td>}
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </div>
+                              {hasBoxSize && <p className="text-[10px] md:text-xs text-gray-500 mt-2 italic">*Box Size: width (mm) x length (mm) x height (mm)</p>}
+                            </div>
+                          );
+                        };
+
+                        return (
+                          <>
+                            {renderTable(selectedProduct.localPackaging, selectedProduct.localPackagingTitle || 'Local Packaging', 'local')}
+                            {renderTable(selectedProduct.sharedPackaging, selectedProduct.sharedPackagingTitle || 'Local and Export', 'shared')}
+                            {renderTable(selectedProduct.exportPackaging, selectedProduct.exportPackagingTitle || 'Export Packaging', 'export')}
+                            {selectedProduct.customTables?.map((t, i) => renderTable(t.data, t.title, `custom-${i}`))}
+                          </>
+                        );
+                      })()}
+                    </div>
+                  )}
 
                   <div className="mt-auto pt-3 md:pt-6 border-t border-gray-100">
                     <p className="text-[10px] md:text-sm text-gray-500 mb-2 md:mb-4 hidden sm:block">

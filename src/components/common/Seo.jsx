@@ -73,8 +73,8 @@ export const Seo = ({
       )}
 
       {/* Additional Meta Tags */}
-      <meta name="theme-color" content="#D01C1F" />
-      <meta name="msapplication-TileColor" content="#D01C1F" />
+      <meta name="theme-color" content="#7e0f00" />
+      <meta name="msapplication-TileColor" content="#7e0f00" />
 
       {/* Schema.org Structured Data (JSON-LD) */}
       {schema && (

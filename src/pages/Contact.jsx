@@ -131,7 +131,7 @@ export const Contact = () => {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-5 gap-8">
+          <div className="relative z-10 grid lg:grid-cols-5 gap-8">
             {/* Map occupying larger space since form is gone */}
             <div className="lg:col-span-3 h-[500px] lg:h-auto min-h-[500px] rounded-3xl overflow-hidden shadow-lg border border-white relative z-0">
               <iframe
@@ -164,7 +164,7 @@ export const Contact = () => {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600 font-medium">Sunday</span>
-                    <span className="font-bold text-gray-900 bg-red-50 text-red-600 px-3 py-1 rounded-full text-xs uppercase tracking-wider">Closed</span>
+                    <span className="font-bold text-gray-900 bg-primary-50 text-primary-600 px-3 py-1 rounded-full text-xs uppercase tracking-wider">Closed</span>
                   </div>
                 </div>
               </div>

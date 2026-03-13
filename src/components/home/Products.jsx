@@ -83,13 +83,13 @@ export const Products = () => {
                   to="/products"
                   className={classNames(
                     "group flex flex-col h-full relative rounded-2xl md:rounded-3xl p-3 md:p-4 transition-all duration-500 cursor-pointer border",
-                    [1, 2, 4, 8].includes(product.id)
+                    [1, 2, 4, 8, 9].includes(product.id)
                       ? "bg-gradient-to-br from-yellow-100 via-yellow-300 to-yellow-500 shadow-xl shadow-yellow-500/20 hover:shadow-yellow-500/40 hover:-translate-y-2 border-yellow-300"
                       : "bg-white border-transparent hover:border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2"
                   )}
                 >
                   {/* Floating Top Seller Badge Outward */}
-                  {[1, 2, 4, 8].includes(product.id) && (
+                  {[1, 2, 4, 8, 9].includes(product.id) && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 md:-top-4 z-20">
                       <span className="bg-gradient-to-r from-yellow-500 to-yellow-700 text-white px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold shadow-lg flex items-center gap-1.5 border-2 border-white/80 whitespace-nowrap">
                         <Star className="w-3 h-3 md:w-3.5 md:h-3.5 fill-white text-white" />
@@ -126,14 +126,14 @@ export const Products = () => {
                   <div className="flex-1 flex flex-col px-1">
                     <h3 className={classNames(
                       "text-xl md:text-2xl font-bold mb-1 md:mb-2 font-heading transition-colors line-clamp-1",
-                      [1, 2, 4, 8].includes(product.id) ? "text-gray-900 group-hover:text-gray-800" : "text-gray-900 group-hover:text-primary-600"
+                      [1, 2, 4, 8, 9].includes(product.id) ? "text-gray-900 group-hover:text-gray-800" : "text-gray-900 group-hover:text-primary-600"
                     )} title={product.name}>
                       {product.name}
                     </h3>
 
                     <p className={classNames(
                       "mb-2 md:mb-4 line-clamp-2 text-sm font-medium leading-relaxed",
-                      [1, 2, 4, 8].includes(product.id) ? "text-gray-900" : "text-gray-600"
+                      [1, 2, 4, 8, 9].includes(product.id) ? "text-gray-900" : "text-gray-600"
                     )}>
                       {product.description}
                     </p>
@@ -143,7 +143,7 @@ export const Products = () => {
                         {product.features.slice(0, 2).map((feature, idx) => (
                           <li key={idx} className={classNames(
                             "flex items-center text-xs font-semibold px-2 py-1 rounded-md",
-                            [1, 2, 4, 8].includes(product.id) ? "bg-white/60 text-yellow-900" : "bg-primary-50 text-primary-700"
+                            [1, 2, 4, 8, 9].includes(product.id) ? "bg-white/60 text-yellow-900" : "bg-primary-50 text-primary-700"
                           )}>
                             {feature}
                           </li>

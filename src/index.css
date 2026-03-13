@@ -8,14 +8,14 @@
 
   }
   body {
-    @apply bg-white text-gray-900 antialiased;
+    @apply bg-primary-500 text-gray-900 antialiased;
   }
   html {
     @apply scroll-smooth;
   }
   :root {
 
-    --background: 0 0% 100%;
+    --background: 7 100% 25%;
 
     --foreground: 0 0% 3.9%;
 

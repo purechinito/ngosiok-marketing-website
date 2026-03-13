@@ -8,17 +8,17 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: "#FBEAEA",
-          100: "#F6D2D3",
-          200: "#EEA6A8",
-          300: "#E77A7D",
-          400: "#DE4D51",
-          500: "#D01C1F",
-          600: "#B11A1C",
-          700: "#901415",
-          800: "#6E0F11",
-          900: "#4B0A0B",
-          DEFAULT: "#D01C1F",
+          50: "#FFEAE6",
+          100: "#FFD6CD",
+          200: "#FFAA99",
+          300: "#FF7E66",
+          400: "#EB4D33",
+          500: "#7e0f00",
+          600: "#6B0D00",
+          700: "#580B00",
+          800: "#450800",
+          900: "#320600",
+          DEFAULT: "#7e0f00",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
