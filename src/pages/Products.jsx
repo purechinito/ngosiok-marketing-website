@@ -259,7 +259,7 @@ export const Products = () => {
                   <img
                     src={selectedImage || selectedProduct.image}
                     alt={selectedProduct.name}
-                    className="w-full h-full object-contain md:object-cover relative z-10"
+                    className="w-full h-full object-contain relative z-10"
                   />
 
                   {/* Gallery Carousel - Overlay at Bottom of Image */}
