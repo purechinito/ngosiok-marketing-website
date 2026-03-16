@@ -1,4 +1,4 @@
-import { Award, Factory, Truck, Globe } from "lucide-react";
+import { Award, Truck, Globe } from "lucide-react";
 
 export const features = [
   {
@@ -11,14 +11,6 @@ export const features = [
   },
   {
     id: 2,
-    icon: Factory,
-    title: "Modern Production",
-    description:
-      "Automated processes eliminate exposure to foreign matter, ensuring clean and safe products. Our state-of-the-art facilities combine traditional craftsmanship with cutting-edge technology for consistent excellence.",
-    image: "/images/features/modern-production.jpeg",
-  },
-  {
-    id: 3,
     icon: Truck,
     title: "Nationwide Distribution",
     description:
@@ -26,7 +18,7 @@ export const features = [
     image: "/images/features/nationwide-distribution.jpeg",
   },
   {
-    id: 4,
+    id: 3,
     icon: Globe,
     title: "Global Reach",
     description:
