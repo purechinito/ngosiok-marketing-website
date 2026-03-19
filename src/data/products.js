@@ -104,7 +104,7 @@ export const products = [
   {
     id: 3,
     name: 'Super Q Misua',
-    category: 'Vermicelli Noodles',
+    category: 'Wheat-based Noodles',
     description: `This is a flour-based noodle that has fine strands and circular shape. This noodle is often used by Chinese people for birthdays; long strands to signify long life, circular shape to signify reunion of family.`,
     features: [
       'Authentic Chinese noodles',
@@ -172,7 +172,7 @@ export const products = [
     id: 7,
     name: 'First Choice Flat Japanese Noodles',
     category: 'Wheat-based Noodles',
-    description: `This is another type of wheat-based noodle that we produce. The noodle is steamed cooked before drying and final packing. This is similar to the instant noodles in appearance. However this does not undergo frying as required of the instant noodles.`,
+    description: `This is another type of wheat-based noodle that we produce. The noodle is steamed cooked before final packing. This is similar to the instant noodles in appearance. However this does not undergo frying as required of the instant noodles.`,
     features: [
       'Delicate texture',
       'Quick cooking',

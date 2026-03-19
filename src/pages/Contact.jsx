@@ -1,7 +1,7 @@
 import { Seo } from '@/components/common/Seo';
 import { Section } from '@/components/common/Section';
 import { Card, CardHeader, CardBody } from '@/components/common/Card';
-import { Mail, Phone, MapPin, Clock, Facebook, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Facebook, Instagram, Youtube } from 'lucide-react';
 import { COMPANY_INFO, SOCIAL_LINKS, SEO_CONFIG } from '@/utils/constants';
 
 export const Contact = () => {
@@ -46,7 +46,8 @@ export const Contact = () => {
     ],
     "sameAs": [
       SOCIAL_LINKS.facebook,
-      SOCIAL_LINKS.instagram
+      SOCIAL_LINKS.instagram,
+      SOCIAL_LINKS.youtube
     ]
   };
 
@@ -191,6 +192,14 @@ export const Contact = () => {
                     className="w-12 h-12 rounded-xl bg-white/20 hover:bg-white flex items-center justify-center transition-all duration-300 hover:text-primary-700 group"
                   >
                     <Instagram className="w-6 h-6" />
+                  </a>
+                  <a
+                    href={SOCIAL_LINKS.youtube}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-xl bg-white/20 hover:bg-white flex items-center justify-center transition-all duration-300 hover:text-primary-700 group"
+                  >
+                    <Youtube className="w-6 h-6" />
                   </a>
                 </div>
               </div>

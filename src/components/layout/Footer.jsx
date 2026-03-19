@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Container } from '@/components/common/Container';
-import { Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 import { COMPANY_INFO, SOCIAL_LINKS } from '@/utils/constants';
 import { fadeUpVariants, staggerContainerVariants, defaultViewport } from '@/utils/animations';
 
@@ -60,6 +60,15 @@ export const Footer = () => {
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
+              </a>
+              <a
+                href={SOCIAL_LINKS.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-11 h-11 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-red-600 hover:border-red-500 transition-all duration-300 hover:scale-110"
+                aria-label="YouTube"
+              >
+                <Youtube className="w-5 h-5" />
               </a>
             </div>
           </motion.div>

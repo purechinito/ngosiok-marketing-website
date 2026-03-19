@@ -3,7 +3,7 @@ import { Button } from '@/components/common/Button';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import { CheckCircle, ArrowRight, Award, Globe, Users, TrendingUp } from 'lucide-react';
+import { CheckCircle, ArrowRight, Award, Globe, Users, TrendingUp, ShieldCheck } from 'lucide-react';
 import CountUp from '@/components/common/CountUp';
 import { COMPANY_INFO } from '@/utils/constants';
 import { fadeUpVariants, scaleVariants, defaultViewport } from '@/utils/animations';
@@ -211,6 +211,32 @@ export const About = () => {
                 <span className="text-gray-800 font-semibold text-lg">{highlight}</span>
               </motion.div>
             ))}
+          </motion.div>
+
+          <motion.div
+            custom={5}
+            variants={fadeUpVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="mb-8"
+          >
+            <div className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3 font-heading">
+              Our Certifications
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                'HACCP Certified',
+                'HALAL Certified',
+                'IDCP GMP Certified',
+                'FDA Approved'
+              ].map((cert, index) => (
+                <div key={index} className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 px-3 py-1.5 rounded-lg border border-green-200 shadow-sm text-xs sm:text-sm font-semibold">
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>{cert}</span>
+                </div>
+              ))}
+            </div>
           </motion.div>
 
           <motion.div

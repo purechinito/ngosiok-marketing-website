@@ -17,6 +17,7 @@ export const SOCIAL_LINKS = {
   facebook:
     "https://www.facebook.com/p/Ngosiok-Marketing-Super-Q-Golden-Bihon-100063821509709/",
   instagram: "https://www.instagram.com/superq_bihon/",
+  youtube: "https://www.youtube.com/c/SuperQBihon",
 };
 
 export const NAVIGATION_LINKS = [
