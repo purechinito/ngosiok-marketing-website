@@ -11,43 +11,22 @@ export const Features = () => {
   const [activeFeature, setActiveFeature] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const PROGRESS_DURATION = 5000; // 5 seconds per slide
-  const [progress, setProgress] = useState(0);
 
   // Prepare images array from features data
   const featureImages = features.map(feature => feature.image || '/ngosiok.jpg');
 
   useEffect(() => {
-    let startTime = Date.now();
-    let animationFrameId;
-
-    const animate = () => {
-      if (!isPaused) {
-        const elapsed = Date.now() - startTime;
-        const newProgress = (elapsed / PROGRESS_DURATION) * 100;
-
-        if (newProgress >= 100) {
-          setActiveFeature((prev) => (prev + 1) % features.length);
-          startTime = Date.now();
-          setProgress(0);
-        } else {
-          setProgress(newProgress);
-        }
-      } else {
-        startTime = Date.now() - (progress / 100) * PROGRESS_DURATION;
-      }
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
+    let interval;
+    if (!isPaused) {
+      interval = setInterval(() => {
+        setActiveFeature((prev) => (prev + 1) % features.length);
+      }, PROGRESS_DURATION);
+    }
+    return () => clearInterval(interval);
   }, [isPaused, features.length]);
 
   const handleManualChange = (index) => {
     setActiveFeature(index);
-    setProgress(0);
   };
 
   return (
@@ -187,8 +166,9 @@ export const Features = () => {
                     {activeFeature === index && (
                       <motion.div
                         className="absolute inset-y-0 left-0 bg-secondary-400"
-                        style={{ width: `${progress}%` }}
-                        transition={{ duration: 0 }} // Controlled by state
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: isPaused ? 0 : PROGRESS_DURATION / 1000, ease: "linear" }}
                       />
                     )}
                   </div>
