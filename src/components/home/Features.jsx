@@ -89,10 +89,14 @@ export const Features = () => {
                 src={featureImages[activeFeature]}
                 alt={features[activeFeature].title}
                 initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: 1 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: features[activeFeature].title === 'Global Reach' ? 1.15 : 1,
+                  y: features[activeFeature].title === 'Global Reach' ? "5%" : 0
+                }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.7 }}
-                className="absolute inset-0 w-full h-full object-cover"
+                className={`absolute inset-0 w-full h-full object-cover ${features[activeFeature].title === 'Global Reach' ? 'object-top' : ''}`}
               />
             </AnimatePresence>
 

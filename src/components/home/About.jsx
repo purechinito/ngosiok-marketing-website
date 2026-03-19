@@ -3,7 +3,7 @@ import { Button } from '@/components/common/Button';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import { CheckCircle, ArrowRight, Award, Globe, Users, TrendingUp, ShieldCheck } from 'lucide-react';
+import { CheckCircle, ArrowRight, Award, Globe, Users, TrendingUp, ShieldCheck, MapPin } from 'lucide-react';
 import CountUp from '@/components/common/CountUp';
 import { COMPANY_INFO } from '@/utils/constants';
 import { fadeUpVariants, scaleVariants, defaultViewport } from '@/utils/animations';
@@ -17,9 +17,9 @@ export const About = () => {
   ];
 
   const stats = [
-    { icon: Award, value: 80, suffix: '+', label: 'Years', gradient: 'from-primary-500 to-primary-600', iconBg: 'bg-gradient-to-br from-primary-500 to-primary-600' },
+    { icon: Award, value: 82, suffix: '+', label: 'Years', gradient: 'from-primary-500 to-primary-600', iconBg: 'bg-gradient-to-br from-primary-500 to-primary-600' },
     { icon: Globe, value: 5, suffix: '+', label: 'Continents', gradient: 'from-secondary-500 to-secondary-600', iconBg: 'bg-gradient-to-br from-secondary-500 to-secondary-600' },
-    { icon: Users, value: 200, suffix: '+', label: 'Employees', gradient: 'from-tertiary-500 to-tertiary-600', iconBg: 'bg-gradient-to-br from-tertiary-500 to-tertiary-600' },
+    { icon: MapPin, textValue: 'Nationwide', suffix: '', label: 'Presence', gradient: 'from-tertiary-500 to-tertiary-600', iconBg: 'bg-gradient-to-br from-tertiary-500 to-tertiary-600' },
     { icon: TrendingUp, value: 4, suffix: '', label: 'Brands', gradient: 'from-primary-400 to-secondary-500', iconBg: 'bg-gradient-to-br from-primary-400 to-secondary-500' },
   ];
 
@@ -116,19 +116,21 @@ export const About = () => {
                       </div>
                     </div>
 
-                    {/* Animated CountUp */}
-                    <div className="font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent flex justify-center items-baseline">
-                      <span className="text-2xl lg:text-3xl text-gray-900">
-                        <CountUp
-                          from={0}
-                          to={stat.value}
-                          separator=","
-                          direction="up"
-                          duration={2.5}
-                          className="inline-block"
-                        />
+                    {/* Animated CountUp OR Text Value */}
+                    <div className="font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent flex justify-center items-baseline px-2">
+                      <span className={`text-gray-900 ${stat.textValue ? 'text-[1.35rem] lg:text-3xl' : 'text-2xl lg:text-3xl'}`}>
+                        {stat.textValue ? stat.textValue : (
+                          <CountUp
+                            from={0}
+                            to={stat.value}
+                            separator=","
+                            direction="up"
+                            duration={2.5}
+                            className="inline-block"
+                          />
+                        )}
                       </span>
-                      <span className="text-primary-600 text-lg ml-0.5 font-extrabold">{stat.suffix}</span>
+                      {stat.suffix && <span className="text-primary-600 text-lg ml-0.5 font-extrabold">{stat.suffix}</span>}
                     </div>
                     <div className="text-xs lg:text-sm text-gray-600 font-bold uppercase tracking-wider mt-1">
                       {stat.label}
@@ -227,8 +229,8 @@ export const About = () => {
             <div className="flex flex-wrap gap-2">
               {[
                 'HACCP Certified',
-                'HALAL Certified',
-                'IDCP GMP Certified',
+                'Halal Certified by IDCP',
+                'GMP Certified',
                 'FDA Approved'
               ].map((cert, index) => (
                 <div key={index} className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 px-3 py-1.5 rounded-lg border border-green-200 shadow-sm text-xs sm:text-sm font-semibold">
