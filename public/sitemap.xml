@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  
-  <!-- Homepage -->
-  <url>
-    <loc>https://ngosiokmarketing.netlify.app/</loc>
-    <lastmod>2025-11-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://ngosiokmarketing.netlify.app/logo.jpg</image:loc>
-      <image:title>Ngosiok Marketing Logo</image:title>
-    </image:image>
-  </url>
-
-  <!-- About Page -->
-  <url>
-    <loc>https://ngosiokmarketing.netlify.app/about</loc>
-    <lastmod>2025-11-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Products Page -->
-  <url>
-    <loc>https://ngosiokmarketing.netlify.app/products</loc>
-    <lastmod>2025-11-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Contact Page -->
-  <url>
-    <loc>https://ngosiokmarketing.netlify.app/contact</loc>
-    <lastmod>2025-11-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        <!-- Homepage -->
+        <url>
+                <loc>https://www.superq.ph/</loc>
+                <lastmod>2025-11-14</lastmod>
+                <changefreq>weekly</changefreq>
+                <priority>1.0</priority>
+                <image:image>
+                        <image:loc>https://www.superq.ph/logo.jpg</image:loc>
+                        <image:title>Ngosiok Marketing Logo</image:title>
+                </image:image>
+        </url>
+        <!-- About Page -->
+        <url>
+                <loc>https://www.superq.ph/about</loc>
+                <lastmod>2025-11-14</lastmod>
+                <changefreq>monthly</changefreq>
+                <priority>0.8</priority>
+        </url>
+        <!-- Products Page -->
+        <url>
+                <loc>https://www.superq.ph/products</loc>
+                <lastmod>2025-11-14</lastmod>
+                <changefreq>weekly</changefreq>
+                <priority>0.9</priority>
+        </url>
+        <!-- Contact Page -->
+        <url>
+                <loc>https://www.superq.ph/contact</loc>
+                <lastmod>2025-11-14</lastmod>
+                <changefreq>monthly</changefreq>
+                <priority>0.7</priority>
+        </url>
 </urlset>
