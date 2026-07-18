@@ -1,35 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-        <!-- Homepage -->
-        <url>
-                <loc>https://www.superq.ph/</loc>
-                <lastmod>2025-11-14</lastmod>
-                <changefreq>weekly</changefreq>
-                <priority>1.0</priority>
-                <image:image>
-                        <image:loc>https://www.superq.ph/logo.jpg</image:loc>
-                        <image:title>Ngosiok Marketing Logo</image:title>
-                </image:image>
-        </url>
-        <!-- About Page -->
-        <url>
-                <loc>https://www.superq.ph/about</loc>
-                <lastmod>2025-11-14</lastmod>
-                <changefreq>monthly</changefreq>
-                <priority>0.8</priority>
-        </url>
-        <!-- Products Page -->
-        <url>
-                <loc>https://www.superq.ph/products</loc>
-                <lastmod>2025-11-14</lastmod>
-                <changefreq>weekly</changefreq>
-                <priority>0.9</priority>
-        </url>
-        <!-- Contact Page -->
-        <url>
-                <loc>https://www.superq.ph/contact</loc>
-                <lastmod>2025-11-14</lastmod>
-                <changefreq>monthly</changefreq>
-                <priority>0.7</priority>
-        </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+<!-- Homepage -->
+<url>
+<loc>https://www.superq.ph/</loc>
+<lastmod>2025-11-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
+<image:image>
+<image:loc>https://www.superq.ph/logo.jpg</image:loc>
+<image:title>Ngosiok Marketing Logo</image:title>
+</image:image>
+</url>
+
+<!-- About Page -->
+<url>
+<loc>https://www.superq.ph/about</loc>
+<lastmod>2025-11-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<!-- Products Page -->
+<url>
+<loc>https://www.superq.ph/products</loc>
+<lastmod>2025-11-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.9</priority>
+</url>
+
+<!-- Contact Page -->
+<url>
+<loc>https://www.superq.ph/contact</loc>
+<lastmod>2025-11-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+
+<!-- Product: super-q-golden-bihon -->
+<url>
+<loc>https://www.superq.ph/products/super-q-golden-bihon</loc>
+<lastmod>2026-07-18</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+
+<!-- Product: super-q-special-palabok -->
+<url>
+<loc>https://www.superq.ph/products/super-q-special-palabok</loc>
+<lastmod>2026-07-18</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+
+<!-- Product: super-q-pancit-canton -->
+<url>
+<loc>https://www.superq.ph/products/super-q-pancit-canton</loc>
+<lastmod>2026-07-18</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+
+<!-- Product: super-q-sotanghon -->
+<url>
+<loc>https://www.superq.ph/products/super-q-sotanghon</loc>
+<lastmod>2026-07-18</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+
+<!-- Product: super-q-misua -->
+<url>
+<loc>https://www.superq.ph/products/super-q-misua</loc>
+<lastmod>2026-07-18</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+
+<!-- Product: q1-misua -->
+<url>
+<loc>https://www.superq.ph/products/q1-misua</loc>
+<lastmod>2026-07-18</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+
+<!-- Product: first-choice-fresh-japanese-ramen -->
+<url>
+<loc>https://www.superq.ph/products/first-choice-fresh-japanese-ramen</loc>
+<lastmod>2026-07-18</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+
+<!-- Product: first-choice-flat-japanese-noodles -->
+<url>
+<loc>https://www.superq.ph/products/first-choice-flat-japanese-noodles</loc>
+<lastmod>2026-07-18</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+
+<!-- Product: long-life-pancit-canton -->
+<url>
+<loc>https://www.superq.ph/products/long-life-pancit-canton</loc>
+<lastmod>2026-07-18</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+
 </urlset>
