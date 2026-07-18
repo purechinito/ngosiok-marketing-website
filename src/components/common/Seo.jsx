@@ -1,17 +1,44 @@
-import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 import { SEO_CONFIG } from '@/utils/constants';
 
+function setMetaTag(attr, key, content) {
+  if (!content) return;
+  let element = document.querySelector(`meta[${attr}="${key}"]`);
+  if (!element) {
+    element = document.createElement('meta');
+    element.setAttribute(attr, key);
+    document.head.appendChild(element);
+  }
+  element.setAttribute('content', content);
+}
+
+function setLinkTag(rel, href) {
+  if (!href) return;
+  let element = document.querySelector(`link[rel="${rel}"]`);
+  if (!element) {
+    element = document.createElement('link');
+    element.setAttribute('rel', rel);
+    document.head.appendChild(element);
+  }
+  element.setAttribute('href', href);
+}
+
 /**
- * SEO Component - Manages all meta tags and structured data for pages
- * 
- * @param {string} title - Page title (will be appended with " | Ngosiok Marketing")
- * @param {string} description - Page description for search engines (write as compelling ad copy)
- * @param {string} canonical - Full canonical URL (defaults to current page)
- * @param {string} ogImage - Open Graph image URL (1200x630px recommended)
- * @param {Object} schema - Schema.org structured data object (JSON-LD)
- * @param {string} type - Open Graph type (default: "website")
- * @param {boolean} noindex - If true, prevents search engine indexing
- */
+* SEO Component - Manages all meta tags and structured data for pages.
+*
+* Implemented with direct DOM updates instead of react-helmet-async, which
+* does not reliably commit head changes under React 19 / React Router 7 -
+* titles and meta tags were silently failing to update in production.
+* Same props and behavior as before, just a working implementation.
+*
+* @param {string} title - Page title (appended with " | Ngosiok Marketing")
+* @param {string} description - Page description for search engines
+* @param {string} canonical - Full canonical URL (defaults to current page)
+* @param {string} ogImage - Open Graph image URL (1200x630px recommended)
+* @param {Object} schema - Schema.org structured data object (JSON-LD)
+* @param {string} type - Open Graph type (default: "website")
+* @param {boolean} noindex - If true, prevents search engine indexing
+*/
 export const Seo = ({
   title = "",
   description = SEO_CONFIG.defaultDescription,
@@ -21,67 +48,63 @@ export const Seo = ({
   type = "website",
   noindex = false,
 }) => {
-  // Build the full page title
-  const pageTitle = title
+  useEffect(() => {
+    const pageTitle = title
     ? `${title} | ${SEO_CONFIG.defaultTitle}`
-    : SEO_CONFIG.defaultTitle;
+      : SEO_CONFIG.defaultTitle;
 
-  // Build canonical URL
-  const canonicalUrl = canonical || `${SEO_CONFIG.siteUrl}${window.location.pathname}`;
+            const canonicalUrl = canonical || `${SEO_CONFIG.siteUrl}${window.location.pathname}`;
 
-  // Ensure image is absolute URL
-  const fullImageUrl = ogImage.startsWith('http') 
-    ? ogImage 
-    : `${SEO_CONFIG.siteUrl}${ogImage}`;
+            const fullImageUrl = ogImage.startsWith('http')
+    ? ogImage
+              : `${SEO_CONFIG.siteUrl}${ogImage}`;
 
-  return (
-    <Helmet>
-      {/* Primary Meta Tags */}
-      <title>{pageTitle}</title>
-      <meta name="title" content={pageTitle} />
-      <meta name="description" content={description} />
-      
-      {/* Canonical URL */}
-      <link rel="canonical" href={canonicalUrl} />
+            document.title = pageTitle;
 
-      {/* Robots */}
-      {noindex && <meta name="robots" content="noindex,nofollow" />}
+            setMetaTag('name', 'title', pageTitle);
+    setMetaTag('name', 'description', description);
+    setLinkTag('canonical', canonicalUrl);
+    setMetaTag('name', 'robots', noindex ? 'noindex,nofollow' : 'index,follow');
 
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:title" content={pageTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={fullImageUrl} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:site_name" content={SEO_CONFIG.defaultTitle} />
-      <meta property="og:locale" content="en_PH" />
-      
-      {SEO_CONFIG.fbAppId && (
-        <meta property="fb:app_id" content={SEO_CONFIG.fbAppId} />
-      )}
+            setMetaTag('property', 'og:type', type);
+    setMetaTag('property', 'og:url', canonicalUrl);
+    setMetaTag('property', 'og:title', pageTitle);
+    setMetaTag('property', 'og:description', description);
+    setMetaTag('property', 'og:image', fullImageUrl);
+    setMetaTag('property', 'og:image:width', '1200');
+    setMetaTag('property', 'og:image:height', '630');
+    setMetaTag('property', 'og:site_name', SEO_CONFIG.defaultTitle);
+    setMetaTag('property', 'og:locale', 'en_PH');
 
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={canonicalUrl} />
-      <meta name="twitter:title" content={pageTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={fullImageUrl} />
-      {SEO_CONFIG.twitterHandle && (
-        <meta name="twitter:site" content={SEO_CONFIG.twitterHandle} />
-      )}
+            if (SEO_CONFIG.fbAppId) {
+              setMetaTag('property', 'fb:app_id', SEO_CONFIG.fbAppId);
+            }
 
-      {/* Additional Meta Tags */}
-      <meta name="theme-color" content="#7e0f00" />
-      <meta name="msapplication-TileColor" content="#7e0f00" />
+            setMetaTag('name', 'twitter:card', 'summary_large_image');
+    setMetaTag('name', 'twitter:url', canonicalUrl);
+    setMetaTag('name', 'twitter:title', pageTitle);
+    setMetaTag('name', 'twitter:description', description);
+    setMetaTag('name', 'twitter:image', fullImageUrl);
+    if (SEO_CONFIG.twitterHandle) {
+      setMetaTag('name', 'twitter:site', SEO_CONFIG.twitterHandle);
+    }
 
-      {/* Schema.org Structured Data (JSON-LD) */}
-      {schema && (
-        <script type="application/ld+json">
-          {JSON.stringify(schema)}
-        </script>
-      )}
-    </Helmet>
-  );
+            setMetaTag('name', 'theme-color', '#7e0f00');
+    setMetaTag('name', 'msapplication-TileColor', '#7e0f00');
+
+            let schemaScript = document.getElementById('seo-schema-jsonld');
+    if (schema) {
+      if (!schemaScript) {
+        schemaScript = document.createElement('script');
+        schemaScript.id = 'seo-schema-jsonld';
+        schemaScript.type = 'application/ld+json';
+        document.head.appendChild(schemaScript);
+      }
+      schemaScript.textContent = JSON.stringify(schema);
+    } else if (schemaScript) {
+      schemaScript.remove();
+    }
+  }, [title, description, canonical, ogImage, schema, type, noindex]);
+
+  return null;
 };
