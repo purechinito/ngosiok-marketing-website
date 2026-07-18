@@ -119,7 +119,7 @@ export const Products = () => {
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-10">
             {filteredProducts.map((product) => (
-              <div
+                <Link to={`/products/${product.slug}`}
                 key={product.id}
                 className={classNames(
                   "group flex flex-col h-full relative rounded-2xl md:rounded-3xl p-3 md:p-4 transition-all duration-500 cursor-pointer border",
@@ -127,7 +127,7 @@ export const Products = () => {
                     ? "bg-gradient-to-br from-yellow-100 via-yellow-300 to-yellow-500 shadow-xl shadow-yellow-500/20 hover:shadow-yellow-500/40 hover:-translate-y-2 border-yellow-300"
                     : "bg-white border-transparent hover:border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2"
                 )}
-                onClick={() => setSelectedProduct(product)}
+                  onClick={(e) => { e.preventDefault(); setSelectedProduct(product); }}
               >
                 {/* Floating Top Seller Badge Outward */}
                 {[1, 2, 4, 8, 9].includes(product.id) && (
@@ -192,8 +192,8 @@ export const Products = () => {
                     </ul>
                   </div>
                 </div>
-              </div>
-            ))}
+                </Link>
+                    ))}
           </div>
         </Section>
 
