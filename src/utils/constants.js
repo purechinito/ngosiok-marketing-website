@@ -45,10 +45,10 @@ export const BREAKPOINTS = {
 export const SEO_CONFIG = {
   defaultTitle: "Ngosiok Marketing",
   titleTemplate: "%s | Ngosiok Marketing",
-  siteUrl: "https://ngosiokmarketing.netlify.app",
+    siteUrl: "https://www.superq.ph",
   defaultDescription:
     "Taste 80+ years of quality. Ngosiok Marketing offers the best bihon and pancit canton for your family. Explore our premium Filipino noodles today!",
-  defaultOgImage: "https://ngosiokmarketing.netlify.app/og-default.jpg",
+    defaultOgImage: "https://www.superq.ph/og-default.jpg",
   twitterHandle: "@ngosiokmarketing",
   fbAppId: "",
 };
