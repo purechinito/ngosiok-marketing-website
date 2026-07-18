@@ -8,7 +8,7 @@ Allow: /
 # Disallow: /admin/
 
 # Provide the location of your sitemap
-Sitemap: https://ngosiokmarketing.netlify.app/sitemap.xml
+Sitemap: https://www.superq.ph/sitemap.xml
 
 # Crawl-delay for polite bots (optional)
 Crawl-delay: 1
