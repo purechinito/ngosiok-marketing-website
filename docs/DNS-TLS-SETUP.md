@@ -10,6 +10,9 @@ apex-domain certificate problem found on 2026-08-16.
 Nameservers are `dns1.domains.ph` / `dns2.domains.ph`, so **all DNS changes are
 made at the domains.ph control panel**, not in Vercel.
 
+> Re-checked against both authoritative nameservers on 2026-09-03: the record set
+> below is unchanged. The `75.2.60.5` record has not yet been removed.
+
 | Name            | Type  | Value                                | TTL   | Host    |
 | --------------- | ----- | ------------------------------------ | ----- | ------- |
 | `superq.ph`     | A     | `75.2.60.5`                          | 14400 | Netlify |
@@ -82,6 +85,39 @@ echo | openssl s_client -connect superq.ph:443 -servername superq.ph 2>/dev/null
 Once the apex resolves to Vercel only, set the apex to redirect to
 `https://www.superq.ph` in the Vercel project's domain settings, so the
 canonical host in the codebase matches what visitors land on.
+
+---
+
+## Proving which address serves the bad certificate
+
+Because the apex round-robins between two hosts, a plain `curl` may succeed or
+fail depending on which address it happens to reach. Pin each address explicitly
+so the result is deterministic. Run these from a machine with outbound access:
+
+```sh
+# Vercel address - expect a valid certificate for superq.ph
+echo | openssl s_client -connect 216.198.79.1:443 -servername superq.ph 2>/dev/null \
+  | openssl x509 -noout -subject -issuer -dates
+
+# Netlify address - expect a certificate that does NOT cover superq.ph
+echo | openssl s_client -connect 75.2.60.5:443 -servername superq.ph 2>/dev/null \
+  | openssl x509 -noout -subject -issuer -dates
+```
+
+The same split with `curl`, which reports the verification failure directly:
+
+```sh
+curl -sSI --resolve superq.ph:443:216.198.79.1 https://superq.ph -o /dev/null -w '%{http_code}\n'
+curl -sSI --resolve superq.ph:443:75.2.60.5   https://superq.ph -o /dev/null -w '%{http_code}\n'
+```
+
+If the first command succeeds and the second fails with a certificate error, the
+diagnosis in this document is confirmed and the only remaining action is
+removing the `75.2.60.5` record.
+
+If **both** fail, the problem is not the split record set and this document does
+not explain it - check that the apex domain is actually attached to the project
+in Vercel and that its certificate has been issued.
 
 ---
 
