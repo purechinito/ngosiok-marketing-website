@@ -38,6 +38,14 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <priority>0.7</priority>
 </url>
 
+<!-- Careers Page -->
+<url>
+<loc>https://www.superq.ph/careers</loc>
+<lastmod>2026-09-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+
 <!-- Product: super-q-golden-bihon -->
 <url>
 <loc>https://www.superq.ph/products/super-q-golden-bihon</loc>
