@@ -92,7 +92,14 @@ export const Seo = ({
             setMetaTag('name', 'theme-color', '#7e0f00');
     setMetaTag('name', 'msapplication-TileColor', '#7e0f00');
 
-            let schemaScript = document.getElementById('seo-schema-jsonld');
+            // Drop the build-time schema injected by scripts/prerender.mjs.
+            // It has done its job (non-JS crawlers already read it); leaving it
+            // would duplicate every node once React injects the live version.
+            document
+              .querySelectorAll('script[type="application/ld+json"][data-prerendered]')
+              .forEach((node) => node.remove());
+
+    let schemaScript = document.getElementById('seo-schema-jsonld');
     if (schema) {
       if (!schemaScript) {
         schemaScript = document.createElement('script');

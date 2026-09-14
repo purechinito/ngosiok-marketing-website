@@ -96,6 +96,12 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/where-to-buy" className="text-sm hover:text-primary-400 transition-colors flex items-center group">
+                  <span className="w-1.5 h-1.5 bg-primary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  Where to Buy
+                </Link>
+              </li>
+              <li>
                 <Link to="/contact" className="text-sm hover:text-primary-400 transition-colors flex items-center group">
                   <span className="w-1.5 h-1.5 bg-primary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                   Contact
@@ -110,19 +116,19 @@ export const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="hover:text-primary-400 transition-colors cursor-pointer flex items-center group">
                 <span className="w-1.5 h-1.5 bg-tertiary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                <Link to="/products">Super Q Golden Bihon</Link>
+                <Link to="/products/super-q-golden-bihon">Super Q Golden Bihon</Link>
               </li>
               <li className="hover:text-primary-400 transition-colors cursor-pointer flex items-center group">
                 <span className="w-1.5 h-1.5 bg-tertiary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                <Link to="/products">Super Q Pancit Canton</Link>
+                <Link to="/products/super-q-pancit-canton">Super Q Pancit Canton</Link>
               </li>
               <li className="hover:text-primary-400 transition-colors cursor-pointer flex items-center group">
                 <span className="w-1.5 h-1.5 bg-tertiary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                <Link to="/products">Super Q Special Palabok</Link>
+                <Link to="/products/super-q-special-palabok">Super Q Special Palabok</Link>
               </li>
               <li className="hover:text-primary-400 transition-colors cursor-pointer flex items-center group">
                 <span className="w-1.5 h-1.5 bg-tertiary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                <Link to="/products">First Choice Noodles</Link>
+                <Link to="/products/first-choice-fresh-japanese-ramen">First Choice Noodles</Link>
               </li>
             </ul>
           </motion.div>

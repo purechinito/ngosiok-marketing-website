@@ -7,6 +7,7 @@ import { About } from '@/pages/About';
 import { Products } from '@/pages/Products';
 import { ProductDetail } from '@/pages/ProductDetail';
 import { Contact } from '@/pages/Contact';
+import { WhereToBuy } from '@/pages/WhereToBuy';
 import { NotFound } from '@/pages/NotFound';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:slug" element={<ProductDetail />} />
+          <Route path="/where-to-buy" element={<WhereToBuy />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
