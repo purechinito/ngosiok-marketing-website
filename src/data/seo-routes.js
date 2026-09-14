@@ -291,6 +291,7 @@ const navBlock = `
         <li><a href="/products">Products</a></li>
         <li><a href="/where-to-buy">Where to Buy</a></li>
         <li><a href="/bihon">What Is Bihon?</a></li>
+        <li><a href="/feedback">Report a Problem</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
@@ -425,6 +426,48 @@ export const seoRoutes = [
 
     <h2>Frequently Asked Questions</h2>
     ${faqBlock(availabilityFaqs)}
+    ${companyFooterFacts}
+    ${navBlock}`,
+  },
+  {
+    path: '/feedback',
+    title: "Report a Problem | Can't Find Super Q? Tell Us",
+    description:
+      "Can't find Super Q on the shelf, or something wrong with a pack? Tell the Cebu team directly. No account needed, photos welcome, and stock-out reports go straight to our distributors.",
+    ogImage: `${SITE}/og-default.jpg`,
+    changefreq: 'monthly',
+    priority: '0.6',
+    schema: [
+      breadcrumb([
+        { name: 'Home', path: '/' },
+        { name: 'Report a Problem', path: '/feedback' },
+      ]),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        '@id': `${SITE}/feedback#contactpage`,
+        name: 'Report a Problem',
+        about: { '@id': `${SITE}/#organization` },
+        inLanguage: 'en',
+      },
+    ],
+    content: `
+    <h1>Report a Problem</h1>
+    <p>Cannot find Super Q on the shelf, or something wrong with a pack? Tell us directly and it
+    goes straight to our team in Cebu.</p>
+    <h2>What you can report</h2>
+    <ul>
+      <li>Stock-outs &mdash; a shop that has run out, and where it is</li>
+      <li>Product quality issues</li>
+      <li>Packaging problems</li>
+      <li>Where-to-buy questions</li>
+      <li>Distributor and bulk enquiries</li>
+    </ul>
+    <p>No account is needed and your name and email are optional. You can attach a photo if it
+    helps explain the problem. Stock-out reports are the most useful thing you can send us:
+    they tell us where supply is running short before our distributors do.</p>
+    <p>Prefer to look for stockists first?
+    <a href="/where-to-buy">See where to buy Super Q</a>.</p>
     ${companyFooterFacts}
     ${navBlock}`,
   },

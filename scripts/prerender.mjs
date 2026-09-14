@@ -38,6 +38,11 @@ const STRIP_PATTERNS = [
   /\s*<title>[\s\S]*?<\/title>/i,
   /\s*<meta\s+name="description"[\s\S]*?\/?>/i,
   /\s*<meta\s+name="keywords"[\s\S]*?\/?>/i,
+  // index.html carries a default robots tag for dev and for the SPA fallback.
+  // Without stripping it, every prerendered page shipped two robots metas, and
+  // on /admin the runtime Seo component flipped only the first to noindex
+  // while the second still said index,follow.
+  /\s*<meta\s+name="robots"[\s\S]*?\/?>/i,
   /\s*<link\s+rel="canonical"[\s\S]*?\/?>/i,
   /\s*<script\s+type="application\/ld\+json"[\s\S]*?<\/script>/gi,
 ];

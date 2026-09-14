@@ -6,6 +6,10 @@
 User-agent: *
 Allow: /
 
+# The admin dashboard is internal. It is protected by Supabase auth and row
+# level security, not by this line - this just keeps it out of search results.
+Disallow: /admin
+
 # ---------------------------------------------------------------------------
 # AI crawlers and answer engines.
 #
