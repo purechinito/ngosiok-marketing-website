@@ -6,8 +6,13 @@ import { ArrowRight } from 'lucide-react';
 import { createFadeUpVariants } from '@/utils/animations';
 import TiltedCard from '@/components/common/TiltedCard';
 import CountUp from '@/components/common/CountUp';
+import { COMPANY_INFO } from '@/utils/constants';
 
 export const Hero = () => {
+  // Derived rather than hardcoded so it never drifts from the About page,
+  // which already computes the same figure, or goes stale on its own.
+  const yearsOfExcellence = new Date().getFullYear() - COMPANY_INFO.foundedYear;
+
   const fadeUpVariants = createFadeUpVariants({
     baseDelay: 0.3,
     stagger: 0.2,
@@ -52,7 +57,13 @@ export const Hero = () => {
               animate="visible"
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold font-heading leading-[1.05] mb-8 tracking-tight"
             >
-              <span className="text-white">Quality</span>
+              {/*
+                The h1 previously read "Quality / Since 1945" - no mention of
+                noodles, bihon or Super Q, so the page's strongest heading said
+                nothing about what we sell. This is the company tagline as it
+                already appears in COMPANY_INFO, keeping the same two-line shape.
+              */}
+              <span className="text-white">Quality Noodles</span>
               <br />
               <span className="bg-gradient-to-r from-tertiary-300 via-tertiary-400 to-tertiary-500 bg-clip-text text-transparent drop-shadow-lg">
                 Since 1945
@@ -104,13 +115,13 @@ export const Hero = () => {
               
               <TiltedCard
                 imageSrc="/KimCNgosiok.jpg"
-                altText="NGOSIOK MARKETING - 80+ Years of Excellence"
+                altText={`NGOSIOK MARKETING - ${yearsOfExcellence}+ Years of Excellence`}
                 captionText={
                   <div className="text-tertiary">
                     <div className="text-3xl md:text-4xl font-bold mb-2 drop-shadow-lg">
                       <CountUp
                         from={0}
-                        to={80}
+                        to={yearsOfExcellence}
                         separator=","
                         direction="up"
                         duration={2.5}

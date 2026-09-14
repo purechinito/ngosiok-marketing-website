@@ -1,14 +1,87 @@
-# robots.txt for Ngosiok Marketing
-# Allow all crawlers to access all content
+# robots.txt for Ngosiok Marketing (superq.ph)
 
+# ---------------------------------------------------------------------------
+# Search engines
+# ---------------------------------------------------------------------------
 User-agent: *
 Allow: /
 
-# Disallow admin or test pages if any
-# Disallow: /admin/
+# The admin dashboard is internal. It is protected by Supabase auth and row
+# level security, not by this line - this just keeps it out of search results.
+Disallow: /admin
 
-# Provide the location of your sitemap
+# ---------------------------------------------------------------------------
+# AI crawlers and answer engines.
+#
+# These are listed explicitly rather than left to the wildcard above. Several
+# of them look for their own user-agent before falling back, and an explicit
+# Allow is the clearest signal that our product and availability pages may be
+# used to answer questions like "where can I buy Super Q bihon in Dubai".
+#
+# Split into two groups on purpose:
+#   - Training/indexing crawlers build the model's background knowledge.
+#   - Live retrieval agents fetch a page when a user asks a question right now,
+#     which is what actually sends us referral traffic.
+# ---------------------------------------------------------------------------
+
+# OpenAI - training, search index, and live retrieval
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI (Gemini / AI Overviews grounding)
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft Copilot
+User-agent: Bingbot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl - the corpus many downstream models train on
+User-agent: CCBot
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Amazon
+User-agent: Amazonbot
+Allow: /
+
+# ---------------------------------------------------------------------------
+# Sitemap
+# ---------------------------------------------------------------------------
 Sitemap: https://www.superq.ph/sitemap.xml
-
-# Crawl-delay for polite bots (optional)
-Crawl-delay: 1

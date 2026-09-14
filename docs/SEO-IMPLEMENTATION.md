@@ -1,304 +1,167 @@
-# SEO Implementation Guide - Ngosiok Marketing
+# SEO & AI SEO Implementation
 
-## 🎯 Complete SEO Strategy Implemented
-
-This document outlines the comprehensive SEO implementation for the Ngosiok Marketing website, following industry best practices and modern search engine optimization techniques.
-
----
-
-## ✅ What's Implemented
-
-### 1. Schema.org Structured Data (JSON-LD)
-
-Every page now includes rich structured data that helps search engines understand your content better.
-
-#### **Homepage** - Organization Schema
-- Establishes your brand in Google's Knowledge Graph
-- Includes business details, contact info, social profiles
-- Helps with brand recognition in search results
-
-#### **About Page** - Breadcrumb Schema
-- Shows site structure in search results
-- Improves navigation visibility
-- Can display breadcrumb trails in Google search
-
-#### **Products Page** - Breadcrumb Schema
-- Enhances product page visibility
-- Shows clear path from homepage to products
-- Improves user experience in search results
-
-#### **Contact Page** - LocalBusiness Schema
-- **Critical for local SEO and Google Maps**
-- Includes:
-  - Complete business address
-  - Geo-coordinates for mapping
-  - Business hours
-  - Contact information
-  - Social media profiles
-- Helps you appear in:
-  - Google Maps
-  - Local search results ("noodles near me")
-  - Google Business Profile
+How search visibility works on this site, what runs at build time, and what
+still needs doing by hand.
 
 ---
 
-### 2. Optimized Meta Tags (No More Keywords!)
+## The problem this solves
 
-#### **Removed:**
-- `keywords` meta tag (ignored by Google since 2009)
+This site is a client-rendered Vite SPA. Before prerendering, `npm run build`
+produced a single 1 KB `index.html` containing an empty `<div id="root">`.
+Every title, meta tag, canonical URL and JSON-LD block was injected later by
+`Seo.jsx` inside a `useEffect`.
 
-#### **Optimized:**
-All titles and descriptions are now written as compelling "search ads":
+That is fine for Googlebot, which renders JavaScript in a second pass. It is
+fatal for the crawlers behind AI answer engines:
 
-**Home:**
-- Title: "Premium Quality Noodles Since 1945"
-- Description: "Taste 80+ years of quality. Ngosiok Marketing offers the best bihon, pancit canton, and Filipino noodles for your family. Explore our premium products today!"
+| Crawler | Feeds | Executes JavaScript |
+| --- | --- | --- |
+| GPTBot, OAI-SearchBot, ChatGPT-User | ChatGPT | No |
+| ClaudeBot, Claude-User | Claude | No |
+| PerplexityBot | Perplexity | No |
+| CCBot | Common Crawl (many models) | No |
+| Googlebot | Google Search, AI Overviews | Yes (delayed second pass) |
 
-**About:**
-- Title: "Our Story - 80+ Years of Noodle Excellence"
-- Description: "From humble beginnings in 1945 to becoming the Philippines' trusted noodle brand. Discover the Ngosiok Marketing story and our commitment to quality Filipino noodles."
-
-**Products:**
-- Title: "Premium Bihon & Pancit Canton | Our Products"
-- Description: "Browse our complete range of premium Filipino noodles. Super Q Golden Bihon, Eagle VSP, First Choice, and more. Find the perfect noodles for your family's pancit today!"
-
-**Contact:**
-- Title: "Contact Us - Visit Our Cebu Office"
-- Description: "Ready to partner or order? Contact Ngosiok Marketing today. Visit us in Cebu City or reach out for distributor inquiries and bulk orders. We're here to help!"
+They fetch the HTML once and move on. So to every AI engine, the entire site
+was one blank page. No amount of schema tuning fixes that, because the schema
+was never in the HTML response.
 
 ---
 
-### 3. Site-Wide SEO Files
+## What runs at build time
 
-#### **`public/robots.txt`**
+`npm run build` now has a `postbuild` step:
+
 ```
-User-agent: *
-Allow: /
-Sitemap: https://ngosiokmarketing.netlify.app/sitemap.xml
+vite build            → dist/index.html (the usual empty SPA shell)
+node scripts/prerender.mjs → a real HTML file per route + sitemap.xml
 ```
 
-**Purpose:**
-- Tells search engines they can crawl all pages
-- Points to your sitemap for faster indexing
-- Polite crawl delay to prevent server overload
+`scripts/prerender.mjs` walks every route in `src/data/seo-routes.js` and
+writes `dist/<route>/index.html` containing:
 
-#### **`public/sitemap.xml`**
-XML sitemap with all pages, including:
-- Homepage (priority: 1.0)
-- Products (priority: 0.9, updated weekly)
-- About (priority: 0.8, updated monthly)
-- Contact (priority: 0.7, updated monthly)
+- the route's `<title>`, meta description and canonical URL
+- Open Graph and Twitter Card tags
+- JSON-LD structured data, marked `data-prerendered="true"`
+- a readable text version of the page inside `#root`
 
-**Purpose:**
-- Helps Google discover and index all pages faster
-- Indicates update frequency and page importance
-- Includes image references
+It also regenerates `dist/sitemap.xml` from the same route list, so the sitemap
+cannot drift out of sync with the pages that actually exist. **Do not create a
+`public/sitemap.xml`** — it would be overwritten anyway.
+
+No extra dependencies. The prerenderer is plain Node with no headless browser,
+so the Vercel build stays fast and cannot fail on a Chromium download.
+
+### Why this is not cloaking
+
+The prerendered text is a faithful summary of what the React app renders, not
+different content shown only to bots. That is ordinary prerendering and is
+explicitly supported by Google.
+
+### How the handoff works
+
+The static copy lives inside `#root`. `main.jsx` calls `createRoot().render()`,
+which clears the container on mount, so a visitor with JavaScript never sees
+it. `Seo.jsx` additionally removes any `script[data-prerendered]` from the head
+before injecting the live schema, so a JS client never ends up holding two
+copies of the same structured data.
+
+### Adding a page
+
+1. Add the route to `src/App.jsx` as usual.
+2. Add an entry to `seoRoutes` in `src/data/seo-routes.js` with `path`,
+   `title`, `description`, `ogImage`, `changefreq`, `priority`, `schema` and
+   `content`.
+
+The sitemap, the prerendered HTML and the meta tags all follow from that one
+entry. Forgetting step 2 means the page ships invisible to AI crawlers.
 
 ---
 
-## 🚀 SEO Component Features
+## Structured data
 
-### Updated `Seo.jsx` Component
+| Route | Schema types |
+| --- | --- |
+| `/` | Organization, WebSite |
+| `/products` | BreadcrumbList, ItemList |
+| `/products/:slug` | BreadcrumbList, Product |
+| `/where-to-buy` | BreadcrumbList, FAQPage |
+| `/about` | BreadcrumbList, Organization |
+| `/contact` | BreadcrumbList, LocalBusiness |
 
-**New Props:**
-```jsx
-<Seo
-  title="Page Title"
-  description="Compelling description with CTA"
-  canonical="https://ngosiokmarketing.netlify.app/page"
-  ogImage="https://ngosiokmarketing.netlify.app/og-image.jpg"
-  schema={schemaObject}  // NEW: JSON-LD structured data
-  type="website"
-  noindex={false}
-/>
+The Organization node is the important one: it carries our brands (Super Q,
+Golden Q, First Choice, Eagle VSP, Long Life, Q1), `areaServed` for every
+export market, and `sameAs` links. That is what lets an answer engine state
+that Ngosiok Marketing makes Super Q.
+
+Nodes are linked by `@id` (`#organization`, `#website`, `#localbusiness`) so
+search engines treat them as one entity rather than several.
+
+---
+
+## Crawler access
+
+`public/robots.txt` lists every major AI crawler with an explicit `Allow`,
+split into training/indexing crawlers and live retrieval agents. The old
+`Crawl-delay: 1` was removed — Google ignores it, and the bots that honour it
+were being slowed down for no reason.
+
+`public/llms.txt` is a markdown summary of the company, products and common
+questions, in the emerging convention AI crawlers look for.
+
+---
+
+## Hosting
+
+`vercel.json` sets `cleanUrls: true` and keeps the SPA rewrite as a fallback.
+Vercel checks the filesystem before applying rewrites, so `/where-to-buy`
+serves the prerendered `dist/where-to-buy/index.html` and only unknown paths
+fall through to the SPA shell. Netlify's `_redirects` behaves the same way —
+a `200` rewrite does not shadow an existing file unless forced with `!`.
+
+---
+
+## Verifying a change
+
+After `npm run build`:
+
+```bash
+# Should print real content, not an empty <div id="root">
+cat dist/where-to-buy/index.html
+
+# Every prerendered page should have exactly one title/description/canonical
+grep -c '<title>' dist/products/super-q-golden-bihon/index.html
 ```
 
-**What It Does:**
-- Dynamically sets page title with brand suffix
-- Injects Schema.org JSON-LD for rich results
-- Sets Open Graph tags for social sharing
-- Twitter Card optimization
-- Canonical URLs to prevent duplicate content
-- Mobile theme colors
+Then check externally:
+
+- Rich Results Test — https://search.google.com/test/rich-results
+- Schema validator — https://validator.schema.org/
+- Facebook sharing debugger — https://developers.facebook.com/tools/debug/
 
 ---
 
-## 📊 Expected SEO Benefits
+## Still to do (needs a human)
 
-### 1. **Rich Search Results**
-Your pages can now appear with:
-- ⭐ Business information cards
-- 📍 Location pins on Google Maps
-- 🔗 Breadcrumb navigation in search
-- 📱 Enhanced mobile previews
+These cannot be done from the codebase:
 
-### 2. **Local SEO Boost**
-The LocalBusiness schema helps you rank for:
-- "bihon supplier Cebu"
-- "noodles manufacturer Philippines"
-- "pancit canton near me"
-
-### 3. **Better Click-Through Rates**
-Compelling titles and descriptions written for humans (not bots) will:
-- Stand out in search results
-- Include clear calls-to-action
-- Highlight your 80+ year legacy
-
-### 4. **Faster Indexing**
-With robots.txt and sitemap.xml:
-- Google finds your pages faster
-- Updates are crawled more frequently
-- Product changes are indexed quicker
-
----
-
-## 🧪 Testing Your SEO
-
-### 1. **Schema.org Validation**
-Test your structured data:
-- **Google Rich Results Test**: https://search.google.com/test/rich-results
-- **Schema.org Validator**: https://validator.schema.org/
-
-Paste your page URLs to verify JSON-LD is correctly formatted.
-
-### 2. **Social Media Previews**
-Test how your pages look when shared:
-- **Facebook Debugger**: https://developers.facebook.com/tools/debug/
-- **Twitter Card Validator**: https://cards-dev.twitter.com/validator
-- **LinkedIn Post Inspector**: https://www.linkedin.com/post-inspector/
-
-### 3. **Local SEO**
-- **Google Business Profile**: Claim/update your listing
-- **Google Maps**: Verify your business location appears
-- Search "Ngosiok Marketing Cebu" to see your Knowledge Graph
-
-### 4. **Site-Wide**
-- **Google Search Console**: Submit your sitemap.xml
-- **Bing Webmaster Tools**: Also submit there for Bing search
-- **PageSpeed Insights**: Ensure fast loading times
-
----
-
-## 📝 Best Practices Going Forward
-
-### 1. **Update Sitemap When Adding Pages**
-If you add new routes (e.g., `/blog`), update `public/sitemap.xml`:
-```xml
-<url>
-  <loc>https://ngosiokmarketing.netlify.app/new-page</loc>
-  <lastmod>2025-XX-XX</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.8</priority>
-</url>
-```
-
-### 2. **Keep Descriptions Actionable**
-Always write descriptions with a call-to-action:
-- ❌ "This page shows our products."
-- ✅ "Browse our complete range today! Find the perfect noodles for your family."
-
-### 3. **Update Structured Data**
-When business info changes (hours, address, phone):
-- Update `COMPANY_INFO` in `src/utils/constants.js`
-- Schema will automatically update everywhere
-
-### 4. **Monitor Performance**
-Use Google Search Console to track:
-- Click-through rates (CTR)
-- Average position in search
-- Impressions and clicks
-- Mobile usability issues
-
----
-
-## 🎯 Quick Wins Checklist
-
-- [x] Schema.org JSON-LD on all pages
-- [x] Removed deprecated keywords meta tag
-- [x] Optimized titles and descriptions
-- [x] Created robots.txt
-- [x] Created sitemap.xml
-- [x] LocalBusiness schema for Google Maps
-- [x] Organization schema for Knowledge Graph
-- [x] Breadcrumb schema for site structure
-- [x] Open Graph tags for social sharing
-- [x] Canonical URLs for all pages
-
----
-
-## 🔥 Next Level SEO (Optional)
-
-### 1. **Create OG Images**
-Design 1200x630px images for social sharing:
-- `og-home.jpg` - Hero shot of products
-- `og-about.jpg` - Factory or team photo
-- `og-products.jpg` - Product grid
-- `og-contact.jpg` - Cebu office exterior
-
-### 2. **Add FAQ Schema**
-If you have an FAQ section, add FAQ schema:
-```javascript
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": "What makes Super Q Golden Bihon different?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Our bihon uses premium cornstarch..."
-    }
-  }]
-}
-```
-
-### 3. **Add Review Schema**
-If you have customer testimonials:
-```javascript
-{
-  "@context": "https://schema.org",
-  "@type": "Review",
-  "itemReviewed": {
-    "@type": "Product",
-    "name": "Super Q Golden Bihon"
-  },
-  "reviewRating": {
-    "@type": "Rating",
-    "ratingValue": "5"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Customer Name"
-  }
-}
-```
-
-### 4. **Add Product Schema**
-For individual product pages (future):
-```javascript
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Super Q Golden Bihon",
-  "image": "...",
-  "description": "...",
-  "brand": {
-    "@type": "Brand",
-    "name": "Super Q"
-  }
-}
-```
-
----
-
-## 📞 Need Help?
-
-This implementation follows Google's official guidelines:
-- [Google Search Central](https://developers.google.com/search)
-- [Schema.org Documentation](https://schema.org/)
-- [Structured Data Guidelines](https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data)
-
----
-
-**Last Updated:** November 14, 2025  
-**Implementation Status:** ✅ Complete and Production-Ready
+1. **Submit the sitemap** in Google Search Console and Bing Webmaster Tools
+   (`https://www.superq.ph/sitemap.xml`). Nothing gets indexed quickly without
+   this.
+2. **Claim the Google Business Profile** for the Cebu office. The
+   LocalBusiness schema supports it but does not replace it.
+3. **Create the OG images** referenced by the routes: `og-home.jpg`,
+   `og-about.jpg`, `og-products.jpg`, `og-contact.jpg`, 1200x630px. Only
+   `og-default.jpg` currently exists, so the others fall back to a 404 and
+   social shares render without a preview image.
+4. **Earn links from coverage.** Press mentions of Super Q are the strongest
+   available ranking signal and the main way AI engines learn to associate the
+   brand with the manufacturer.
+5. **Keep `/where-to-buy` current.** Stockist data lives in
+   `src/data/availability.js`. Entries marked `community: true` are
+   shopper-reported sightings, not distribution agreements — keep that
+   distinction honest, and promote an entry only once supply is actually
+   reliable.
+6. **Add `/privacy` and `/terms`.** The footer links to both and neither route
+   exists, so they currently render the 404 page.
