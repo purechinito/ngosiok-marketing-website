@@ -17,6 +17,7 @@ export const BihonGuide = () => {
         canonical={`${SEO_CONFIG.siteUrl}/bihon`}
         ogImage={route.ogImage}
         schema={route.schema}
+        appendBrand={false}
         type="article"
       />
       <main className="pt-20 bg-gray-50 min-h-screen">

@@ -2,7 +2,8 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { Seo } from '@/components/common/Seo';
 import { Section } from '@/components/common/Section';
 import { products } from '@/data/products';
-import { SEO_CONFIG, COMPANY_INFO } from '@/utils/constants';
+import { SEO_CONFIG } from '@/utils/constants';
+import { seoRoutes } from '@/data/seo-routes';
 import { ArrowRight, ChevronRight, Phone, MessageCircle, Star } from 'lucide-react';
 
 const renderPackagingTable = (data, title, tableKey) => {
@@ -71,52 +72,28 @@ export const ProductDetail = () => {
   const canonicalUrl = SEO_CONFIG.siteUrl + '/products/' + product.slug;
   const imageUrl = SEO_CONFIG.siteUrl + product.image;
 
-  const productSchema = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": product.name,
-    "description": product.description.replace(/\n+/g, ' '),
-    "image": imageUrl,
-    "category": product.category,
-    "brand": {
-      "@type": "Brand",
-      "name": COMPANY_INFO.name,
-    },
-    "manufacturer": {
-      "@type": "Organization",
-      "name": COMPANY_INFO.name,
-      "url": SEO_CONFIG.siteUrl,
-    },
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": SEO_CONFIG.siteUrl },
-      { "@type": "ListItem", "position": 2, "name": "Products", "item": SEO_CONFIG.siteUrl + '/products' },
-      { "@type": "ListItem", "position": 3, "name": product.name, "item": canonicalUrl },
-    ],
-  };
+  // Title, description and schema all come from src/data/seo-routes.js so the
+  // client-rendered head matches the prerendered one exactly. The schema built
+  // there carries validated GTINs per pack size and sets `brand` to the product
+  // brand (Super Q, First Choice, Long Life) rather than the company name.
+  const route = seoRoutes.find((entry) => entry.path === '/products/' + product.slug);
 
   const relatedProducts = products
     .filter((p) => p.slug !== product.slug && p.category === product.category)
     .slice(0, 3);
 
   const paragraphs = product.description.split('\n\n');
-  const firstParagraph = paragraphs[0] || '';
-  const metaDescription = firstParagraph.length > 150
-    ? firstParagraph.slice(0, 150) + '... Wholesale & export inquiries welcome.'
-    : firstParagraph + ' Wholesale & export inquiries welcome.';
 
   return (
     <>
       <Seo
-        title={product.name + ' - ' + product.category}
-        description={metaDescription}
+        title={route.title}
+        description={route.description}
         canonical={canonicalUrl}
         ogImage={imageUrl}
-        schema={[productSchema, breadcrumbSchema]}
+        schema={route.schema}
+        appendBrand={false}
+        type="product"
       />
       <main className="pt-20 bg-gray-50 min-h-screen">
         <Section className="pb-0 pt-10">

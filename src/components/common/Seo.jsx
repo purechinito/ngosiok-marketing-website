@@ -38,6 +38,11 @@ function setLinkTag(rel, href) {
 * @param {Object} schema - Schema.org structured data object (JSON-LD)
 * @param {string} type - Open Graph type (default: "website")
 * @param {boolean} noindex - If true, prevents search engine indexing
+* @param {boolean} appendBrand - Append " | Ngosiok Marketing" to the title.
+*   Pass false when `title` comes from src/data/seo-routes.js, whose titles are
+*   already complete and are used verbatim by the prerenderer. Without this the
+*   client-rendered title gained a suffix the static HTML did not have, so the
+*   two disagreed on every prerendered route.
 */
 export const Seo = ({
   title = "",
@@ -47,10 +52,11 @@ export const Seo = ({
   schema = null,
   type = "website",
   noindex = false,
+  appendBrand = true,
 }) => {
   useEffect(() => {
     const pageTitle = title
-    ? `${title} | ${SEO_CONFIG.defaultTitle}`
+    ? (appendBrand ? `${title} | ${SEO_CONFIG.defaultTitle}` : title)
       : SEO_CONFIG.defaultTitle;
 
             const canonicalUrl = canonical || `${SEO_CONFIG.siteUrl}${window.location.pathname}`;
@@ -111,7 +117,7 @@ export const Seo = ({
     } else if (schemaScript) {
       schemaScript.remove();
     }
-  }, [title, description, canonical, ogImage, schema, type, noindex]);
+  }, [title, description, canonical, ogImage, schema, type, noindex, appendBrand]);
 
   return null;
 };

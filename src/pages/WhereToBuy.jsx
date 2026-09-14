@@ -17,6 +17,7 @@ export const WhereToBuy = () => {
         canonical={`${SEO_CONFIG.siteUrl}/where-to-buy`}
         ogImage={route.ogImage}
         schema={route.schema}
+        appendBrand={false}
       />
       <main className="pt-20 bg-gray-50 min-h-screen">
         {/* Header */}

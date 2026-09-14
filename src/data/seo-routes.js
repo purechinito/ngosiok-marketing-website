@@ -17,6 +17,7 @@ import { products } from './products.js';
 import { COMPANY_INFO, SEO_CONFIG, SOCIAL_LINKS } from '../utils/constants.js';
 import { exportMarkets, uaeStockists, availabilityFaqs } from './availability.js';
 import { noodleComparison, cookingSteps, bihonFaqs } from './bihon-guide.js';
+import { productSeo } from './product-seo.js';
 
 const SITE = SEO_CONFIG.siteUrl;
 
@@ -114,20 +115,128 @@ const websiteSchema = {
   inLanguage: 'en',
 };
 
+/**
+ * GS1 check digit for GTIN-8/12/13/14. Publishing an invalid GTIN is worse
+ * than publishing none - search engines use it to merge product listings, so
+ * a bad one either gets the markup rejected or ties us to someone else's
+ * product. Everything here is validated before it reaches the page.
+ */
+export const isValidGtin = (code) => {
+  if (typeof code !== 'string' || !/^\d+$/.test(code)) return false;
+  if (![8, 12, 13, 14].includes(code.length)) return false;
+  const digits = code.split('').map(Number);
+  const check = digits.pop();
+  let sum = 0;
+  digits.reverse().forEach((digit, index) => {
+    sum += digit * (index % 2 === 0 ? 3 : 1);
+  });
+  return (10 - (sum % 10)) % 10 === check;
+};
+
+/**
+ * Our retail brands, longest first so that a prefix match cannot pick a
+ * shorter name that happens to lead. Splitting on the first space (the
+ * previous approach) produced "Super", "First" and "Long" - half a brand name
+ * each, which is worse than useless in schema meant to establish who owns the
+ * brand.
+ */
+const BRANDS = ['First Choice', 'Long Life', 'Eagle VSP', 'Golden Q', 'Super Q', 'Q1'].sort(
+  (a, b) => b.length - a.length
+);
+
+export const brandOf = (productName) =>
+  BRANDS.find((brand) => productName.startsWith(brand)) || COMPANY_INFO.name;
+
+/** Which schema.org property a GTIN belongs in, by length. */
+const gtinProperty = (code) =>
+  ({ 8: 'gtin8', 12: 'gtin12', 13: 'gtin13', 14: 'gtin14' })[code.length];
+
+/**
+ * Flatten every packaging table on a product into one variant per barcode.
+ *
+ * Pack sizes carry their own GTINs, and a 227 g pack is a genuinely different
+ * retail item from a 500 g pack. Modelling them as ProductGroup variants is
+ * what lets a search engine match our page to a specific pack a shopper is
+ * looking at, rather than guessing.
+ */
+export const productVariants = (product) => {
+  const rows = [
+    ...(product.localPackaging || []),
+    ...(product.exportPackaging || []),
+    ...(product.sharedPackaging || []),
+    ...(product.customTables || []).flatMap((table) => table.data || []),
+  ];
+
+  const seen = new Set();
+  const variants = [];
+
+  for (const row of rows) {
+    const code = row.productBarcode || row.barcode;
+    if (!isValidGtin(code) || seen.has(code)) continue;
+    seen.add(code);
+    variants.push({
+      '@type': 'Product',
+      '@id': `${SITE}/products/${product.slug}#gtin-${code}`,
+      name: `${product.name} ${row.weight}`,
+      [gtinProperty(code)]: code,
+      sku: code,
+      size: String(row.weight),
+      image: `${SITE}${product.image}`,
+      brand: { '@type': 'Brand', name: brandOf(product.name) },
+      manufacturer: { '@id': `${SITE}/#organization` },
+      countryOfOrigin: { '@type': 'Country', name: 'Philippines' },
+    });
+  }
+
+  return variants;
+};
+
 /** Product schema reused by the product detail routes and the product index. */
-export const productSchema = (product) => ({
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  '@id': `${SITE}/products/${product.slug}#product`,
-  name: product.name,
-  description: flatten(product.description),
-  image: `${SITE}${product.image}`,
-  category: product.category,
-  brand: { '@type': 'Brand', name: product.name.split(' ')[0] },
-  manufacturer: { '@id': `${SITE}/#organization` },
-  countryOfOrigin: { '@type': 'Country', name: 'Philippines' },
-  url: `${SITE}/products/${product.slug}`,
-});
+export const productSchema = (product) => {
+  const seo = productSeo[product.slug] || {};
+  const variants = productVariants(product);
+  const images = [product.image, ...(product.additionalImages || [])].map(
+    (path) => `${SITE}${path}`
+  );
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': variants.length > 1 ? 'ProductGroup' : 'Product',
+    '@id': `${SITE}/products/${product.slug}#product`,
+    name: product.name,
+    description: seo.description || flatten(product.description),
+    image: images,
+    category: product.category,
+    brand: { '@type': 'Brand', name: brandOf(product.name) },
+    manufacturer: { '@id': `${SITE}/#organization` },
+    countryOfOrigin: { '@type': 'Country', name: 'Philippines' },
+    url: `${SITE}/products/${product.slug}`,
+  };
+
+  if (seo.alsoKnownAs) schema.alternateName = seo.alsoKnownAs;
+
+  if (seo.material) {
+    schema.material = seo.material;
+    schema.additionalProperty = [
+      { '@type': 'PropertyValue', name: 'Base ingredient', value: seo.material },
+      { '@type': 'PropertyValue', name: 'Country of manufacture', value: 'Philippines' },
+    ];
+  }
+
+  if (variants.length > 1) {
+    schema.productGroupID = product.slug;
+    schema.variesBy = 'https://schema.org/size';
+    schema.hasVariant = variants;
+  } else if (variants.length === 1) {
+    Object.assign(schema, {
+      sku: variants[0].sku,
+      [gtinProperty(variants[0].sku)]: variants[0].sku,
+      size: variants[0].size,
+    });
+  }
+
+  return schema;
+};
 
 const listItem = (text) => `<li>${escapeHtml(text)}</li>`;
 
@@ -504,11 +613,15 @@ export const seoRoutes = [
   },
   ...products.map((product) => ({
     path: `/products/${product.slug}`,
-    title: `${product.name} | Ngosiok Marketing`,
-    description: `${flatten(product.description).slice(0, 150).trim()}...`,
+    // Titles and descriptions come from product-seo.js. The old fallback sliced
+    // the spec text at 150 characters and appended "...", which cut mid-word
+    // and read as a truncated paragraph in the search result.
+    title: productSeo[product.slug]?.title || `${product.name} | Ngosiok Marketing`,
+    description:
+      productSeo[product.slug]?.description || flatten(product.description).slice(0, 155),
     ogImage: `${SITE}${product.image}`,
     changefreq: 'monthly',
-    priority: '0.6',
+    priority: '0.7',
     schema: [
       breadcrumb([
         { name: 'Home', path: '/' },
@@ -521,6 +634,20 @@ export const seoRoutes = [
     <h1>${escapeHtml(product.name)}</h1>
     <p><strong>Category:</strong> ${escapeHtml(product.category)}</p>
     <p><strong>Made by:</strong> ${escapeHtml(COMPANY_INFO.name)}, Cebu City, Philippines</p>
+    ${
+      productSeo[product.slug]?.material
+        ? `<p><strong>Base ingredient:</strong> ${escapeHtml(
+            productSeo[product.slug].material
+          )}</p>`
+        : ''
+    }
+    ${
+      productSeo[product.slug]?.alsoKnownAs
+        ? `<p><strong>Also known as:</strong> ${escapeHtml(
+            productSeo[product.slug].alsoKnownAs.join(', ')
+          )}</p>`
+        : ''
+    }
     <p>${escapeHtml(flatten(product.description))}</p>
     <h2>Key Features</h2>
     <ul>${(product.features || []).map(listItem).join('')}</ul>
