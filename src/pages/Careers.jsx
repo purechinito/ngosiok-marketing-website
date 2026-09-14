@@ -113,8 +113,51 @@ export const Careers = () => {
     "@type": "WebPage",
     "name": "Careers at Ngosiok Marketing",
     "url": `${SEO_CONFIG.siteUrl}/careers`,
-    "description": "Join our team and drive innovation in food processing and AI automation."
+    "description": "Join our team and drive innovation in food processing and AI automation.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${SEO_CONFIG.siteUrl}/careers`
+      }
+    }
   };
+
+  const jobPostings = jobListings.map(job => ({
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    "title": job.title,
+    "description": job.description || job.goal,
+    "employmentType": job.type,
+    "hiringOrganization": {
+      "@type": "Organization",
+      "name": "Ngosiok Marketing",
+      "sameAs": `${SEO_CONFIG.siteUrl}`,
+      "logo": `${SEO_CONFIG.siteUrl}/logo.jpg`
+    },
+    "jobLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "325 B. Aranas Street",
+        "addressLocality": "Cebu City",
+        "addressRegion": "Cebu",
+        "postalCode": "6000",
+        "addressCountry": "PH"
+      }
+    },
+    "baseSalary": {
+      "@type": "PriceSpecification",
+      "priceCurrency": "PHP",
+      "price": "Competitive"
+    },
+    "datePosted": new Date().toISOString().split('T')[0],
+    "validThrough": new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    "applicantLocationRequirements": {
+      "@type": "Country",
+      "name": "PH"
+    }
+  }));
 
   return (
     <>
@@ -123,7 +166,13 @@ export const Careers = () => {
         description="Explore exciting career opportunities at Ngosiok Marketing. We're hiring AI Workflow Specialists, Product Managers, and more. Grow your career with us!"
         canonical={`${SEO_CONFIG.siteUrl}/careers`}
         ogImage={`${SEO_CONFIG.siteUrl}/og-careers.jpg`}
-        schema={careersSchema}
+        schema={{
+          "@context": "https://schema.org",
+          "@graph": [
+            careersSchema,
+            ...jobPostings
+          ]
+        }}
       />
       <main>
         <CareersHero />
