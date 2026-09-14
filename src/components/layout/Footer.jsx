@@ -96,6 +96,12 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/bihon" className="text-sm hover:text-primary-400 transition-colors flex items-center group">
+                  <span className="w-1.5 h-1.5 bg-primary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  What Is Bihon?
+                </Link>
+              </li>
+              <li>
                 <Link to="/where-to-buy" className="text-sm hover:text-primary-400 transition-colors flex items-center group">
                   <span className="w-1.5 h-1.5 bg-primary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                   Where to Buy

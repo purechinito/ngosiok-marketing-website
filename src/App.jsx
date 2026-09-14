@@ -8,6 +8,7 @@ import { Products } from '@/pages/Products';
 import { ProductDetail } from '@/pages/ProductDetail';
 import { Contact } from '@/pages/Contact';
 import { WhereToBuy } from '@/pages/WhereToBuy';
+import { BihonGuide } from '@/pages/BihonGuide';
 import { NotFound } from '@/pages/NotFound';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/products/:slug" element={<ProductDetail />} />
           <Route path="/where-to-buy" element={<WhereToBuy />} />
+          <Route path="/bihon" element={<BihonGuide />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

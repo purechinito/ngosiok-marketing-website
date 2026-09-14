@@ -16,6 +16,7 @@
 import { products } from './products.js';
 import { COMPANY_INFO, SEO_CONFIG, SOCIAL_LINKS } from '../utils/constants.js';
 import { exportMarkets, uaeStockists, availabilityFaqs } from './availability.js';
+import { noodleComparison, cookingSteps, bihonFaqs } from './bihon-guide.js';
 
 const SITE = SEO_CONFIG.siteUrl;
 
@@ -180,6 +181,7 @@ const navBlock = `
         <li><a href="/">Home</a></li>
         <li><a href="/products">Products</a></li>
         <li><a href="/where-to-buy">Where to Buy</a></li>
+        <li><a href="/bihon">What Is Bihon?</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
@@ -314,6 +316,84 @@ export const seoRoutes = [
 
     <h2>Frequently Asked Questions</h2>
     ${faqBlock(availabilityFaqs)}
+    ${companyFooterFacts}
+    ${navBlock}`,
+  },
+  {
+    path: '/bihon',
+    title: 'What Is Bihon? Rice or Cornstarch, and How to Cook It',
+    description:
+      'Bihon explained by the people who make it. What bihon is actually made of, how it differs from canton, sotanghon and misua, and how to cook it without it turning mushy.',
+    ogImage: `${SITE}/images/products/bihon.jpg`,
+    changefreq: 'monthly',
+    priority: '0.9',
+    schema: [
+      breadcrumb([
+        { name: 'Home', path: '/' },
+        { name: 'What Is Bihon?', path: '/bihon' },
+      ]),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        '@id': `${SITE}/bihon#article`,
+        headline: 'What Is Bihon? Rice or Cornstarch, and How to Cook It',
+        description:
+          'A noodle manufacturer explains what bihon is made of, how it compares to other Filipino noodles, and how to cook it properly.',
+        image: `${SITE}/images/products/bihon.jpg`,
+        author: { '@id': `${SITE}/#organization` },
+        publisher: { '@id': `${SITE}/#organization` },
+        inLanguage: 'en',
+        about: [
+          { '@type': 'Thing', name: 'Bihon' },
+          { '@type': 'Thing', name: 'Pancit' },
+          { '@type': 'Thing', name: 'Filipino cuisine' },
+        ],
+      },
+      faqSchema(bihonFaqs),
+    ],
+    content: `
+    <h1>What Is Bihon?</h1>
+    <p><strong>Bihon is a very fine, round noodle used across Filipino cooking</strong>, most
+    famously in pancit bihon. The word describes the shape of the noodle, not a single recipe,
+    which is why some sources say bihon is made of rice and others say cornstarch.</p>
+    <p>Both are right. Traditional bihon is milled from rice flour, which is why it is often sold
+    in English as rice sticks or rice vermicelli. Many commercial Filipino bihon are made from
+    cornstarch instead. Super Q Golden Bihon is cornstarch-based; its golden colour comes from
+    the cornstarch itself, not from added colouring. Cornstarch gives a bouncier bite and holds
+    together better under prolonged tossing in a hot pan.</p>
+
+    <h2>Bihon vs Canton vs Sotanghon vs Misua</h2>
+    <table>
+      <thead><tr><th>Noodle</th><th>Made from</th><th>Strand</th><th>Cooked texture</th><th>Classic dish</th></tr></thead>
+      <tbody>
+      ${noodleComparison
+        .map(
+          (row) =>
+            `<tr><td><a href="/products/${escapeHtml(row.slug)}">${escapeHtml(
+              row.noodle
+            )}</a></td><td>${escapeHtml(row.base)}</td><td>${escapeHtml(
+              row.strand
+            )}</td><td>${escapeHtml(row.cooked)}</td><td>${escapeHtml(row.dish)}</td></tr>`
+        )
+        .join('')}
+      </tbody>
+    </table>
+
+    <h2>How to Cook Bihon Without It Turning Mushy</h2>
+    <p>The single most common mistake is boiling it. Bihon is not spaghetti.</p>
+    <ol>
+      ${cookingSteps
+        .map(
+          (step) =>
+            `<li><strong>${escapeHtml(step.title)}</strong> ${escapeHtml(step.body)}</li>`
+        )
+        .join('')}
+    </ol>
+
+    <h2>Bihon Questions, Answered</h2>
+    ${faqBlock(bihonFaqs)}
+    <p><a href="/products/super-q-golden-bihon">See Super Q Golden Bihon</a> &middot;
+    <a href="/where-to-buy">Where to buy</a></p>
     ${companyFooterFacts}
     ${navBlock}`,
   },
