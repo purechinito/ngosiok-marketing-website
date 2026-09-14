@@ -1,4 +1,5 @@
 import { useState } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Seo } from '@/components/common/Seo';
 import { Container } from '@/components/common/Container';
