@@ -90,7 +90,7 @@ export const About = () => {
         title="Our Story - 80+ Years of Noodle Excellence"
         description="From humble beginnings in 1945 to becoming the Philippines' trusted noodle brand. Discover the Ngosiok Marketing story and our commitment to quality Filipino noodles."
         canonical={`${SEO_CONFIG.siteUrl}/about`}
-        ogImage={`${SEO_CONFIG.siteUrl}/og-about.jpg`}
+        ogImage={SEO_CONFIG.defaultOgImage}
         schema={breadcrumbSchema}
       />
       <main className="pt-20">
