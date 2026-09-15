@@ -96,6 +96,12 @@ export const Products = () => {
               Discover our range of traditional and innovative noodle products,
               crafted with care and dedication.
             </p>
+            <Link
+              to="/bihon-guide"
+              className="inline-flex items-center gap-2 mt-8 text-white font-semibold border-b-2 border-primary-400 hover:text-primary-300 hover:border-primary-300 transition-colors"
+            >
+              Not sure which noodle you need? Read our bihon guide
+            </Link>
           </div>
         </Section>
 

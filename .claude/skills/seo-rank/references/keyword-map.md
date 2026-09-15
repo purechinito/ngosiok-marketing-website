@@ -114,12 +114,20 @@ Do not attack head terms first. Order of execution:
 
 ## Published — ranking targets claimed
 
-_None yet. Log each page here on publish with its target query and publish date
-so future sessions do not duplicate or cannibalise._
+Log each page here on publish with its target query and publish date so future
+sessions do not duplicate or cannibalise.
 
 | Page | URL | Target query | Published |
 |---|---|---|---|
-| — | — | — | — |
+| Bihon Guide (Cluster 1 pillar) | `/bihon-guide` | what is bihon | 2026-09-15 |
+
+**Claimed by the pillar** — do not build separate pages for these; they are
+sections within `/bihon-guide` and should stay there:
+`cornstarch bihon vs rice bihon`, `bihon vs sotanghon`, `bihon vs pancit canton`,
+`how to tell good bihon`, `why does my pancit get soggy`, `do you soak bihon`.
+
+If any of these earns significant impressions on its own in Search Console, that
+is the signal to split it into a dedicated page — not before.
 
 ## Cannibalisation guard
 
