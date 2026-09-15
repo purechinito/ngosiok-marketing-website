@@ -185,6 +185,14 @@ export const ProductDetail = () => {
                   Inquire About This Product
                 </Link>
               </div>
+
+              <p className="text-sm text-gray-500 mt-6">
+                Comparing noodle types?{' '}
+                <Link to="/bihon-guide" className="text-primary-600 font-semibold hover:underline">
+                  Read our guide to bihon, sotanghon and pancit canton
+                </Link>
+                .
+              </p>
             </div>
           </div>
         </Section>

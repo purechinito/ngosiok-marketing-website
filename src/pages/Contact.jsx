@@ -57,7 +57,7 @@ export const Contact = () => {
         title="Contact Us - Visit Our Cebu Office"
         description="Ready to partner or order? Contact Ngosiok Marketing today. Visit us in Cebu City or reach out for distributor inquiries and bulk orders. We're here to help!"
         canonical={`${SEO_CONFIG.siteUrl}/contact`}
-        ogImage={`${SEO_CONFIG.siteUrl}/og-contact.jpg`}
+        ogImage={SEO_CONFIG.defaultOgImage}
         schema={localBusinessSchema}
       />
       <main className="pt-20 bg-gray-50 min-h-screen">

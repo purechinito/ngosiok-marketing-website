@@ -46,6 +46,18 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <priority>0.8</priority>
 </url>
 
+<!-- Bihon Guide (content pillar) -->
+<url>
+<loc>https://www.superq.ph/bihon-guide</loc>
+<lastmod>2026-09-15</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+<image:image>
+<image:loc>https://www.superq.ph/images/products/newproducts/goldenbihon.jpg</image:loc>
+<image:title>Super Q Golden Bihon pack with cooked bihon dish</image:title>
+</image:image>
+</url>
+
 <!-- Product: super-q-golden-bihon -->
 <url>
 <loc>https://www.superq.ph/products/super-q-golden-bihon</loc>
