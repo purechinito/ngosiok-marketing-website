@@ -1,19 +1,26 @@
 import { createClient } from '@supabase/supabase-js';
+import { createDemoClient } from '@/lib/demo';
 
 const url = import.meta.env.VITE_SUPABASE_URL;
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-/**
- * A missing key should say so out loud. A white screen with nothing in it is
- * how a working build gets mistaken for a broken one.
- */
 export const isSupabaseConfigured = Boolean(url && anonKey);
 
-export const supabase = createClient(
-  url || 'https://not-configured.supabase.co',
-  anonKey || 'not-configured',
-  { auth: { persistSession: true, autoRefreshToken: true } }
-);
+/**
+ * With no credentials, run on seeded demo data rather than showing a dead end.
+ *
+ * Until a Supabase project exists there is nothing to look at, which makes the
+ * board impossible to show anyone — and a decision maker cannot react to a
+ * README. Demo mode means the real screens can be opened and clicked today.
+ * The moment VITE_SUPABASE_URL is set, this path is never taken again.
+ */
+export const isDemo = !isSupabaseConfigured;
+
+export const supabase = isSupabaseConfigured
+  ? createClient(url, anonKey, {
+      auth: { persistSession: true, autoRefreshToken: true },
+    })
+  : createDemoClient();
 
 /**
  * Postgres raises our business rules as exceptions (see schema.sql).

@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { Inbox, Plus, ClipboardList, Gavel, LogOut } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { isDemo } from '@/lib/supabase';
 
 function Tab({ to, icon: Icon, label }) {
   return (
@@ -26,6 +27,11 @@ export function Layout() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      {isDemo && (
+        <div className="bg-amber-400 px-4 py-1.5 text-center text-xs font-semibold text-amber-950">
+          Demo data · not connected to a database · nothing you do here is saved
+        </div>
+      )}
       <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
           <div>
