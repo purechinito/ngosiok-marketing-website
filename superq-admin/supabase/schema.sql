@@ -66,6 +66,29 @@ create type public.problem_kind as enum (
   'PROCESS','EQUIPMENT','QUALITY','SAFETY','SUPPLY','OTHER'
 );
 
+-- The seven wastes — and the most important field in this schema.
+--
+-- "Three staff standing with nothing to do" is WAITING. Naming the waste lets
+-- someone report the situation without accusing a colleague or a supervisor:
+-- you file a waste type, not a complaint about a person. That is what makes the
+-- socially awkward, chronically ignored problems reportable at all.
+create type public.waste_kind as enum (
+  'WAITING',         -- people or machines idle
+  'MOTION',          -- unnecessary walking, reaching, searching
+  'TRANSPORT',       -- moving material further than it needs to go
+  'DEFECTS',         -- rework, rejects, re-runs
+  'INVENTORY',       -- stock sitting, expiring, or in the way
+  'OVERPRODUCTION',  -- making more, or sooner, than needed
+  'OVERPROCESSING',  -- steps that add nothing
+  'OTHER'
+);
+
+-- How often it happens. Turns a one-off observation into a weekly cost, which
+-- is what lets a quiet chronic problem outrank a loud one-off.
+create type public.occurrence as enum (
+  'ONCE','MONTHLY','WEEKLY','DAILY','EVERY_SHIFT'
+);
+
 -- -----------------------------------------------------------------------------
 -- Core tables
 -- -----------------------------------------------------------------------------
@@ -112,6 +135,23 @@ create table public.tickets (
   suggested_fix       text,                   -- optional; seeds the first proposal
 
   kind                public.problem_kind not null default 'PROCESS',
+
+  -- What kind of waste this is, so it can be reported without naming anyone.
+  waste              public.waste_kind,
+
+  -- "Have you tried to raise this before? What happened?"
+  -- The weak-communication signal. An answer like "told my supervisor three
+  -- times" is exactly the buried problem this board exists to surface, so it
+  -- feeds the priority score directly.
+  raised_before       text,
+
+  -- Rough size of the waste. Three people idle for two hours every shift is
+  -- 30 hours a week — a number a decision maker can act on, where "the line
+  -- keeps stopping" is not.
+  people_affected     integer,
+  hours_lost_each     numeric(6,2),
+  happens             public.occurrence,
+
   department_id       uuid not null references public.departments(id),
   reporter_id         uuid not null references public.profiles(id),
 
@@ -173,6 +213,25 @@ create table public.comments (
   created_at timestamptz not null default now()
 );
 
+-- "I see this too."
+--
+-- Deliberately one-directional. A confirmation measures how many people
+-- experience a problem, which is precisely what a chronic buried problem has
+-- and a one-off complaint does not.
+--
+-- There is no downvote, on purpose: an anonymous, unaccountable rejection of a
+-- colleague's report is socially corrosive on a floor where everyone knows
+-- everyone, and "my report disappeared and nobody said why" is the best
+-- documented way to kill participation. The accountable version already exists
+-- — triage DECLINE, which requires a name and a written reason.
+create table public.confirmations (
+  id         uuid primary key default gen_random_uuid(),
+  ticket_id  uuid not null references public.tickets(id) on delete cascade,
+  user_id    uuid not null references public.profiles(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  unique (ticket_id, user_id)
+);
+
 create table public.attachments (
   id          uuid primary key default gen_random_uuid(),
   ticket_id   uuid not null references public.tickets(id) on delete cascade,
@@ -199,6 +258,7 @@ create index tickets_decision_maker_idx    on public.tickets (decision_maker_id,
 create index tickets_reporter_idx          on public.tickets (reporter_id);
 create index proposals_ticket_idx          on public.proposals (ticket_id, version desc);
 create index ticket_events_ticket_idx      on public.ticket_events (ticket_id, created_at desc);
+create index confirmations_ticket_idx      on public.confirmations (ticket_id);
 create index role_assignments_user_idx     on public.role_assignments (user_id);
 
 -- -----------------------------------------------------------------------------
@@ -504,6 +564,7 @@ alter table public.role_assignments enable row level security;
 alter table public.tickets          enable row level security;
 alter table public.proposals        enable row level security;
 alter table public.comments         enable row level security;
+alter table public.confirmations    enable row level security;
 alter table public.attachments      enable row level security;
 alter table public.ticket_events    enable row level security;
 
@@ -571,6 +632,15 @@ create policy comments_insert on public.comments
 create policy comments_update_own on public.comments
   for update to authenticated using (author_id = auth.uid());
 
+-- Confirmations: everyone sees the count, you add and remove only your own.
+-- Nobody can withdraw someone else's "I see this too".
+create policy confirmations_read on public.confirmations
+  for select to authenticated using (true);
+create policy confirmations_insert on public.confirmations
+  for insert to authenticated with check (user_id = auth.uid());
+create policy confirmations_delete on public.confirmations
+  for delete to authenticated using (user_id = auth.uid());
+
 create policy attachments_read on public.attachments
   for select to authenticated using (true);
 create policy attachments_insert on public.attachments
@@ -585,6 +655,93 @@ create policy events_read on public.ticket_events
 -- Watch proposal_rounds: an average above 2 means your decision criteria are
 -- unclear, which is a signal about the organisation, not about the tool.
 -- -----------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------
+-- Priority — the mechanic this board exists for.
+--
+-- Every other ticket system lets old items sink. This one does the opposite:
+-- days_quiet RAISES the score, because "the problem everyone forgot about" is
+-- the exact thing we are hunting. A chronic problem always loses a recency
+-- contest, so recency is not allowed to run the queue.
+--
+-- Four terms, each explainable to a person on the floor in one sentence:
+--   confirmations  how many people say they see it too   (x3)
+--   days_quiet     how long it has been ignored          (x0.5, capped at 60d)
+--   hours_lost     measured waste per week               (capped at 40h)
+--   severity       triage's judgement of the stakes
+--
+-- Popularity alone is never allowed to rank it. If it were, the loudest
+-- department would win and the quiet buried problems would lose again — which
+-- is the failure this whole system is meant to correct.
+-- -----------------------------------------------------------------------------
+
+create or replace view public.ticket_priority as
+with activity as (
+  select ticket_id, max(created_at) as last_event
+    from public.ticket_events group by ticket_id
+),
+confirmed as (
+  select ticket_id, count(*)::int as confirmations
+    from public.confirmations group by ticket_id
+)
+select
+  t.id,
+  t.reference,
+  t.title,
+  t.department_id,
+  t.status,
+  t.severity,
+  t.waste,
+  coalesce(c.confirmations, 0) as confirmations,
+
+  -- Days since anything at all happened on this ticket.
+  floor(extract(epoch from (now() - coalesce(a.last_event, t.created_at))) / 86400)::int
+    as days_quiet,
+
+  -- people x hours x times per week
+  round(
+    coalesce(t.people_affected, 0) * coalesce(t.hours_lost_each, 0) *
+    case t.happens
+      when 'EVERY_SHIFT' then 10
+      when 'DAILY'       then 5
+      when 'WEEKLY'      then 1
+      when 'MONTHLY'     then 0.25
+      else 0
+    end
+  , 1) as hours_lost_per_week,
+
+  round(
+      coalesce(c.confirmations, 0) * 3
+    + least(
+        floor(extract(epoch from (now() - coalesce(a.last_event, t.created_at))) / 86400),
+        60
+      ) * 0.5
+    + least(
+        coalesce(t.people_affected, 0) * coalesce(t.hours_lost_each, 0) *
+        case t.happens
+          when 'EVERY_SHIFT' then 10
+          when 'DAILY'       then 5
+          when 'WEEKLY'      then 1
+          when 'MONTHLY'     then 0.25
+          else 0
+        end,
+        40
+      )
+    + case t.severity
+        when 'CRITICAL' then 20
+        when 'HIGH'     then 10
+        when 'MEDIUM'   then 4
+        else 0
+      end
+    -- Someone who already tried to raise this through normal channels and got
+    -- nowhere IS the weak-communication signal. Weight it like a severity bump.
+    + case when coalesce(length(trim(t.raised_before)), 0) > 0 then 8 else 0 end
+  , 1) as priority_score,
+
+  t.created_at
+from public.tickets t
+left join activity  a on a.ticket_id = t.id
+left join confirmed c on c.ticket_id = t.id;
 
 create or replace view public.ticket_metrics as
 select

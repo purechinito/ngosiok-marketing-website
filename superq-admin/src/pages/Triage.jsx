@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/context/AuthContext';
 import { TicketCard, EmptyState } from '@/components/TicketCard';
+import { fetchTicketsWithPriority, SORTS } from '@/lib/tickets';
 
 /**
  * Linear's triage inbox, borrowed wholesale.
@@ -11,6 +11,9 @@ import { TicketCard, EmptyState } from '@/components/TicketCard';
  * at 200 problems a week — and the one that stays empty if nobody opens it,
  * which is why it belongs in a standing shift huddle, not in someone's
  * good intentions.
+ *
+ * Ordered by priority, so the report that five people confirmed and nobody has
+ * touched in three weeks sits above the one filed this morning.
  */
 export function Triage() {
   const { leadOf, decidesFor, isAdmin } = useAuth();
@@ -19,40 +22,30 @@ export function Triage() {
 
   const scopes = [...new Set([...leadOf, ...decidesFor])];
   const companyWide = isAdmin || scopes.includes(null);
+  const departmentIds = scopes.filter(Boolean);
+  const scopeKey = JSON.stringify(departmentIds);
 
   useEffect(() => {
     let active = true;
-
-    let query = supabase
-      .from('tickets')
-      .select('*, department:departments(id,name,code), proposals(count)')
-      .in('status', ['NEW', 'RETURNED'])
-      .order('created_at', { ascending: true }); // oldest first: age is the priority
-
-    const departmentIds = scopes.filter(Boolean);
-    if (!companyWide && departmentIds.length > 0) {
-      query = query.in('department_id', departmentIds);
-    }
-
-    query.then(({ data }) => {
+    fetchTicketsWithPriority({
+      statuses: ['NEW', 'RETURNED'],
+      departmentIds: companyWide ? undefined : JSON.parse(scopeKey),
+    }).then((rows) => {
       if (!active) return;
-      setTickets(
-        (data ?? []).map((t) => ({ ...t, proposal_count: t.proposals?.[0]?.count ?? 0 }))
-      );
+      setTickets(rows.sort(SORTS.priority.compare));
       setLoading(false);
     });
-
     return () => {
       active = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(scopes), companyWide]);
+  }, [scopeKey, companyWide]);
 
   return (
     <div>
       <h1 className="text-xl font-bold tracking-tight">Triage inbox</h1>
       <p className="mt-1 text-sm text-slate-600">
-        Oldest first. Accept it, send it back for more detail, or decline it with a reason.
+        Highest priority first. Accept it, send it back for more detail, or decline it with a
+        reason.
       </p>
 
       <div className="mt-4 space-y-3">

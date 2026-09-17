@@ -275,6 +275,114 @@ begin
 end $$;
 
 -- =============================================================================
+-- The "three staff standing with nothing to do" scenario.
+--
+-- This is the problem the board exists for: nobody owns it, saying it out loud
+-- sounds like an accusation, and it has been true for a month. It must beat a
+-- fresh, identical report — otherwise the board buries exactly what it was
+-- built to surface.
+-- =============================================================================
+reset role;
+
+-- An old, ignored report of idle staff.
+insert into public.tickets
+  (title, body, waste, people_affected, hours_lost_each, happens,
+   raised_before, department_id, reporter_id, reference)
+values
+  ('Three staff idle at the start of every shift',
+   'Packing crew waits for the first batch with nothing to do.',
+   'WAITING', 3, 2, 'EVERY_SHIFT',
+   'I told my supervisor three times. Nothing happened.',
+   (select id from public.departments where code = 'PRD'),
+   '11111111-1111-1111-1111-111111111111', 'pending');
+
+-- The same problem, reported fresh today, with nobody having raised it before.
+insert into public.tickets
+  (title, body, waste, people_affected, hours_lost_each, happens,
+   department_id, reporter_id, reference)
+values
+  ('Packing crew idle at shift start',
+   'Same situation, reported today.',
+   'WAITING', 3, 2, 'EVERY_SHIFT',
+   (select id from public.departments where code = 'PRD'),
+   '11111111-1111-1111-1111-111111111111', 'pending');
+
+-- Age the first one by 30 days, events included.
+update public.tickets set created_at = now() - interval '30 days' where reference = 'PRD-2';
+update public.ticket_events set created_at = now() - interval '30 days'
+ where ticket_id = (select id from public.tickets where reference = 'PRD-2');
+
+do $$
+declare hrs numeric; quiet int;
+begin
+  select hours_lost_per_week, days_quiet into hrs, quiet
+    from public.ticket_priority where reference = 'PRD-2';
+  -- 3 people x 2 hours x 10 shifts a week
+  perform t_ok('T22  waste is costed: 3 people x 2h x every shift = 60h/week',
+               hrs = 60, format('%s h/week', hrs));
+  perform t_ok('T23  days_quiet counts how long it has been ignored',
+               quiet >= 29, format('%s days quiet', quiet));
+end $$;
+
+do $$
+declare old_score numeric; new_score numeric;
+begin
+  select priority_score into old_score from public.ticket_priority where reference = 'PRD-2';
+  select priority_score into new_score from public.ticket_priority where reference = 'PRD-3';
+  perform t_ok('T24  a forgotten problem OUTRANKS an identical fresh one',
+               old_score > new_score, format('%s vs %s', old_score, new_score));
+end $$;
+
+-- ---- "I see this too" -------------------------------------------------------
+set role authenticated;
+
+select set_config('request.jwt.claim.sub', '44444444-4444-4444-4444-444444444444', false);
+do $$
+declare n int;
+begin
+  insert into public.confirmations (ticket_id, user_id)
+  values ((select id from public.tickets where reference = 'PRD-3'),
+          '44444444-4444-4444-4444-444444444444');
+  select confirmations into n from public.ticket_priority where reference = 'PRD-3';
+  perform t_ok('T25  anyone can say "I see this too"', n = 1, format('%s confirmations', n));
+end $$;
+
+do $$
+declare ok boolean := false; msg text := 'no error raised';
+begin
+  begin
+    insert into public.confirmations (ticket_id, user_id)
+    values ((select id from public.tickets where reference = 'PRD-3'),
+            '44444444-4444-4444-4444-444444444444');
+  exception when others then ok := (sqlstate = '23505'); msg := sqlerrm;
+  end;
+  perform t_ok('T26  the same person cannot confirm twice (no ballot stuffing)', ok, msg);
+end $$;
+
+select set_config('request.jwt.claim.sub', '22222222-2222-2222-2222-222222222222', false);
+do $$
+declare n int;
+begin
+  delete from public.confirmations
+   where user_id = '44444444-4444-4444-4444-444444444444';
+  get diagnostics n = row_count;
+  perform t_ok('T27  nobody can withdraw someone else''s confirmation',
+               n = 0, format('%s rows deleted', n));
+end $$;
+
+do $$
+declare before_score numeric; after_score numeric;
+begin
+  select priority_score into before_score from public.ticket_priority where reference = 'PRD-3';
+  insert into public.confirmations (ticket_id, user_id)
+  values ((select id from public.tickets where reference = 'PRD-3'),
+          '22222222-2222-2222-2222-222222222222');
+  select priority_score into after_score from public.ticket_priority where reference = 'PRD-3';
+  perform t_ok('T28  each confirmation raises priority',
+               after_score > before_score, format('%s -> %s', before_score, after_score));
+end $$;
+
+-- =============================================================================
 -- Results
 -- =============================================================================
 reset role;

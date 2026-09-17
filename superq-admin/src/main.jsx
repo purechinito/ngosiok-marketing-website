@@ -1,6 +1,12 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+// HashRouter, not BrowserRouter, on purpose.
+//
+// This is served as plain static files from the same Apache that runs the ERP,
+// at whatever path it ends up mounted on. Hash routing needs no rewrite rules,
+// no .htaccess, and no knowledge of the mount path — so a deep link like
+// /problems/#/t/PRD-1 cannot 404 because a server directive was missed.
+import { HashRouter } from 'react-router-dom';
 import { AuthProvider } from '@/context/AuthContext';
 import { isSupabaseConfigured } from '@/lib/supabase';
 import App from '@/App';
@@ -36,11 +42,11 @@ function SetupNeeded() {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {isSupabaseConfigured ? (
-      <BrowserRouter>
+      <HashRouter>
         <AuthProvider>
           <App />
         </AuthProvider>
-      </BrowserRouter>
+      </HashRouter>
     ) : (
       <SetupNeeded />
     )}

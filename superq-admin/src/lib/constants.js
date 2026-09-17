@@ -37,6 +37,47 @@ export const SEVERITIES = [
 ];
 
 /**
+ * The seven wastes, in plain language with a concrete example each.
+ *
+ * This list is the reason someone can report "three staff standing with
+ * nothing to do" at all: you file a waste type, not a complaint about a person
+ * or their supervisor. Without this field, that report never gets written.
+ */
+export const WASTE_KINDS = [
+  { value: 'WAITING', label: 'Waiting', example: 'People or machines idle with nothing to do' },
+  { value: 'MOTION', label: 'Extra walking or searching', example: 'Hunting for a tool every shift' },
+  { value: 'TRANSPORT', label: 'Moving things too far', example: 'Carrying stock across the plant' },
+  { value: 'DEFECTS', label: 'Rework or rejects', example: 'Re-running packs that did not seal' },
+  { value: 'INVENTORY', label: 'Stock sitting or in the way', example: 'Pallets blocking the aisle' },
+  { value: 'OVERPRODUCTION', label: 'Making too much, too soon', example: 'Producing ahead of orders' },
+  { value: 'OVERPROCESSING', label: 'Steps that add nothing', example: 'Signing a form nobody reads' },
+  { value: 'OTHER', label: 'Something else', example: '' },
+];
+
+/** Turns a one-off observation into a weekly cost a decision maker can act on. */
+export const OCCURRENCES = [
+  { value: 'EVERY_SHIFT', label: 'Every shift' },
+  { value: 'DAILY', label: 'Every day' },
+  { value: 'WEEKLY', label: 'Every week' },
+  { value: 'MONTHLY', label: 'Every month' },
+  { value: 'ONCE', label: 'It happened once' },
+];
+
+const WEEKLY_MULTIPLIER = {
+  EVERY_SHIFT: 10,
+  DAILY: 5,
+  WEEKLY: 1,
+  MONTHLY: 0.25,
+  ONCE: 0,
+};
+
+/** Mirrors the same calculation in the ticket_priority view. */
+export function hoursLostPerWeek({ people_affected, hours_lost_each, happens }) {
+  const multiplier = WEEKLY_MULTIPLIER[happens] ?? 0;
+  return (Number(people_affected) || 0) * (Number(hours_lost_each) || 0) * multiplier;
+}
+
+/**
  * Decision tiers exist so one executive never becomes the bottleneck.
  * If the Tier 3 queue is over ~10 items, the tiers are set wrong — not the people.
  */

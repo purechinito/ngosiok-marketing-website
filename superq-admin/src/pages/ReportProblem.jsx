@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Camera, X } from 'lucide-react';
 import { supabase, readableError } from '@/lib/supabase';
 import { useAuth } from '@/context/AuthContext';
-import { PROBLEM_KINDS } from '@/lib/constants';
+import { PROBLEM_KINDS, WASTE_KINDS, OCCURRENCES, hoursLostPerWeek } from '@/lib/constants';
 
 /**
  * The Toyota submission gate.
@@ -27,6 +27,11 @@ export function ReportProblem() {
     current_condition: '',
     suggested_fix: '',
     kind: 'PROCESS',
+    waste: '',
+    raised_before: '',
+    people_affected: '',
+    hours_lost_each: '',
+    happens: '',
     department_id: '',
   });
 
@@ -52,9 +57,24 @@ export function ReportProblem() {
     setBusy(true);
     setError(null);
 
+    // Empty strings are not nulls as far as Postgres enums and numerics are
+    // concerned, so normalise before sending.
+    const payload = {
+      ...form,
+      waste: form.waste || null,
+      happens: form.happens || null,
+      raised_before: form.raised_before.trim() || null,
+      current_condition: form.current_condition.trim() || null,
+      suggested_fix: form.suggested_fix.trim() || null,
+      people_affected: form.people_affected ? Number(form.people_affected) : null,
+      hours_lost_each: form.hours_lost_each ? Number(form.hours_lost_each) : null,
+      reporter_id: profile.id,
+      reference: 'pending',
+    };
+
     const { data, error: err } = await supabase
       .from('tickets')
-      .insert({ ...form, reporter_id: profile.id, reference: 'pending' })
+      .insert(payload)
       .select('id, reference')
       .single();
 
@@ -138,6 +158,117 @@ export function ReportProblem() {
               This one field is what turns a complaint into something we can act on.
             </p>
           </div>
+        </div>
+
+        {/*
+          The waste type lets someone report "three staff standing with nothing
+          to do" without it reading as an accusation against those three people
+          or their supervisor. They are filing a WAITING waste, not a complaint.
+        */}
+        <div className="card space-y-4">
+          <div>
+            <span className="label">What kind of waste is this?</span>
+            <div className="space-y-2">
+              {WASTE_KINDS.map((w) => (
+                <label
+                  key={w.value}
+                  className={`flex cursor-pointer items-start gap-3 rounded-lg border p-3 ${
+                    form.waste === w.value
+                      ? 'border-brand-500 bg-brand-50'
+                      : 'border-slate-200 bg-white'
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="waste"
+                    className="mt-1 h-4 w-4 min-h-0"
+                    checked={form.waste === w.value}
+                    onChange={() => setForm((f) => ({ ...f, waste: w.value }))}
+                  />
+                  <span>
+                    <span className="block text-sm font-semibold text-slate-800">{w.label}</span>
+                    {w.example && (
+                      <span className="block text-xs text-slate-500">{w.example}</span>
+                    )}
+                  </span>
+                </label>
+              ))}
+            </div>
+            <p className="hint">
+              You are reporting a situation, not a person. Nobody is named by picking one of these.
+            </p>
+          </div>
+
+          <div>
+            <label className="label" htmlFor="raised">
+              Have you tried to raise this before? What happened?
+            </label>
+            <textarea
+              id="raised"
+              className="field"
+              rows={2}
+              value={form.raised_before}
+              onChange={set('raised_before')}
+              placeholder="e.g. I told my supervisor three times and nothing happened."
+            />
+            <p className="hint">
+              If the normal way of asking has already failed, this moves up the queue.
+            </p>
+          </div>
+        </div>
+
+        {/* Turns "the line keeps stopping" into a number someone can decide on. */}
+        <div className="card space-y-4">
+          <span className="label">How big is it, roughly?</span>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="label" htmlFor="people">
+                How many people
+              </label>
+              <input
+                id="people"
+                className="field"
+                inputMode="numeric"
+                value={form.people_affected}
+                onChange={set('people_affected')}
+                placeholder="3"
+              />
+            </div>
+            <div>
+              <label className="label" htmlFor="hours">
+                Hours lost each
+              </label>
+              <input
+                id="hours"
+                className="field"
+                inputMode="decimal"
+                value={form.hours_lost_each}
+                onChange={set('hours_lost_each')}
+                placeholder="2"
+              />
+            </div>
+          </div>
+          <div>
+            <label className="label" htmlFor="happens">
+              How often
+            </label>
+            <select id="happens" className="field" value={form.happens} onChange={set('happens')}>
+              <option value="">Not sure</option>
+              {OCCURRENCES.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          {hoursLostPerWeek(form) > 0 && (
+            <p className="rounded-lg bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-800">
+              That is about {hoursLostPerWeek(form).toLocaleString()} hours a week.
+            </p>
+          )}
+          <p className="hint">
+            A rough guess is fine. A number gets decided on; &ldquo;it keeps happening&rdquo; does not.
+          </p>
         </div>
 
         <div className="card space-y-4">

@@ -1,6 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Users, Gavel, CheckCircle2, RotateCcw, Send } from 'lucide-react';
+import {
+  ArrowLeft,
+  Users,
+  Gavel,
+  CheckCircle2,
+  RotateCcw,
+  Send,
+  Hand,
+  Hourglass,
+} from 'lucide-react';
 import { supabase, readableError } from '@/lib/supabase';
 import { useAuth } from '@/context/AuthContext';
 import { StatusBadge } from '@/components/StatusBadge';
@@ -9,6 +18,7 @@ import {
   SEVERITIES,
   TIERS,
   TICKET_STATUS,
+  WASTE_KINDS,
   MAX_PROPOSAL_ROUNDS_BEFORE_HUDDLE,
 } from '@/lib/constants';
 
@@ -19,6 +29,7 @@ export function TicketDetail() {
   const [ticket, setTicket] = useState(null);
   const [proposals, setProposals] = useState([]);
   const [comments, setComments] = useState([]);
+  const [confirmations, setConfirmations] = useState([]);
   const [people, setPeople] = useState([]);
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -34,7 +45,7 @@ export function TicketDetail() {
 
     if (!t) return null;
 
-    const [{ data: p }, { data: c }] = await Promise.all([
+    const [{ data: p }, { data: c }, { data: conf }, { data: prio }] = await Promise.all([
       supabase
         .from('proposals')
         .select('*, author:profiles!proposals_author_id_fkey(id,full_name)')
@@ -45,9 +56,19 @@ export function TicketDetail() {
         .select('*, author:profiles!comments_author_id_fkey(id,full_name)')
         .eq('ticket_id', t.id)
         .order('created_at', { ascending: true }),
+      supabase
+        .from('confirmations')
+        .select('user_id, author:profiles!confirmations_user_id_fkey(id,full_name)')
+        .eq('ticket_id', t.id),
+      supabase.from('ticket_priority').select('*').eq('id', t.id).maybeSingle(),
     ]);
 
-    return { ticket: t, proposals: p ?? [], comments: c ?? [] };
+    return {
+      ticket: { ...t, ...(prio ?? {}), department: t.department },
+      proposals: p ?? [],
+      comments: c ?? [],
+      confirmations: conf ?? [],
+    };
   }, [reference]);
 
   const apply = useCallback((result) => {
@@ -55,6 +76,7 @@ export function TicketDetail() {
     setTicket(result.ticket);
     setProposals(result.proposals);
     setComments(result.comments);
+    setConfirmations(result.confirmations);
   }, []);
 
   /** Re-read everything after a mutation, so the UI always reflects what the database allowed. */
@@ -126,7 +148,34 @@ export function TicketDetail() {
           {ticket.department?.name} · {ticket.reporter?.full_name} · {ageLabel(ticket.created_at)}
         </p>
 
+        {(ticket.waste || ticket.hours_lost_per_week > 0) && (
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            {ticket.waste && (
+              <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
+                {WASTE_KINDS.find((w) => w.value === ticket.waste)?.label ?? ticket.waste}
+              </span>
+            )}
+            {ticket.hours_lost_per_week > 0 && (
+              <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-800">
+                ~{Number(ticket.hours_lost_per_week).toLocaleString()} hours lost each week
+              </span>
+            )}
+          </div>
+        )}
+
         <p className="mt-4 whitespace-pre-wrap text-sm text-slate-700">{ticket.body}</p>
+
+        {ticket.raised_before && (
+          <div className="mt-4 rounded-lg border border-rose-200 bg-rose-50 p-3">
+            <p className="text-xs font-semibold uppercase tracking-wide text-rose-700">
+              Already tried to raise this
+            </p>
+            <p className="mt-1 whitespace-pre-wrap text-sm text-slate-700">{ticket.raised_before}</p>
+            <p className="mt-1 text-xs text-rose-700">
+              The normal way of asking did not work. That is why this is here.
+            </p>
+          </div>
+        )}
 
         {ticket.current_condition && (
           <div className="mt-4 rounded-lg bg-slate-50 p-3">
@@ -169,7 +218,29 @@ export function TicketDetail() {
             <strong>Declined:</strong> {ticket.decline_reason}
           </p>
         )}
+
+        {ticket.days_quiet >= 14 && !['CLOSED', 'DECLINED'].includes(ticket.status) && (
+          <p className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-800">
+            <Hourglass size={13} />
+            Nothing has happened here in {ticket.days_quiet} days
+          </p>
+        )}
       </div>
+
+      {/*
+        "I see this too" — one direction only. It measures how many people
+        experience the problem, which is exactly what a chronic buried problem
+        has and a one-off complaint does not. There is no downvote: rejecting a
+        colleague's report is done at triage, by a named person, with a written
+        reason.
+      */}
+      <Confirmations
+        ticket={ticket}
+        confirmations={confirmations}
+        profile={profile}
+        run={run}
+        busy={busy}
+      />
 
       {error && <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</p>}
 
@@ -278,6 +349,56 @@ export function TicketDetail() {
 
       {/* ---- Conversation ---- */}
       <Discussion ticket={ticket} comments={comments} profile={profile} run={run} busy={busy} />
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+
+function Confirmations({ ticket, confirmations, profile, run, busy }) {
+  const mine = confirmations.some((c) => c.user_id === profile?.id);
+  const others = confirmations
+    .filter((c) => c.user_id !== profile?.id)
+    .map((c) => c.author?.full_name)
+    .filter(Boolean);
+
+  const toggle = () =>
+    run(() =>
+      mine
+        ? supabase
+            .from('confirmations')
+            .delete()
+            .eq('ticket_id', ticket.id)
+            .eq('user_id', profile.id)
+        : supabase
+            .from('confirmations')
+            .insert({ ticket_id: ticket.id, user_id: profile.id })
+    );
+
+  return (
+    <div className="card">
+      <button
+        type="button"
+        onClick={toggle}
+        disabled={busy}
+        className={`w-full ${mine ? 'btn-secondary' : 'btn-primary'}`}
+      >
+        <Hand size={16} />
+        {mine ? 'You said you see this too' : 'I see this too'}
+      </button>
+
+      <p className="mt-2 text-center text-xs text-slate-500">
+        {confirmations.length === 0
+          ? 'Nobody else has confirmed this yet.'
+          : `${confirmations.length} ${
+              confirmations.length === 1 ? 'person sees' : 'people see'
+            } this too${others.length ? ` — ${others.slice(0, 3).join(', ')}` : ''}${
+              others.length > 3 ? ` and ${others.length - 3} more` : ''
+            }.`}
+      </p>
+      <p className="mt-1 text-center text-xs text-slate-400">
+        Confirming raises its priority. There is no way to vote a colleague&apos;s report down.
+      </p>
     </div>
   );
 }

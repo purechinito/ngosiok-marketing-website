@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { TicketCard, EmptyState } from '@/components/TicketCard';
+import { fetchTicketsWithPriority, SORTS } from '@/lib/tickets';
 
 const FILTERS = [
   { key: 'open', label: 'Open', match: (t) => !['CLOSED', 'DECLINED'].includes(t.status) },
@@ -11,11 +12,15 @@ const FILTERS = [
 /**
  * The whole company can see every process problem. Transparency is the point —
  * a board people cannot see is a suggestion box, and suggestion boxes die.
+ *
+ * It sorts by priority rather than by date on purpose. A chronic problem always
+ * loses a recency contest, and chronic problems are what this board is for.
  */
 export function Board() {
   const [tickets, setTickets] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [filter, setFilter] = useState('open');
+  const [sort, setSort] = useState('priority');
   const [departmentId, setDepartmentId] = useState('');
   const [me, setMe] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -32,32 +37,22 @@ export function Board() {
 
   useEffect(() => {
     let active = true;
-
-    let query = supabase
-      .from('tickets')
-      .select('*, department:departments(id,name,code), proposals(count)')
-      .order('created_at', { ascending: false })
-      .limit(100);
-
-    if (departmentId) query = query.eq('department_id', departmentId);
-
-    query.then(({ data }) => {
+    fetchTicketsWithPriority({ departmentId: departmentId || undefined }).then((rows) => {
       if (!active) return;
-      setTickets(
-        (data ?? []).map((t) => ({ ...t, proposal_count: t.proposals?.[0]?.count ?? 0 }))
-      );
+      setTickets(rows);
       setLoading(false);
     });
-
     return () => {
       active = false;
     };
   }, [departmentId]);
 
-  const visible = tickets.filter((t) => {
-    if (filter === 'mine') return t.reporter_id === me || t.owner_id === me;
-    return FILTERS.find((f) => f.key === filter)?.match?.(t) ?? true;
-  });
+  const visible = tickets
+    .filter((t) => {
+      if (filter === 'mine') return t.reporter_id === me || t.owner_id === me;
+      return FILTERS.find((f) => f.key === filter)?.match?.(t) ?? true;
+    })
+    .sort(SORTS[sort].compare);
 
   return (
     <div>
@@ -80,19 +75,35 @@ export function Board() {
         ))}
       </div>
 
-      <select
-        className="field mt-3"
-        value={departmentId}
-        onChange={(e) => setDepartmentId(e.target.value)}
-        aria-label="Filter by department"
-      >
-        <option value="">All departments</option>
-        {departments.map((d) => (
-          <option key={d.id} value={d.id}>
-            {d.name}
-          </option>
-        ))}
-      </select>
+      <div className="mt-3 grid gap-2 sm:grid-cols-2">
+        <select
+          className="field"
+          value={departmentId}
+          onChange={(e) => setDepartmentId(e.target.value)}
+          aria-label="Filter by department"
+        >
+          <option value="">All departments</option>
+          {departments.map((d) => (
+            <option key={d.id} value={d.id}>
+              {d.name}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className="field"
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+          aria-label="Sort by"
+        >
+          {Object.entries(SORTS).map(([key, s]) => (
+            <option key={key} value={key}>
+              Sort: {s.label}
+            </option>
+          ))}
+        </select>
+      </div>
+      <p className="hint">{SORTS[sort].hint}</p>
 
       <div className="mt-4 space-y-3">
         {loading && <p className="text-sm text-slate-500">Loading…</p>}
