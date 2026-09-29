@@ -66,7 +66,7 @@ export const Products = () => {
         title="Premium Bihon & Pancit Canton | Our Products"
         description="Browse our complete range of premium Filipino noodles. Super Q Golden Bihon, Eagle VSP, First Choice, and more. Find the perfect noodles for your family's pancit today!"
         canonical={`${SEO_CONFIG.siteUrl}/products`}
-        ogImage={`${SEO_CONFIG.siteUrl}/og-products.jpg`}
+        ogImage={SEO_CONFIG.defaultOgImage}
         schema={breadcrumbSchema}
       />
       <main className="pt-20 bg-gray-50 min-h-screen">
@@ -96,6 +96,12 @@ export const Products = () => {
               Discover our range of traditional and innovative noodle products,
               crafted with care and dedication.
             </p>
+            <Link
+              to="/bihon-guide"
+              className="inline-flex items-center gap-2 mt-8 text-white font-semibold border-b-2 border-primary-400 hover:text-primary-300 hover:border-primary-300 transition-colors"
+            >
+              Not sure which noodle you need? Read our bihon guide
+            </Link>
           </div>
         </Section>
 

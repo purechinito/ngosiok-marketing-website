@@ -43,7 +43,7 @@ export const Home = () => {
         title="Premium Quality Noodles Since 1945"
         description="Taste 80+ years of quality. Ngosiok Marketing offers the best bihon, pancit canton, and Filipino noodles for your family. Explore our premium products today!"
         canonical={`${SEO_CONFIG.siteUrl}/`}
-        ogImage={`${SEO_CONFIG.siteUrl}/og-home.jpg`}
+        ogImage={SEO_CONFIG.defaultOgImage}
         schema={organizationSchema}
       />
       <main>

@@ -165,7 +165,7 @@ export const Careers = () => {
         title="Careers - Join Our Team at Ngosiok Marketing"
         description="Explore exciting career opportunities at Ngosiok Marketing. We're hiring AI Workflow Specialists, Product Managers, and more. Grow your career with us!"
         canonical={`${SEO_CONFIG.siteUrl}/careers`}
-        ogImage={`${SEO_CONFIG.siteUrl}/og-careers.jpg`}
+        ogImage={SEO_CONFIG.defaultOgImage}
         schema={{
           "@context": "https://schema.org",
           "@graph": [

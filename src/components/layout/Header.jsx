@@ -87,16 +87,16 @@ export const Header = () => {
                     layout
                     className="block"
                   >
-                    <motion.h1
+                    <motion.span
                       layout
-                      className="font-bold bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent font-heading whitespace-nowrap"
+                      className="block font-bold bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent font-heading whitespace-nowrap"
                       animate={{
                         fontSize: isScrolled ? '1rem' : '1.125rem',
                       }}
                       transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
                     >
                       {COMPANY_INFO.name}
-                    </motion.h1>
+                    </motion.span>
                     <motion.p
                       layout
                       className="text-gray-600 font-medium whitespace-nowrap"

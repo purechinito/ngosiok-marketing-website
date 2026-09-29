@@ -74,7 +74,7 @@ All titles and descriptions are now written as compelling "search ads":
 ```
 User-agent: *
 Allow: /
-Sitemap: https://ngosiokmarketing.netlify.app/sitemap.xml
+Sitemap: https://www.superq.ph/sitemap.xml
 ```
 
 **Purpose:**
@@ -105,8 +105,8 @@ XML sitemap with all pages, including:
 <Seo
   title="Page Title"
   description="Compelling description with CTA"
-  canonical="https://ngosiokmarketing.netlify.app/page"
-  ogImage="https://ngosiokmarketing.netlify.app/og-image.jpg"
+  canonical="https://www.superq.ph/page"
+  ogImage="https://www.superq.ph/og-image.jpg"
   schema={schemaObject}  // NEW: JSON-LD structured data
   type="website"
   noindex={false}
@@ -185,7 +185,7 @@ Test how your pages look when shared:
 If you add new routes (e.g., `/blog`), update `public/sitemap.xml`:
 ```xml
 <url>
-  <loc>https://ngosiokmarketing.netlify.app/new-page</loc>
+  <loc>https://www.superq.ph/new-page</loc>
   <lastmod>2025-XX-XX</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
@@ -226,14 +226,44 @@ Use Google Search Console to track:
 
 ---
 
-## 🔥 Next Level SEO (Optional)
+## 🧭 Known Gaps (as of this revision)
 
-### 1. **Create OG Images**
-Design 1200x630px images for social sharing:
+Honest status of what is **not** done, so nobody re-plans work that is already
+shipped or assumes work that isn't.
+
+### ⚠️ No prerendering / SSR
+This is a client-rendered Vite SPA. `Seo.jsx` injects meta tags in a `useEffect`,
+i.e. **after** JavaScript executes. Consequences:
+- Googlebot renders JS, so indexing works — but it is slower and less reliable
+  than server-rendered HTML.
+- **Social scrapers (Facebook, X, LinkedIn, WhatsApp) do not execute JS.** They
+  only ever see the static tags in `index.html`.
+
+Because of this, the static fallback tags in `index.html` are load-bearing and
+must be kept in sync with the Home page's `<Seo>` props. Adding prerendering to
+the Vite build is the proper fix and needs sign-off.
+
+### ⚠️ Per-page OG images not yet designed
+Only `public/og-default.jpg` exists. All pages currently point at it. To give
+each page its own social card, design 1200x630px images and re-point the
+`ogImage` prop on the relevant page:
 - `og-home.jpg` - Hero shot of products
 - `og-about.jpg` - Factory or team photo
 - `og-products.jpg` - Product grid
 - `og-contact.jpg` - Cebu office exterior
+- `og-careers.jpg` - Team or workplace photo
+
+Do **not** reference these paths until the files actually exist in `public/` — a
+missing OG image produces a broken social preview card.
+
+### ⚠️ No review collection mechanism
+`AggregateRating` / `Review` schema requires genuine, collected reviews.
+Publishing rating markup without them violates Google's structured data
+guidelines and risks a manual action. Build collection first.
+
+---
+
+## 🔥 Next Level SEO (Optional)
 
 ### 2. **Add FAQ Schema**
 If you have an FAQ section, add FAQ schema:
@@ -273,8 +303,10 @@ If you have customer testimonials:
 }
 ```
 
-### 4. **Add Product Schema**
-For individual product pages (future):
+### 4. ~~**Add Product Schema**~~ ✅ DONE
+Implemented in `src/pages/ProductDetail.jsx` — every `/products/:slug` page ships
+`Product` + `BreadcrumbList` JSON-LD, built from `src/data/products.js`. Kept here
+for reference only:
 ```javascript
 {
   "@context": "https://schema.org",
@@ -300,5 +332,7 @@ This implementation follows Google's official guidelines:
 
 ---
 
-**Last Updated:** November 14, 2025  
-**Implementation Status:** ✅ Complete and Production-Ready
+**Last Updated:** September 15, 2026  
+**Implementation Status:** Foundation shipped. See **Known Gaps** above for what
+remains. Ongoing ranking work is driven by the `seo-rank` skill in
+`.claude/skills/seo-rank/`.
