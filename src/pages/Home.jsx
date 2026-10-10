@@ -5,46 +5,18 @@ import { Features } from '@/components/home/Features';
 import { Products } from '@/components/home/Products';
 import { Contact } from '@/components/home/Contact';
 import { COMPANY_INFO, SEO_CONFIG } from '@/utils/constants';
+import { organizationNode, websiteNode } from '@/utils/schema';
 
 export const Home = () => {
-  // Organization Schema for Google Knowledge Graph
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": COMPANY_INFO.name,
-    "url": SEO_CONFIG.siteUrl,
-    "logo": `${SEO_CONFIG.siteUrl}/logo.jpg`,
-    "description": "Premium Filipino noodle manufacturer since 1945",
-    "foundingDate": "1945",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "325 B. Aranas Street",
-      "addressLocality": "Cebu City",
-      "addressRegion": "Cebu",
-      "postalCode": "6000",
-      "addressCountry": "PH"
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": COMPANY_INFO.phone,
-      "contactType": "customer service",
-      "areaServed": "PH",
-      "availableLanguage": ["English", "Filipino"]
-    },
-    "sameAs": [
-      "https://www.facebook.com/p/Ngosiok-Marketing-Super-Q-Golden-Bihon-100063821509709/",
-      "https://www.instagram.com/superq_bihon/"
-    ]
-  };
 
   return (
     <>
       <Seo
-        title="Super Q Bihon & Filipino Noodles Since 1945"
+        title="Ngosiok Marketing: Bihon & Filipino Noodles Since 1945"
         description="Makers of Super Q Golden Bihon in Cebu since 1945. Cornstarch bihon, pancit canton and Filipino noodles for homes, distributors, food service and export."
         canonical={`${SEO_CONFIG.siteUrl}/`}
         ogImage={SEO_CONFIG.defaultOgImage}
-        schema={organizationSchema}
+        schema={[organizationNode, websiteNode]}
       />
       <main>
         <Hero />

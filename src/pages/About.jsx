@@ -6,6 +6,7 @@ import { SEO_CONFIG } from '@/utils/constants';
 import { motion } from 'framer-motion';
 import { fadeUpVariants, defaultViewport } from '@/utils/animations';
 import { WorldMap } from '@/components/common/WorldMap';
+import { organizationNode } from '@/utils/schema';
 
 export const About = () => {
   // Breadcrumb Schema
@@ -87,11 +88,11 @@ export const About = () => {
   return (
     <>
       <Seo
-        title="Our Story - 80+ Years of Noodle Excellence"
-        description="From humble beginnings in 1945 to becoming the Philippines' trusted noodle brand. Discover the Ngosiok Marketing story and our commitment to quality Filipino noodles."
+        title="Our Story: 80+ Years of Noodle Making in Cebu"
+        description="How Ngosiok Marketing grew from wartime noodle making in Cebu into the maker of Super Q Golden Bihon, now sold nationwide and exported."
         canonical={`${SEO_CONFIG.siteUrl}/about`}
         ogImage={SEO_CONFIG.defaultOgImage}
-        schema={breadcrumbSchema}
+        schema={[organizationNode, breadcrumbSchema]}
       />
       <main className="pt-20">
 

@@ -43,7 +43,13 @@ export const BREAKPOINTS = {
 
 // SEO Constants
 export const SEO_CONFIG = {
-  defaultTitle: "Ngosiok Marketing",
+  // Brand name shown in page titles and as the site name. "Super Q" is what
+  // people search for and matches the domain; the company is Ngosiok Marketing.
+  defaultTitle: "Super Q",
+  // One-line description. Keep identical everywhere (schema, llms.txt, social
+  // bios) so search and AI engines resolve one consistent entity.
+  brandDescription:
+    "Ngosiok Marketing makes Super Q Golden Bihon and Filipino noodles in Cebu, Philippines, since 1945.",
   titleTemplate: "%s | Ngosiok Marketing",
     siteUrl: "https://www.superq.ph",
   defaultDescription:

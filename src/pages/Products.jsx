@@ -63,8 +63,8 @@ export const Products = () => {
   return (
     <>
       <Seo
-        title="Premium Bihon & Pancit Canton | Our Products"
-        description="Browse our complete range of premium Filipino noodles. Super Q Golden Bihon, Eagle VSP, First Choice, and more. Find the perfect noodles for your family's pancit today!"
+        title="Filipino Noodles: Bihon, Pancit Canton & More"
+        description="Super Q Golden Bihon, palabok, pancit canton, sotanghon, misua and fresh miki, made in Cebu since 1945. Packaging specs for retail, bulk and export buyers."
         canonical={`${SEO_CONFIG.siteUrl}/products`}
         ogImage={SEO_CONFIG.defaultOgImage}
         schema={breadcrumbSchema}

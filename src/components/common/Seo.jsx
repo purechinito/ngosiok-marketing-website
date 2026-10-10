@@ -90,8 +90,6 @@ export const Seo = ({
     setMetaTag('property', 'og:title', pageTitle);
     setMetaTag('property', 'og:description', description);
     setMetaTag('property', 'og:image', fullImageUrl);
-    setMetaTag('property', 'og:image:width', '1200');
-    setMetaTag('property', 'og:image:height', '630');
     setMetaTag('property', 'og:site_name', SEO_CONFIG.defaultTitle);
     setMetaTag('property', 'og:locale', 'en_PH');
 

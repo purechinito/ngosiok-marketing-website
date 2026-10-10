@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ORG_ID } from '@/utils/schema';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Seo } from '@/components/common/Seo';
@@ -85,6 +86,15 @@ const jobListings = [
   }
 ];
 
+// Date these openings were first published (careers page launch).
+const JOBS_POSTED = '2026-09-14';
+const EMPLOYMENT_TYPES = {
+  'Full-time': 'FULL_TIME',
+  'Part-time': 'PART_TIME',
+  Contract: 'CONTRACTOR',
+  Internship: 'INTERN',
+};
+
 export const Careers = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -108,31 +118,18 @@ export const Careers = () => {
   const featuredJob = jobListings.find(job => job.featured);
   const otherJobs = jobListings.filter(job => !job.featured);
 
-  const careersSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Careers at Ngosiok Marketing",
-    "url": `${SEO_CONFIG.siteUrl}/careers`,
-    "description": "Join our team and drive innovation in food processing and AI automation.",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `${SEO_CONFIG.siteUrl}/careers`
-      }
-    }
-  };
 
   const jobPostings = jobListings.map(job => ({
     "@context": "https://schema.org",
     "@type": "JobPosting",
     "title": job.title,
     "description": job.description || job.goal,
-    "employmentType": job.type,
+    "employmentType": EMPLOYMENT_TYPES[job.type] || job.type,
     "hiringOrganization": {
       "@type": "Organization",
+      "@id": ORG_ID,
       "name": "Ngosiok Marketing",
-      "sameAs": `${SEO_CONFIG.siteUrl}`,
+      "sameAs": SEO_CONFIG.siteUrl,
       "logo": `${SEO_CONFIG.siteUrl}/logo.jpg`
     },
     "jobLocation": {
@@ -146,13 +143,9 @@ export const Careers = () => {
         "addressCountry": "PH"
       }
     },
-    "baseSalary": {
-      "@type": "PriceSpecification",
-      "priceCurrency": "PHP",
-      "price": "Competitive"
-    },
-    "datePosted": new Date().toISOString().split('T')[0],
-    "validThrough": new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    // Fixed date: a datePosted that changes on every build misrepresents the
+    // posting date, which Google's job posting guidelines prohibit.
+    "datePosted": JOBS_POSTED,
     "applicantLocationRequirements": {
       "@type": "Country",
       "name": "PH"
@@ -162,14 +155,13 @@ export const Careers = () => {
   return (
     <>
       <Seo
-        title="Careers - Join Our Team at Ngosiok Marketing"
+        title="Careers at Ngosiok Marketing, Cebu"
         description="Explore exciting career opportunities at Ngosiok Marketing. We're hiring AI Workflow Specialists, Product Managers, and more. Grow your career with us!"
         canonical={`${SEO_CONFIG.siteUrl}/careers`}
         ogImage={SEO_CONFIG.defaultOgImage}
         schema={{
           "@context": "https://schema.org",
           "@graph": [
-            careersSchema,
             ...jobPostings
           ]
         }}
