@@ -90,7 +90,14 @@ function stripTemplateHead(html) {
 // Keep an untouched copy of the app shell as the fallback for unknown URLs
 // (see vercel.json / public/_redirects). Without this, dist/index.html would
 // hold the pre-rendered home page and every 404 would serve home content.
-fs.writeFileSync(path.join(distDir, 'spa-fallback.html'), template);
+// Every real page is pre-rendered from the sitemap, so anything served from the
+// fallback is an unknown URL: mark it noindex so Google never reports it as a
+// soft 404. (A page missing from sitemap.xml would also get noindex — which is
+// why every route must be listed there.)
+fs.writeFileSync(
+  path.join(distDir, 'spa-fallback.html'),
+  template.replace(/<meta\s+name="robots"[^>]*>/i, '<meta name="robots" content="noindex,follow" />'),
+);
 
 const baseTemplate = stripTemplateHead(template);
 let written = 0;

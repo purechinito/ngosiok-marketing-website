@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/common/Button';
 import { Home, ArrowLeft } from 'lucide-react';
+import { Seo } from '@/components/common/Seo';
 
 export const NotFound = () => {
   return (
+    <>
+    <Seo title="Page Not Found" noindex />
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50">
       <div className="text-center px-4">
         <div className="mb-8">
@@ -36,5 +39,6 @@ export const NotFound = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };

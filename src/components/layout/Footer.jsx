@@ -182,15 +182,6 @@ export const Footer = () => {
                   © {currentYear} <span className="text-white font-semibold">{COMPANY_INFO.name}</span>. All rights reserved.
                 </span>
               </div>
-              <div className="flex items-center space-x-6 text-gray-400">
-                <Link to="/privacy" className="hover:text-primary-400 transition-colors">
-                  Privacy Policy
-                </Link>
-                <span className="text-gray-600">•</span>
-                <Link to="/terms" className="hover:text-primary-400 transition-colors">
-                  Terms of Service
-                </Link>
-              </div>
             </div>
 
             <div className="text-gray-500 text-xs md:text-sm text-center pt-2">
