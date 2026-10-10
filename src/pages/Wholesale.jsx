@@ -46,7 +46,7 @@ const buyerTypes = [
   },
   {
     title: 'Export importers',
-    body: 'Super Q Golden Bihon, Special Palabok and Pancit Canton are produced in export pack sizes with their own carton barcodes and published carton dimensions, so an importer can plan container loads and register products before the first order.',
+    body: 'Super Q Golden Bihon, Special Palabok and Pancit Canton are produced in export pack sizes with their own carton barcodes and published carton dimensions, so an importer can plan container loads and register products before the first order. The minimum order is one 20-foot container van, around 528 sacks.',
   },
   {
     title: 'Private label',
@@ -73,7 +73,12 @@ const faqs = [
   {
     question: 'What is the minimum order quantity?',
     answer:
-      'It depends on the product, pack size and whether the order is local, export or private label. Send sales your product and expected monthly volume and we will confirm the quantity and terms for your order.',
+      'Our minimum order is one 20-foot container van, which holds around 528 sacks. Send sales your product, pack sizes and destination and we will confirm the load and terms for your order.',
+  },
+  {
+    question: 'What is the shelf life of Super Q Golden Bihon?',
+    answer:
+      'Super Q Golden Bihon carries a labeled shelf life of 2 years from production.',
   },
   {
     question: 'Is Super Q bihon made from rice?',

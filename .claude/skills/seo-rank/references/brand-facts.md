@@ -123,11 +123,21 @@ Source: `src/pages/About.jsx`.
 - Instagram: https://www.instagram.com/superq_bihon/
 - YouTube: https://www.youtube.com/c/SuperQBihon
 
+## Owner-confirmed facts (Timothy, 2026-10-10)
+
+- **Minimum order quantity:** one 20-foot container van, around 528 sacks.
+  Sack contents differ by product (see `localPackaging` in `products.js`), so do
+  not convert this to kilos or packs without asking.
+- **Shelf life:** Super Q Golden Bihon is labeled 2 years from production. The
+  product keeps far longer, but 2 years is the government's maximum for the
+  label. **Publish "2 years" only** — never a longer figure. Not yet confirmed
+  for other products; ask before stating shelf life for anything else.
+
 ## Known unverified — do NOT publish without owner confirmation
 
 - Any certification (FDA, HACCP, ISO, halal, GMP)
 - Nutrition facts, calorie counts, allergen statements
-- Shelf life in months
+- Shelf life for products other than Super Q Golden Bihon
 - Prices, SRP, or wholesale terms
 - Specific export destination countries
 - Awards, market-share figures, or production volumes
