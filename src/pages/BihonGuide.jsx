@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Seo } from '@/components/common/Seo';
 import { Section } from '@/components/common/Section';
-import { SEO_CONFIG, COMPANY_INFO } from '@/utils/constants';
+import { SEO_CONFIG } from '@/utils/constants';
 import { ChevronRight } from 'lucide-react';
+import { organizationNode, orgRef } from '@/utils/schema';
 
 const faqs = [
   {
@@ -87,7 +88,7 @@ const qualityMarkers = [
   },
   {
     title: 'Compactness and yield',
-    body: 'A denser, more compact block holds more noodle in the same pack. Super Q Golden Bihon is made rectangular, hard and compact specifically because that compactness allows for considerable yield — the practical test is how many servings a pack actually produces.',
+    body: 'A denser, more compact block holds more noodle in the same pack. Super Q Golden Bihon is made rectangular, hard and compact specifically because that compactness allows for considerable yield — the practical test is how many servings a pack actually produces. A 500 g pack of Super Q Golden Bihon feeds at least 5 people.',
   },
   {
     title: 'Colour without colouring',
@@ -103,6 +104,10 @@ const qualityMarkers = [
   },
 ];
 
+// Update GUIDE_UPDATED only when the guide's content substantively changes.
+const GUIDE_PUBLISHED = '2026-09-15';
+const GUIDE_UPDATED = '2026-10-10';
+
 export const BihonGuide = () => {
   const canonicalUrl = `${SEO_CONFIG.siteUrl}/bihon-guide`;
 
@@ -113,19 +118,10 @@ export const BihonGuide = () => {
     description:
       'A practical guide to bihon: what it is made from, how cornstarch bihon differs from rice bihon, how it compares to sotanghon and pancit canton, and how to cook it without it turning soggy.',
     image: SEO_CONFIG.defaultOgImage,
-    author: {
-      '@type': 'Organization',
-      name: COMPANY_INFO.name,
-      url: SEO_CONFIG.siteUrl,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: COMPANY_INFO.name,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${SEO_CONFIG.siteUrl}/logo.jpg`,
-      },
-    },
+    author: orgRef,
+    datePublished: GUIDE_PUBLISHED,
+    dateModified: GUIDE_UPDATED,
+    publisher: orgRef,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': canonicalUrl,
@@ -162,11 +158,11 @@ export const BihonGuide = () => {
         canonical={canonicalUrl}
         ogImage={SEO_CONFIG.defaultOgImage}
         type="article"
-        schema={[articleSchema, breadcrumbSchema, faqSchema]}
+        schema={[organizationNode, articleSchema, breadcrumbSchema, faqSchema]}
       />
 
       <main className="pt-20 bg-white">
-        <Section className="pb-0 pt-10">
+        <Section className="pb-0 pt-10 md:pb-0 md:pt-10">
           <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8 flex-wrap">
             <Link to="/" className="hover:text-primary-600 transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4" />
@@ -174,7 +170,7 @@ export const BihonGuide = () => {
           </nav>
         </Section>
 
-        <Section className="pt-0">
+        <Section className="pt-0 md:pt-0">
           <div className="max-w-3xl">
             <span className="text-primary-600 font-bold tracking-wider uppercase text-sm mb-3 block">
               Noodle Guide
@@ -182,6 +178,11 @@ export const BihonGuide = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-gray-900 mb-8 leading-tight">
               What Is Bihon? A Complete Guide to the Filipino Noodle
             </h1>
+
+            <p className="text-sm text-gray-500 mb-6">
+              By Ngosiok Marketing, makers of Super Q bihon in Cebu since 1945 ·{' '}
+              <time dateTime={GUIDE_UPDATED}>Updated 10 October 2026</time>
+            </p>
 
             <p className="text-xl text-gray-700 leading-relaxed mb-6 font-medium">
               Bihon is the fine, thin noodle at the heart of pancit — the stir-fried

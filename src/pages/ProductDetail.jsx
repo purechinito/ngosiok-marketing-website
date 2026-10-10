@@ -4,6 +4,7 @@ import { Section } from '@/components/common/Section';
 import { products } from '@/data/products';
 import { SEO_CONFIG, COMPANY_INFO } from '@/utils/constants';
 import { ArrowRight, ChevronRight, Phone, MessageCircle, Star } from 'lucide-react';
+import { organizationNode, orgRef } from '@/utils/schema';
 
 const renderPackagingTable = (data, title, tableKey) => {
   if (!data || data.length === 0) return null;
@@ -90,11 +91,15 @@ export const ProductDetail = () => {
       "@type": "Brand",
       "name": brandName,
     },
-    "manufacturer": {
-      "@type": "Organization",
-      "name": COMPANY_INFO.name,
-      "url": SEO_CONFIG.siteUrl,
-    },
+    "manufacturer": orgRef,
+    ...(product.servings && {
+      "additionalProperty": {
+        "@type": "PropertyValue",
+        "name": `Servings per ${product.servings.packSize} pack`,
+        "minValue": product.servings.minPeople,
+        "unitText": "people",
+      },
+    }),
     "offers": {
       "@type": "Offer",
       "price": product.srp.price.toFixed(2),
@@ -119,22 +124,20 @@ export const ProductDetail = () => {
     .slice(0, 3);
 
   const paragraphs = product.description.split('\n\n');
-  const firstParagraph = paragraphs[0] || '';
-  const metaDescription = firstParagraph.length > 150
-    ? firstParagraph.slice(0, 150) + '... Wholesale & export inquiries welcome.'
-    : firstParagraph + ' Wholesale & export inquiries welcome.';
+  // Hand-written per product in products.js; never truncate mid-sentence.
+  const metaDescription = product.metaDescription;
 
   return (
     <>
       <Seo
-        title={product.name + ' - ' + product.category}
+        title={product.seoTitle || product.name}
         description={metaDescription}
         canonical={canonicalUrl}
         ogImage={imageUrl}
-        schema={productSchema ? [productSchema, breadcrumbSchema] : breadcrumbSchema}
+        schema={productSchema ? [organizationNode, productSchema, breadcrumbSchema] : breadcrumbSchema}
       />
       <main className="pt-20 bg-gray-50 min-h-screen">
-        <Section className="pb-0 pt-10">
+        <Section className="pb-0 pt-10 md:pb-0 md:pt-10">
           <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8 flex-wrap">
             <Link to="/" className="hover:text-primary-600 transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4" />
@@ -144,7 +147,7 @@ export const ProductDetail = () => {
           </nav>
         </Section>
 
-        <Section className="pt-0">
+        <Section className="pt-0 md:pt-0">
           <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
             <div>
               <div className="rounded-3xl overflow-hidden bg-white shadow-lg border border-gray-100 aspect-square">
@@ -174,6 +177,7 @@ export const ProductDetail = () => {
                     {`SRP ₱${product.srp.price}`}
                   </span>
                   {` · ${product.srp.size} pack`}
+                  {product.servings && ` · feeds at least ${product.servings.minPeople}`}
                 </p>
               )}
 

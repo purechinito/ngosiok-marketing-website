@@ -4,6 +4,7 @@ import { Section } from '@/components/common/Section';
 import { SEO_CONFIG, COMPANY_INFO } from '@/utils/constants';
 import { products } from '@/data/products';
 import { ChevronRight } from 'lucide-react';
+import { organizationNode } from '@/utils/schema';
 
 // Bulk packaging rows are built from src/data/products.js — the same data
 // printed on real packaging — so nothing here can drift from the catalog.
@@ -42,7 +43,7 @@ const buyerTypes = [
   },
   {
     title: 'Food service and bulk buyers',
-    body: 'For caterers, canteens, restaurants and commissaries, Super Q Golden Bihon comes in 12 kg sacks (in sack or paper-wrapped) as well as 1 kg packs. The compact cornstarch block gives considerable yield, which matters when you cook pancit by the tray.',
+    body: 'For caterers, canteens, restaurants and commissaries, Super Q Golden Bihon comes in 12 kg sacks (in sack or paper-wrapped) as well as 1 kg packs. The compact cornstarch block gives considerable yield: a 500 g pack feeds at least 5 people, which matters when you cook pancit by the tray.',
   },
   {
     title: 'Export importers',
@@ -112,37 +113,6 @@ export const Wholesale = () => {
     ],
   };
 
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': `${SEO_CONFIG.siteUrl}/#organization`,
-    name: COMPANY_INFO.name,
-    url: SEO_CONFIG.siteUrl,
-    logo: `${SEO_CONFIG.siteUrl}/logo.jpg`,
-    foundingDate: String(COMPANY_INFO.foundedYear),
-    email: COMPANY_INFO.email,
-    telephone: COMPANY_INFO.phone,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: '325 B. Aranas Street',
-      addressLocality: 'Cebu City',
-      postalCode: '6000',
-      addressCountry: 'PH',
-    },
-    brand: [
-      { '@type': 'Brand', name: 'Super Q' },
-      { '@type': 'Brand', name: 'Golden Q Bihon' },
-      { '@type': 'Brand', name: 'Long Life' },
-      { '@type': 'Brand', name: 'First Choice' },
-      { '@type': 'Brand', name: 'Q1' },
-    ],
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'sales',
-      email: COMPANY_INFO.email,
-      telephone: COMPANY_INFO.mobile,
-    },
-  };
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -157,15 +127,15 @@ export const Wholesale = () => {
   return (
     <>
       <Seo
-        title="Bihon Supplier & Noodle Manufacturer in Cebu | Wholesale"
+        title="Bihon Supplier & Noodle Manufacturer in Cebu"
         description="Buy Super Q bihon direct from the Cebu manufacturer. Bulk sacks, export cartons and private label for distributors, food service and importers. Ask sales."
         canonical={canonicalUrl}
         ogImage={SEO_CONFIG.defaultOgImage}
-        schema={[breadcrumbSchema, organizationSchema, faqSchema]}
+        schema={[organizationNode, breadcrumbSchema, faqSchema]}
       />
 
       <main className="pt-20 bg-white">
-        <Section className="pb-0 pt-10">
+        <Section className="pb-0 pt-10 md:pb-0 md:pt-10">
           <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8 flex-wrap">
             <Link to="/" className="hover:text-primary-600 transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4" />
@@ -173,7 +143,7 @@ export const Wholesale = () => {
           </nav>
         </Section>
 
-        <Section className="pt-0">
+        <Section className="pt-0 md:pt-0">
           <div className="max-w-3xl">
             <span className="text-primary-600 font-bold tracking-wider uppercase text-sm mb-3 block">
               For distributors, food service &amp; importers

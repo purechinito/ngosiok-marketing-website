@@ -79,6 +79,22 @@ JavaScript see full content. Consequences:
 - `public/llms.txt` is the AI-facing summary of the site. Update it when a
   product, key page or verified fact changes.
 
+**Entity and naming rules (AEO/GEO):**
+- Page titles end in `| Super Q` (the searched brand and the domain). The
+  company name Ngosiok Marketing appears in titles where it helps (home, about,
+  contact, careers).
+- The organization is defined once in `src/utils/schema.js` (`organizationNode`,
+  stable `@id`). Pages include that node and reference it with `orgRef` — never
+  hand-write another Organization object. Keep `SEO_CONFIG.brandDescription`
+  word-for-word identical in schema, `llms.txt` and social bios.
+- Product pages emit `Product` JSON-LD only when `products.js` has an `srp`.
+  Each product needs a hand-written `seoTitle` and `metaDescription` (≤155
+  chars, verified facts only) — never truncate copy.
+- After a production deploy with new or changed pages, run `npm run indexnow`
+  to notify Bing (which feeds ChatGPT search and Copilot).
+- Compress images before adding them: max 1600px on the long edge, JPEG
+  quality ~80. Nothing over ~250 KB without a reason.
+
 ## Phase 1 — Research before writing
 
 1. Read `references/keyword-map.md` for the current cluster plan and what is

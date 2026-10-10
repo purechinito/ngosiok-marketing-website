@@ -3,16 +3,18 @@ import { Section } from '@/components/common/Section';
 import { Card, CardHeader, CardBody } from '@/components/common/Card';
 import { Mail, Phone, MapPin, Clock, Facebook, Instagram, Youtube } from 'lucide-react';
 import { COMPANY_INFO, SOCIAL_LINKS, SEO_CONFIG } from '@/utils/constants';
+import { organizationNode, orgRef } from '@/utils/schema';
 
 export const Contact = () => {
   // LocalBusiness Schema for Google Maps and local search
   const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": "FoodEstablishment",
-    "@id": `${SEO_CONFIG.siteUrl}/#organization`,
-    "name": COMPANY_INFO.name,
+    "@type": "LocalBusiness",
+    "@id": `${SEO_CONFIG.siteUrl}/#cebu-office`,
+    "name": "Ngosiok Marketing (Super Q) — Cebu City Office",
+    "parentOrganization": orgRef,
     "image": `${SEO_CONFIG.siteUrl}/logo.jpg`,
-    "description": "Premium Filipino noodle manufacturer since 1945",
+    "description": SEO_CONFIG.brandDescription,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "325 B. Aranas Street",
@@ -21,15 +23,9 @@ export const Contact = () => {
       "postalCode": "6000",
       "addressCountry": "PH"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "10.3",
-      "longitude": "123.9"
-    },
     "url": SEO_CONFIG.siteUrl,
     "telephone": COMPANY_INFO.phone,
     "email": COMPANY_INFO.email,
-    "priceRange": "$$",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
@@ -54,11 +50,11 @@ export const Contact = () => {
   return (
     <>
       <Seo
-        title="Contact Us - Visit Our Cebu Office"
+        title="Contact Ngosiok Marketing: Cebu Office & Sales"
         description="Ready to partner or order? Contact Ngosiok Marketing today. Visit us in Cebu City or reach out for distributor inquiries and bulk orders. We're here to help!"
         canonical={`${SEO_CONFIG.siteUrl}/contact`}
         ogImage={SEO_CONFIG.defaultOgImage}
-        schema={localBusinessSchema}
+        schema={[organizationNode, localBusinessSchema]}
       />
       <main className="pt-20 bg-gray-50 min-h-screen">
         {/* Header */}

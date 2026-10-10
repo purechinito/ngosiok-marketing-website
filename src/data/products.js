@@ -3,10 +3,14 @@ export const products = [
     id: 1,
     name: 'Super Q Golden Bihon',
       slug: 'super-q-golden-bihon',
+    seoTitle: 'Super Q Golden Bihon: Cornstarch Bihon from Cebu',
+    metaDescription: 'A 500 g pack (SRP ₱50) feeds at least 5. Cornstarch bihon with fine strands and natural yellow colour. Bulk, export and private label.',
     category: 'Cornstarch-based Noodles',
     // Suggested retail price, owner-confirmed 2026-10-10 (approximate).
     // A product only emits Product structured data when it has an SRP — see ProductDetail.jsx.
     srp: { price: 50, currency: 'PHP', size: '500 g' },
+    // Owner-confirmed 2026-10-10: one 500 g pack feeds a minimum of 5 people.
+    servings: { packSize: '500 g', minPeople: 5 },
     description: `This is a cornstarch-based noodle that has fine strands, natural yellow colour (from cornstarch), and rectangular, hard and compact shape. The compactness of our bihon allows for considerable yield.\n\nThe cooked product is soft, smooth, and bouncy while retaining its distinct bites. It is easy to cook that even a neophyte should have no problem cooking a delicious food for all to enjoy!\n\nOur bihon is made through the proprietary process that we developed, minimizing unwanted foreign matters due to human intervention and sun drying. The production in a controlled environment has allowed us to bring our products to a higher standard of quality unsurpassed by our competitors, thus, our bihon is the benchmark by which other bihon are compared to.\n\nSuper Q Golden Bihon is our premium brand that is sold locally and internationally. We accept private label packing with certain quantity of orders. We also cater to the budget conscious consumers in the Visayas and Mindanao regions through our secondary brand called Golden Q Bihon.`,
     features: [
       'Natural yellow color',
@@ -36,6 +40,8 @@ export const products = [
     id: 4,
     name: 'Super Q Special Palabok',
       slug: 'super-q-special-palabok',
+    seoTitle: 'Super Q Special Palabok: Thick Cornstarch Noodles',
+    metaDescription: 'Cornstarch palabok noodles with a thicker strand than bihon, made in Cebu by Super Q. Retail and export packs; distributor inquiries welcome.',
     category: 'Cornstarch-based Noodles',
     description: `This is also a cornstarch-based noodle that is very similar to our Super Q Golden Bihon. The only difference is the strand – palabok is much thicker. It needs longer time to cook due to its thickness.\n\nWhile this type of noodle is very popular among Filipinos, people in different countries around the globe have accepted it as a substitute to their own dishes. It is also attractive to those who have a preference for thick noodles.`,
     features: [
@@ -64,6 +70,8 @@ export const products = [
     id: 8,
     name: 'Super Q Pancit Canton',
       slug: 'super-q-pancit-canton',
+    seoTitle: 'Super Q Pancit Canton: Wheat Noodles for Local & Export',
+    metaDescription: 'Wheat-based pancit canton, puffed by deep frying the cooked noodles. Made in Cebu by Super Q for local and export markets. Private label available.',
     category: 'Wheat-based Noodles',
     description: `This is a wheat-based noodle. It is puffed up by deep frying the cooked noodles.\n\nWe produce this type of noodles for both the local and export markets. We also accept private label packing with certain quantity of orders.`,
     features: [
@@ -89,6 +97,8 @@ export const products = [
     id: 2,
     name: 'Super Q Sotanghon',
       slug: 'super-q-sotanghon',
+    seoTitle: 'Super Q Sotanghon: Glass Noodles',
+    metaDescription: 'Translucent sotanghon glass noodles that stay intact instead of turning mushy. Made by Super Q in Cebu for soups, lumpia fillings and stir-fries.',
     category: 'Vermicelli Noodles',
     description: `Super Q Sotanghon, also known as glass noodles, is a delicate and versatile noodle appreciated for its translucent appearance and smooth, slippery texture when cooked. These fine strands are carefully processed to ensure they remain intact and do not easily become mushy during cooking.\n\nHighly versatile, Sotanghon is a favorite ingredient in many Southeast Asian cuisines. Whether used in hearty chicken soups, spring roll fillings, or stir-fried alongside fresh vegetables and savory meats, it imparts a light yet satisfying element to any dish. Its neutral flavor profile makes it an excellent canvas, easily absorbing the rich essences of the ingredients it is cooked with.\n\nOur Sotanghon is produced with a steadfast commitment to quality and hygiene, ensuring that you receive a clean, consistent, and superior product. From comforting home-cooked meals to professional culinary creations, Super Q Sotanghon provides a premium noodle experience you can always rely on.`,
     features: [
@@ -112,6 +122,8 @@ export const products = [
     id: 3,
     name: 'Super Q Misua',
       slug: 'super-q-misua',
+    seoTitle: 'Super Q Misua: Fine Wheat Noodles for Birthdays',
+    metaDescription: 'Fine, circular wheat-flour misua: long strands for long life, round shape for family reunion. Made by Super Q in Cebu in 160 g packs.',
     category: 'Wheat-based Noodles',
     description: `This is a flour-based noodle that has fine strands and circular shape. This noodle is often used by Chinese people for birthdays; long strands to signify long life, circular shape to signify reunion of family.`,
     features: [
@@ -134,6 +146,8 @@ export const products = [
     id: 5,
     name: 'Q1 Misua',
       slug: 'q1-misua',
+    seoTitle: 'Q1 Misua: Fine Wheat Flour Noodles',
+    metaDescription: 'Fine, circular wheat-flour misua traditionally served at Chinese-Filipino birthdays. Made in Cebu by Ngosiok Marketing for the local market.',
     category: 'Wheat-based Noodles',
     description: `This is a flour-based noodle that has fine strands and circular shape. This noodle is often used by Chinese people for birthdays; long strands to signify long life, circular shape to signify reunion of family.`,
     features: [
@@ -155,6 +169,8 @@ export const products = [
     id: 6,
     name: 'First Choice Fresh Japanese Ramen',
       slug: 'first-choice-fresh-japanese-ramen',
+    seoTitle: 'First Choice Fresh Japanese Ramen (Fresh Miki)',
+    metaDescription: 'Fresh miki, also called Hokkien noodles, in Classic, Mami and Lomi variants. Made in Cebu and sold through wet markets and supermarkets nearby.',
     category: 'Wheat-based Noodles',
     description: `Another wheat-based noodle, it is also referred to as the Hokkien noodles. Its production process includes the preparation of the dough, cutting, cooking, oiling, cooling, and packing of the finished products.\n\nDue to their limited shelf-life, distribution is limited to wet markets and supermarkets within the province and the surrounding provinces with regular shipping schedule.\n\nThree variants of our fresh miki include regular noodles (Classic), flat noodles (Mami), and thick noodles (Lomi).`,
     features: [
@@ -182,6 +198,8 @@ export const products = [
     id: 7,
     name: 'First Choice Flat Japanese Noodles',
       slug: 'first-choice-flat-japanese-noodles',
+    seoTitle: 'First Choice Flat Japanese Noodles: Steamed, Not Fried',
+    metaDescription: 'Flat wheat noodles steam-cooked before packing. They look like instant noodles but are never fried. Made in Cebu by Ngosiok Marketing.',
     category: 'Wheat-based Noodles',
     description: `This is another type of wheat-based noodle that we produce. The noodle is steamed cooked before final packing. This is similar to the instant noodles in appearance. However this does not undergo frying as required of the instant noodles.`,
     features: [
@@ -209,6 +227,8 @@ export const products = [
     id: 9,
     name: 'Long Life Pancit Canton',
       slug: 'long-life-pancit-canton',
+    seoTitle: 'Long Life Pancit Canton: Wheat Noodles',
+    metaDescription: 'Wheat-based pancit canton puffed by deep frying, in 150 g to 1 kg packs for the local market. Private label packing available at volume.',
     category: 'Wheat-based Noodles',
     description: `This is a wheat-based noodle. It is puffed up by deep frying the cooked noodles.\n\nWe produce this type of noodles for the local market only. We also accept private label packing with certain quantity of orders.`,
     features: [
