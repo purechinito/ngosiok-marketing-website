@@ -133,6 +133,9 @@ Source: `src/pages/About.jsx`.
   label. **Publish "2 years" only** — never a longer figure. Not yet confirmed
   for other products; ask before stating shelf life for anything else.
 - **SRP:** Super Q Golden Bihon 500 g pack, ₱50 (approximate, owner-confirmed).
+- **Yield:** one 500 g pack of Super Q Golden Bihon feeds a minimum of 5 people
+  (owner-confirmed 2026-10-10). Stored as `servings` in `products.js`. Phrase it
+  as "at least 5"; do not extrapolate to other pack sizes or products.
   Stored as `srp` in `products.js`. No SRP is confirmed for any other product.
 
 **Structured-data rule:** a product page emits `Product` JSON-LD only when its

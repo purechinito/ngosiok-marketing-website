@@ -92,6 +92,14 @@ export const ProductDetail = () => {
       "name": brandName,
     },
     "manufacturer": orgRef,
+    ...(product.servings && {
+      "additionalProperty": {
+        "@type": "PropertyValue",
+        "name": `Servings per ${product.servings.packSize} pack`,
+        "minValue": product.servings.minPeople,
+        "unitText": "people",
+      },
+    }),
     "offers": {
       "@type": "Offer",
       "price": product.srp.price.toFixed(2),
@@ -169,6 +177,7 @@ export const ProductDetail = () => {
                     {`SRP ₱${product.srp.price}`}
                   </span>
                   {` · ${product.srp.size} pack`}
+                  {product.servings && ` · feeds at least ${product.servings.minPeople}`}
                 </p>
               )}
 

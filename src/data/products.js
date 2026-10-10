@@ -4,11 +4,13 @@ export const products = [
     name: 'Super Q Golden Bihon',
       slug: 'super-q-golden-bihon',
     seoTitle: 'Super Q Golden Bihon: Cornstarch Bihon from Cebu',
-    metaDescription: 'Cornstarch bihon with fine strands, natural yellow colour and considerable yield. SRP ₱50 per 500 g. Bulk sacks, export cartons and private label.',
+    metaDescription: 'A 500 g pack (SRP ₱50) feeds at least 5. Cornstarch bihon with fine strands and natural yellow colour. Bulk, export and private label.',
     category: 'Cornstarch-based Noodles',
     // Suggested retail price, owner-confirmed 2026-10-10 (approximate).
     // A product only emits Product structured data when it has an SRP — see ProductDetail.jsx.
     srp: { price: 50, currency: 'PHP', size: '500 g' },
+    // Owner-confirmed 2026-10-10: one 500 g pack feeds a minimum of 5 people.
+    servings: { packSize: '500 g', minPeople: 5 },
     description: `This is a cornstarch-based noodle that has fine strands, natural yellow colour (from cornstarch), and rectangular, hard and compact shape. The compactness of our bihon allows for considerable yield.\n\nThe cooked product is soft, smooth, and bouncy while retaining its distinct bites. It is easy to cook that even a neophyte should have no problem cooking a delicious food for all to enjoy!\n\nOur bihon is made through the proprietary process that we developed, minimizing unwanted foreign matters due to human intervention and sun drying. The production in a controlled environment has allowed us to bring our products to a higher standard of quality unsurpassed by our competitors, thus, our bihon is the benchmark by which other bihon are compared to.\n\nSuper Q Golden Bihon is our premium brand that is sold locally and internationally. We accept private label packing with certain quantity of orders. We also cater to the budget conscious consumers in the Visayas and Mindanao regions through our secondary brand called Golden Q Bihon.`,
     features: [
       'Natural yellow color',

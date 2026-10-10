@@ -88,7 +88,7 @@ const qualityMarkers = [
   },
   {
     title: 'Compactness and yield',
-    body: 'A denser, more compact block holds more noodle in the same pack. Super Q Golden Bihon is made rectangular, hard and compact specifically because that compactness allows for considerable yield — the practical test is how many servings a pack actually produces.',
+    body: 'A denser, more compact block holds more noodle in the same pack. Super Q Golden Bihon is made rectangular, hard and compact specifically because that compactness allows for considerable yield — the practical test is how many servings a pack actually produces. A 500 g pack of Super Q Golden Bihon feeds at least 5 people.',
   },
   {
     title: 'Colour without colouring',
@@ -106,7 +106,7 @@ const qualityMarkers = [
 
 // Update GUIDE_UPDATED only when the guide's content substantively changes.
 const GUIDE_PUBLISHED = '2026-09-15';
-const GUIDE_UPDATED = '2026-09-15';
+const GUIDE_UPDATED = '2026-10-10';
 
 export const BihonGuide = () => {
   const canonicalUrl = `${SEO_CONFIG.siteUrl}/bihon-guide`;
@@ -181,7 +181,7 @@ export const BihonGuide = () => {
 
             <p className="text-sm text-gray-500 mb-6">
               By Ngosiok Marketing, makers of Super Q bihon in Cebu since 1945 ·{' '}
-              <time dateTime={GUIDE_UPDATED}>Updated 15 September 2026</time>
+              <time dateTime={GUIDE_UPDATED}>Updated 10 October 2026</time>
             </p>
 
             <p className="text-xl text-gray-700 leading-relaxed mb-6 font-medium">

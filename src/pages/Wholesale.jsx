@@ -43,7 +43,7 @@ const buyerTypes = [
   },
   {
     title: 'Food service and bulk buyers',
-    body: 'For caterers, canteens, restaurants and commissaries, Super Q Golden Bihon comes in 12 kg sacks (in sack or paper-wrapped) as well as 1 kg packs. The compact cornstarch block gives considerable yield, which matters when you cook pancit by the tray.',
+    body: 'For caterers, canteens, restaurants and commissaries, Super Q Golden Bihon comes in 12 kg sacks (in sack or paper-wrapped) as well as 1 kg packs. The compact cornstarch block gives considerable yield: a 500 g pack feeds at least 5 people, which matters when you cook pancit by the tray.',
   },
   {
     title: 'Export importers',
