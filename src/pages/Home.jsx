@@ -40,8 +40,8 @@ export const Home = () => {
   return (
     <>
       <Seo
-        title="Premium Quality Noodles Since 1945"
-        description="Taste 80+ years of quality. Ngosiok Marketing offers the best bihon, pancit canton, and Filipino noodles for your family. Explore our premium products today!"
+        title="Super Q Bihon & Filipino Noodles Since 1945"
+        description="Makers of Super Q Golden Bihon in Cebu since 1945. Cornstarch bihon, pancit canton and Filipino noodles for homes, distributors, food service and export."
         canonical={`${SEO_CONFIG.siteUrl}/`}
         ogImage={SEO_CONFIG.defaultOgImage}
         schema={organizationSchema}

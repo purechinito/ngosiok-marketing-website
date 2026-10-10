@@ -410,10 +410,10 @@ export const BihonGuide = () => {
                 Browse All Products
               </Link>
               <Link
-                to="/contact"
+                to="/wholesale"
                 className="inline-flex justify-center items-center gap-2 bg-white text-gray-800 border-2 border-gray-200 px-6 py-3.5 rounded-xl font-bold hover:border-primary-600 hover:text-primary-600 transition-all"
               >
-                Distributor &amp; Export Inquiries
+                Wholesale, Export &amp; Private Label
               </Link>
             </div>
           </div>

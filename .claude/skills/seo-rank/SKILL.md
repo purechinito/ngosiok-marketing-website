@@ -65,11 +65,19 @@ regulatory exposure. Violating these causes actual harm, not just a ranking dip.
 | URL discovery | `public/sitemap.xml` |
 | SPA rewrite config | `vercel.json` |
 
-**Critical architectural constraint:** this is a client-rendered Vite SPA.
-`Seo.jsx` injects tags via `useEffect` **after** JavaScript runs. Googlebot
-renders JS, but **Facebook, X, LinkedIn, and WhatsApp scrapers do not**. Any
-og:/twitter: tag that exists only in `Seo.jsx` is invisible to social sharing.
-Static fallbacks in `index.html` are therefore load-bearing, not redundant.
+**Pre-rendering:** `npm run build` renders every URL in `public/sitemap.xml`
+to static HTML (`scripts/prerender.mjs` + `src/entry-server.jsx`). Each page's
+`<Seo>` props become real `<title>`, meta, canonical, OG and JSON-LD tags in the
+raw HTML, so crawlers, social scrapers and AI answer engines that do not run
+JavaScript see full content. Consequences:
+- **A page that is not in `sitemap.xml` is not pre-rendered.** The sitemap is the
+  route list.
+- Page components must render without touching `window`/`document` during
+  render (effects are fine). The build fails loudly if a page renders empty.
+- Unknown URLs fall back to `dist/spa-fallback.html` (see `vercel.json`,
+  `public/_redirects`), never to the home page.
+- `public/llms.txt` is the AI-facing summary of the site. Update it when a
+  product, key page or verified fact changes.
 
 ## Phase 1 — Research before writing
 
@@ -175,8 +183,5 @@ beats ten drafted in a burst and abandoned.
 ## Open items requiring a human decision
 
 Carry these forward; do not silently resolve them:
-- **Prerendering/SSR.** Client-only rendering slows indexing and breaks social
-  scrapers. Fixing properly means adding prerendering to the Vite build — an
-  architecture change that needs sign-off.
 - **Review collection.** Needed before any `AggregateRating` schema is legitimate.
 - **Google Business Profile.** Off-repo, owner-only action.

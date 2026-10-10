@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { SEO_CONFIG } from '@/utils/constants';
+import { HeadCollectorContext } from '@/components/common/headCollector';
 
 function setMetaTag(attr, key, content) {
   if (!content) return;
@@ -48,6 +49,24 @@ export const Seo = ({
   type = "website",
   noindex = false,
 }) => {
+  // Pre-render path: record this page's head data so the build script can
+  // write it into the static HTML that crawlers and AI bots read.
+  const collector = useContext(HeadCollectorContext);
+  if (collector) {
+    const pageTitle = title
+      ? `${title} | ${SEO_CONFIG.defaultTitle}`
+      : SEO_CONFIG.defaultTitle;
+    collector.report({
+      title: pageTitle,
+      description,
+      canonical: canonical || `${SEO_CONFIG.siteUrl}${collector.path}`,
+      ogImage: ogImage.startsWith('http') ? ogImage : `${SEO_CONFIG.siteUrl}${ogImage}`,
+      schema,
+      type,
+      noindex,
+    });
+  }
+
   useEffect(() => {
     const pageTitle = title
     ? `${title} | ${SEO_CONFIG.defaultTitle}`

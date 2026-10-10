@@ -58,6 +58,14 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 </image:image>
 </url>
 
+<!-- Wholesale, distribution and private label (B2B) -->
+<url>
+<loc>https://www.superq.ph/wholesale</loc>
+<lastmod>2026-10-10</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
+
 <!-- Product: super-q-golden-bihon -->
 <url>
 <loc>https://www.superq.ph/products/super-q-golden-bihon</loc>

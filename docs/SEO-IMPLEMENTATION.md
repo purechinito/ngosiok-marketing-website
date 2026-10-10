@@ -231,17 +231,10 @@ Use Google Search Console to track:
 Honest status of what is **not** done, so nobody re-plans work that is already
 shipped or assumes work that isn't.
 
-### ⚠️ No prerendering / SSR
-This is a client-rendered Vite SPA. `Seo.jsx` injects meta tags in a `useEffect`,
-i.e. **after** JavaScript executes. Consequences:
-- Googlebot renders JS, so indexing works — but it is slower and less reliable
-  than server-rendered HTML.
-- **Social scrapers (Facebook, X, LinkedIn, WhatsApp) do not execute JS.** They
-  only ever see the static tags in `index.html`.
-
-Because of this, the static fallback tags in `index.html` are load-bearing and
-must be kept in sync with the Home page's `<Seo>` props. Adding prerendering to
-the Vite build is the proper fix and needs sign-off.
+### ✅ Prerendering (shipped 2026-10-10)
+`npm run build` pre-renders every sitemap URL to static HTML with its own head
+tags and JSON-LD. Social scrapers and AI crawlers now see full page content.
+See the `seo-rank` skill for the rules this imposes on new pages.
 
 ### ⚠️ Per-page OG images not yet designed
 Only `public/og-default.jpg` exists. All pages currently point at it. To give

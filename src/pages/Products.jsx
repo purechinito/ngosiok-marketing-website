@@ -218,7 +218,11 @@ export const Products = () => {
             </h2>
             <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto drop-shadow-sm font-medium">
               Contact us to learn more about our distribution options,
-              bulk orders, or to become a retail partner.
+              bulk orders, or to become a retail partner. See{' '}
+              <Link to="/wholesale" className="underline font-semibold text-white">
+                bulk, export and private label packaging
+              </Link>
+              .
             </p>
             <Link
               to="/contact"

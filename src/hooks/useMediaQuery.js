@@ -7,6 +7,7 @@ export const useMediaQuery = (query) => {
       media.addEventListener('change', listener);
       return () => media.removeEventListener('change', listener);
     },
-    () => window.matchMedia(query).matches
+    () => window.matchMedia(query).matches,
+    () => false
   );
 };
