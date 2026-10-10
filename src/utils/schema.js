@@ -75,7 +75,13 @@ export const organizationNode = {
     email: COMPANY_INFO.email,
     telephone: COMPANY_INFO.mobile,
   },
-  sameAs: [SOCIAL_LINKS.facebook, SOCIAL_LINKS.instagram, SOCIAL_LINKS.youtube],
+  sameAs: [
+    // Wikidata item for the company — ties the site to the knowledge graph.
+    'https://www.wikidata.org/wiki/Q141683048',
+    SOCIAL_LINKS.facebook,
+    SOCIAL_LINKS.instagram,
+    SOCIAL_LINKS.youtube,
+  ],
 };
 
 export const websiteNode = {
