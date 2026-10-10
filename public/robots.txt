@@ -1,14 +1,39 @@
-# robots.txt for Ngosiok Marketing
-# Allow all crawlers to access all content
+# robots.txt for Ngosiok Marketing (superq.ph)
+# All crawlers may access all content, including AI search and answer engines.
 
 User-agent: *
 Allow: /
 
-# Disallow admin or test pages if any
-# Disallow: /admin/
+# AI search and answer engines — listed explicitly so they are never caught by
+# a future blanket rule. These fetch pages to cite them in AI answers.
+User-agent: OAI-SearchBot
+Allow: /
 
-# Provide the location of your sitemap
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://www.superq.ph/sitemap.xml
-
-# Crawl-delay for polite bots (optional)
-Crawl-delay: 1

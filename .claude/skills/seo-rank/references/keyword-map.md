@@ -120,6 +120,7 @@ sessions do not duplicate or cannibalise.
 | Page | URL | Target query | Published |
 |---|---|---|---|
 | Bihon Guide (Cluster 1 pillar) | `/bihon-guide` | what is bihon | 2026-09-15 |
+| Wholesale & Private Label (Cluster 4 hub) | `/wholesale` | bihon supplier philippines | 2026-10-10 |
 
 **Claimed by the pillar** — do not build separate pages for these; they are
 sections within `/bihon-guide` and should stay there:
@@ -128,6 +129,11 @@ sections within `/bihon-guide` and should stay there:
 
 If any of these earns significant impressions on its own in Search Console, that
 is the signal to split it into a dedicated page — not before.
+
+**Claimed by the wholesale hub** — sections within `/wholesale`, not separate pages
+until Search Console shows they earn impressions on their own:
+`bihon manufacturer cebu`, `bihon wholesale supplier`, `private label noodles philippines`,
+`noodle exporter philippines`, `bihon bulk`, `bihon minimum order`.
 
 ## Cannibalisation guard
 

@@ -9,6 +9,7 @@ import { ProductDetail } from '@/pages/ProductDetail';
 import { Contact } from '@/pages/Contact';
 import { Careers } from '@/pages/Careers';
 import { BihonGuide } from '@/pages/BihonGuide';
+import { Wholesale } from '@/pages/Wholesale';
 import { NotFound } from '@/pages/NotFound';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/bihon-guide" element={<BihonGuide />} />
+          <Route path="/wholesale" element={<Wholesale />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
