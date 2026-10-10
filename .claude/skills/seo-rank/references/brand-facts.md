@@ -132,13 +132,20 @@ Source: `src/pages/About.jsx`.
   product keeps far longer, but 2 years is the government's maximum for the
   label. **Publish "2 years" only** — never a longer figure. Not yet confirmed
   for other products; ask before stating shelf life for anything else.
+- **SRP:** Super Q Golden Bihon 500 g pack, ₱50 (approximate, owner-confirmed).
+  Stored as `srp` in `products.js`. No SRP is confirmed for any other product.
+
+**Structured-data rule:** a product page emits `Product` JSON-LD only when its
+entry in `products.js` has an `srp`. Without a price, review or rating Google
+flags the Product snippet as invalid, and reviews must never be fabricated. To
+give another product rich results, get its SRP confirmed and add `srp`.
 
 ## Known unverified — do NOT publish without owner confirmation
 
 - Any certification (FDA, HACCP, ISO, halal, GMP)
 - Nutrition facts, calorie counts, allergen statements
 - Shelf life for products other than Super Q Golden Bihon
-- Prices, SRP, or wholesale terms
+- Prices, SRP, or wholesale terms (other than the Golden Bihon SRP above)
 - Specific export destination countries
 - Awards, market-share figures, or production volumes
 - Customer reviews, testimonials, or ratings

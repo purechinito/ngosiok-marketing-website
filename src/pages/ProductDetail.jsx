@@ -60,6 +60,8 @@ const renderPackagingTable = (data, title, tableKey) => {
   );
 };
 
+const BRAND_NAMES = ['Super Q', 'Q1', 'First Choice', 'Long Life'];
+
 export const ProductDetail = () => {
   const { slug } = useParams();
   const product = products.find((p) => p.slug === slug);
@@ -71,7 +73,13 @@ export const ProductDetail = () => {
   const canonicalUrl = SEO_CONFIG.siteUrl + '/products/' + product.slug;
   const imageUrl = SEO_CONFIG.siteUrl + product.image;
 
-  const productSchema = {
+  const brandName = BRAND_NAMES.find((b) => product.name.startsWith(b)) || COMPANY_INFO.name;
+
+  // Google treats a Product with no price, review or rating as an invalid
+  // Product snippet. We publish no reviews and only some SRPs, so Product
+  // markup is emitted only for products that have an `srp` in products.js.
+  // Add an SRP to a product and its Product markup comes back automatically.
+  const productSchema = product.srp && {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": product.name,
@@ -80,12 +88,19 @@ export const ProductDetail = () => {
     "category": product.category,
     "brand": {
       "@type": "Brand",
-      "name": COMPANY_INFO.name,
+      "name": brandName,
     },
     "manufacturer": {
       "@type": "Organization",
       "name": COMPANY_INFO.name,
       "url": SEO_CONFIG.siteUrl,
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": product.srp.price.toFixed(2),
+      "priceCurrency": product.srp.currency,
+      "url": canonicalUrl,
+      "description": `Suggested retail price, ${product.srp.size} pack`,
     },
   };
 
@@ -116,7 +131,7 @@ export const ProductDetail = () => {
         description={metaDescription}
         canonical={canonicalUrl}
         ogImage={imageUrl}
-        schema={[productSchema, breadcrumbSchema]}
+        schema={productSchema ? [productSchema, breadcrumbSchema] : breadcrumbSchema}
       />
       <main className="pt-20 bg-gray-50 min-h-screen">
         <Section className="pb-0 pt-10">
@@ -152,6 +167,15 @@ export const ProductDetail = () => {
               <h1 className="text-3xl md:text-5xl font-bold font-heading text-gray-900 mb-6 leading-tight">
                 {product.name}
               </h1>
+
+              {product.srp && (
+                <p className="text-lg text-gray-700 mb-6">
+                  <span className="font-bold text-gray-900">
+                    {`SRP ₱${product.srp.price}`}
+                  </span>
+                  {` · ${product.srp.size} pack`}
+                </p>
+              )}
 
               {product.features && product.features.length > 0 && (
                 <ul className="flex flex-wrap gap-2 mb-6">
