@@ -93,7 +93,20 @@ strand, longer cook time.
 frying the cooked noodles. Super Q is local + export; Long Life is local only.
 
 **Super Q Sotanghon** — glass noodles, translucent, smooth; holds up without
-going mushy. Neutral flavour, absorbs the dish.
+going mushy. Neutral flavour, absorbs the dish. The pack is labeled
+**"Mung Bean Vermicelli"** (source: product photo
+`public/images/products/newproducts/sotanghon_vermicelli.jpg`).
+
+## Declared net weight tolerance — read before any weighing claim
+
+The Super Q Special Palabok pack is printed **"APPROX. NET WT. 1/2 KILO (± 5%)"**
+(source: `public/images/products/newproducts/specialpalabok.jpg`). The brand's
+own packaging therefore declares a ±5% tolerance on at least one product.
+
+Any "weighing accuracy" claim must be consistent with that printed tolerance.
+Do not publish a claim that Super Q packs are more accurate than competitors'
+unless it rests on actual measured weights (pack count, scale, date, method)
+recorded by the owner. A declared tolerance is a maximum, not a measurement.
 
 **Misua (Super Q / Q1)** — flour-based, fine strands, circular shape. Used by
 Chinese families for birthdays: long strands for long life, circular shape for
@@ -152,4 +165,8 @@ give another product rich results, get its SRP confirmed and add `srp`.
 - Specific export destination countries
 - Awards, market-share figures, or production volumes
 - Customer reviews, testimonials, or ratings
+- Consumer surveys or popularity rankings. Cite a survey only with its source,
+  sample size, date and method. Never imply one exists.
+- Competitor product facts (Wai Wai, Hobe, others). The owner has committed to
+  supplying these from actual packs; publish only what they supply.
 - Founder birth/death dates beyond the 1973 succession

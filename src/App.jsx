@@ -10,6 +10,8 @@ import { Contact } from '@/pages/Contact';
 import { Careers } from '@/pages/Careers';
 import { BihonGuide } from '@/pages/BihonGuide';
 import { Wholesale } from '@/pages/Wholesale';
+import { Recipes } from '@/pages/Recipes';
+import { RecipeDetail } from '@/pages/RecipeDetail';
 import { NotFound } from '@/pages/NotFound';
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/bihon-guide" element={<BihonGuide />} />
           <Route path="/wholesale" element={<Wholesale />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/recipes/:slug" element={<RecipeDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

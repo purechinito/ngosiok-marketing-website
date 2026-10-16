@@ -121,6 +121,11 @@ sessions do not duplicate or cannibalise.
 |---|---|---|---|
 | Bihon Guide (Cluster 1 pillar) | `/bihon-guide` | what is bihon | 2026-09-15 |
 | Wholesale & Private Label (Cluster 4 hub) | `/wholesale` | bihon supplier philippines | 2026-10-10 |
+| Recipes hub (Cluster 3) | `/recipes` | filipino noodle recipes | 2026-10-16 |
+| Pancit Bihon Guisado | `/recipes/pancit-bihon-guisado` | pancit bihon recipe | 2026-10-16 |
+| Pancit Bam-i | `/recipes/pancit-bam-i` | pancit bam-i recipe | 2026-10-16 |
+| Pancit Palabok | `/recipes/pancit-palabok` | pancit palabok recipe | 2026-10-16 |
+| Chicken Sotanghon Soup | `/recipes/chicken-sotanghon-soup` | chicken sotanghon soup recipe | 2026-10-16 |
 
 **Claimed by the pillar** — do not build separate pages for these; they are
 sections within `/bihon-guide` and should stay there:
@@ -134,6 +139,20 @@ is the signal to split it into a dedicated page — not before.
 until Search Console shows they earn impressions on their own:
 `bihon manufacturer cebu`, `bihon wholesale supplier`, `private label noodles philippines`,
 `noodle exporter philippines`, `bihon bulk`, `bihon minimum order`.
+
+**Recipe pages are the scale axis** (modelled on SeriousMD's per-doctor
+`/doc/<name>` pages): one indexed page per dish, generated from
+`src/data/recipes.js`. Adding a recipe = one entry there + one sitemap `<loc>`
+(the sitemap also drives prerendering). One dish per page; never two recipes
+targeting the same dish name. `pancit bihon guisado` lives in the recipe, not
+in `/bihon-guide`, which links to it.
+
+**Queued, blocked on owner input:**
+- Bihon buyer's guide / brand comparison — criteria agreed: worldwide
+  availability, yield, weighing accuracy. Blocked on: competitor pack facts
+  (owner supplying), measured weights, and any survey's source. See the
+  net-weight tolerance note in `brand-facts.md`.
+- Where-to-buy / stockist pages — blocked on the owner's distributor list.
 
 ## Cannibalisation guard
 

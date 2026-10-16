@@ -66,6 +66,62 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <priority>0.9</priority>
 </url>
 
+<!-- Recipes hub -->
+<url>
+<loc>https://www.superq.ph/recipes</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<!-- Recipe: pancit-bihon-guisado -->
+<url>
+<loc>https://www.superq.ph/recipes/pancit-bihon-guisado</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+<image:image>
+<image:loc>https://www.superq.ph/images/products/newproducts/goldenbihon.jpg</image:loc>
+<image:title>Super Q Golden Bihon pack with a cooked bihon dish</image:title>
+</image:image>
+</url>
+
+<!-- Recipe: pancit-bam-i -->
+<url>
+<loc>https://www.superq.ph/recipes/pancit-bam-i</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+<image:image>
+<image:loc>https://www.superq.ph/images/superqpancit.jpg</image:loc>
+<image:title>Super Q Special Pancit Canton pack with a cooked pancit dish</image:title>
+</image:image>
+</url>
+
+<!-- Recipe: pancit-palabok -->
+<url>
+<loc>https://www.superq.ph/recipes/pancit-palabok</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+<image:image>
+<image:loc>https://www.superq.ph/images/products/newproducts/specialpalabok.jpg</image:loc>
+<image:title>Pancit palabok beside a pack of Super Q Special Palabok</image:title>
+</image:image>
+</url>
+
+<!-- Recipe: chicken-sotanghon-soup -->
+<url>
+<loc>https://www.superq.ph/recipes/chicken-sotanghon-soup</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+<image:image>
+<image:loc>https://www.superq.ph/images/products/newproducts/sotanghon_vermicelli.jpg</image:loc>
+<image:title>Super Q Sotanghon packs with a bowl of chicken sotanghon soup</image:title>
+</image:image>
+</url>
+
 <!-- Product: super-q-golden-bihon -->
 <url>
 <loc>https://www.superq.ph/products/super-q-golden-bihon</loc>

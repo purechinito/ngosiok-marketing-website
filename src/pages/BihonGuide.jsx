@@ -364,6 +364,17 @@ export const BihonGuide = () => {
                   </span>
                 </li>
               </ol>
+              <p>
+                Want the full method with quantities? Follow our{' '}
+                <Link to="/recipes/pancit-bihon-guisado" className="text-primary-600 font-semibold hover:underline">
+                  pancit bihon guisado recipe
+                </Link>
+                , or browse{' '}
+                <Link to="/recipes" className="text-primary-600 font-semibold hover:underline">
+                  all our noodle recipes
+                </Link>
+                .
+              </p>
             </div>
           </div>
         </Section>

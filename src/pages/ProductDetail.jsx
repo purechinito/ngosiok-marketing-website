@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { Seo } from '@/components/common/Seo';
 import { Section } from '@/components/common/Section';
 import { products } from '@/data/products';
+import { recipesForProduct } from '@/data/recipes';
 import { SEO_CONFIG, COMPANY_INFO } from '@/utils/constants';
 import { ArrowRight, ChevronRight, Phone, MessageCircle, Star } from 'lucide-react';
 import { organizationNode, orgRef } from '@/utils/schema';
@@ -119,6 +120,8 @@ export const ProductDetail = () => {
     ],
   };
 
+  const productRecipes = recipesForProduct(product.slug);
+
   const relatedProducts = products
     .filter((p) => p.slug !== product.slug && p.category === product.category)
     .slice(0, 3);
@@ -233,6 +236,38 @@ export const ProductDetail = () => {
               {renderPackagingTable(product.sharedPackaging, product.sharedPackagingTitle || 'Local and Export', 'shared')}
               {renderPackagingTable(product.exportPackaging, product.exportPackagingTitle || 'Export Packaging', 'export')}
               {product.customTables && product.customTables.map((t, i) => renderPackagingTable(t.data, t.title, 'custom-' + i))}
+            </div>
+          </Section>
+        )}
+
+        {productRecipes.length > 0 && (
+          <Section className="pt-0">
+            <h2 className="text-2xl font-bold font-heading text-gray-900 mb-6">
+              Recipes with {product.name}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {productRecipes.map((r) => (
+                <Link
+                  key={r.slug}
+                  to={'/recipes/' + r.slug}
+                  className="group bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1"
+                >
+                  <div className="aspect-[4/3] rounded-xl overflow-hidden bg-gray-50 mb-3">
+                    <img
+                      src={r.image}
+                      alt={r.imageAlt}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <h3 className="font-bold text-gray-900 group-hover:text-primary-600 transition-colors">
+                    {r.name}
+                  </h3>
+                  <p className="text-sm text-gray-500 mt-1">
+                    {r.prepMinutes + r.cookMinutes} min · {r.servings}
+                  </p>
+                </Link>
+              ))}
             </div>
           </Section>
         )}
