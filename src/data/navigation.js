@@ -1,4 +1,4 @@
-import { Home, Info, Package, Mail, Briefcase } from 'lucide-react';
+import { Home, Info, Package, Mail, Briefcase, ChefHat } from 'lucide-react';
 
 export const navigationItems = [
   {
@@ -12,6 +12,12 @@ export const navigationItems = [
     name: 'Products',
     path: '/products',
     icon: Package,
+  },
+  {
+    id: 6,
+    name: 'Recipes',
+    path: '/recipes',
+    icon: ChefHat,
   },
     {
     id: 2,
