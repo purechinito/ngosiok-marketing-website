@@ -41,8 +41,8 @@ export const Recipes = () => {
   return (
     <>
       <Seo
-        title="Filipino Noodle Recipes: Pancit Bihon, Bam-i, Palabok"
-        description="Step-by-step Filipino noodle recipes from the makers of Super Q: pancit bihon guisado, Cebuano bam-i, pancit palabok and chicken sotanghon soup."
+        title="Pancit Bihon & Canton Recipes for Love & Negosyo"
+        description="Filipino pancit recipes from the makers of Super Q: pancit bihon, canton, bam-i, palabok and sotanghon soup. Cook them for someone you love, or to sell."
         canonical={canonicalUrl}
         ogImage={SEO_CONFIG.defaultOgImage}
         schema={[organizationNode, collectionSchema, breadcrumbSchema]}
@@ -65,10 +65,14 @@ export const Recipes = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-gray-900 mb-6 leading-tight">
               Filipino Noodle Recipes
             </h1>
-            <p className="text-xl text-gray-700 leading-relaxed font-medium">
-              The pancit and noodle soups Filipino households cook most, written by the
-              people who make the noodles. Every recipe names the exact Super Q noodle it
-              uses and links to its pack sizes.
+            <p className="text-xl text-gray-700 leading-relaxed font-medium mb-4">
+              Cook them for someone you love, or cook them to sell. These are the pancit
+              and noodle soups Filipino households make most, written by the people who
+              make the noodles.
+            </p>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Every recipe names the exact Super Q noodle it uses, with tips for
+              cooking it at home and for selling it pang-negosyo.
             </p>
           </div>
         </Section>
@@ -93,6 +97,9 @@ export const Recipes = () => {
                   <h2 className="text-2xl font-bold font-heading text-gray-900 group-hover:text-primary-600 transition-colors mb-2">
                     {recipe.name}
                   </h2>
+                  {recipe.tagline && (
+                    <p className="text-primary-700 font-semibold leading-snug mb-2">{recipe.tagline}</p>
+                  )}
                   <p className="text-gray-600 leading-relaxed mb-4">{recipe.description}</p>
                   <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-500">
                     <span className="inline-flex items-center gap-1.5">

@@ -217,6 +217,14 @@ export const ProductDetail = () => {
                 </Link>
               </div>
 
+              <p className="text-sm text-gray-500 mt-4">
+                Can't find it in your store?{' '}
+                <Link to="/where-to-buy" className="text-primary-600 font-semibold hover:underline">
+                  Tell us where
+                </Link>
+                {' '}and we will get it restocked.
+              </p>
+
               <p className="text-sm text-gray-500 mt-6">
                 Comparing noodle types?{' '}
                 <Link to="/bihon-guide" className="text-primary-600 font-semibold hover:underline">

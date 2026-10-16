@@ -412,7 +412,11 @@ export const BihonGuide = () => {
                 Super Q Golden Bihon
               </Link>{' '}
               is our cornstarch-based premium bihon, produced in a controlled environment
-              and sold locally and internationally.
+              and sold locally and internationally. Comparing brands? See{' '}
+              <Link to="/best-bihon-brand-philippines" className="text-primary-600 font-semibold hover:underline">
+                how to choose the best bihon
+              </Link>
+              , including how to weigh a pack yourself.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link

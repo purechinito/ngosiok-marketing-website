@@ -66,6 +66,26 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <priority>0.9</priority>
 </url>
 
+<!-- Buyer's guide: best bihon brand -->
+<url>
+<loc>https://www.superq.ph/best-bihon-brand-philippines</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+<image:image>
+<image:loc>https://www.superq.ph/images/products/newproducts/specialbihon.jpg</image:loc>
+<image:title>Golden Q Special Bihon pack with a plate of bihon</image:title>
+</image:image>
+</url>
+
+<!-- Where to buy + out-of-stock report -->
+<url>
+<loc>https://www.superq.ph/where-to-buy</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+
 <!-- Recipes hub -->
 <url>
 <loc>https://www.superq.ph/recipes</loc>
@@ -81,8 +101,8 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 <image:image>
-<image:loc>https://www.superq.ph/images/products/newproducts/goldenbihon.jpg</image:loc>
-<image:title>Super Q Golden Bihon pack with a cooked bihon dish</image:title>
+<image:loc>https://www.superq.ph/images/products/ngosiok%20(1).jpg</image:loc>
+<image:title>Super Q Golden Bihon pack with a plate of pancit bihon</image:title>
 </image:image>
 </url>
 
@@ -107,6 +127,18 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <image:image>
 <image:loc>https://www.superq.ph/images/products/newproducts/specialpalabok.jpg</image:loc>
 <image:title>Pancit palabok beside a pack of Super Q Special Palabok</image:title>
+</image:image>
+</url>
+
+<!-- Recipe: pancit-canton-guisado -->
+<url>
+<loc>https://www.superq.ph/recipes/pancit-canton-guisado</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+<image:image>
+<image:loc>https://www.superq.ph/images/products/newproducts/specialpancitcanton.jpg</image:loc>
+<image:title>Super Q Special Pancit Canton packs with a plate of pancit canton</image:title>
 </image:image>
 </url>
 

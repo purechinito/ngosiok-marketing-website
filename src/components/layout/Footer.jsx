@@ -108,6 +108,18 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/best-bihon-brand-philippines" className="text-sm hover:text-primary-400 transition-colors flex items-center group">
+                  <span className="w-1.5 h-1.5 bg-primary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  Best Bihon Brand
+                </Link>
+              </li>
+              <li>
+                <Link to="/where-to-buy" className="text-sm hover:text-primary-400 transition-colors flex items-center group">
+                  <span className="w-1.5 h-1.5 bg-primary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  Where to Buy
+                </Link>
+              </li>
+              <li>
                 <Link to="/wholesale" className="text-sm hover:text-primary-400 transition-colors flex items-center group">
                   <span className="w-1.5 h-1.5 bg-primary-500 rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                   Wholesale &amp; Private Label
