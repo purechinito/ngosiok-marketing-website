@@ -12,6 +12,8 @@ import { BihonGuide } from '@/pages/BihonGuide';
 import { Wholesale } from '@/pages/Wholesale';
 import { Recipes } from '@/pages/Recipes';
 import { RecipeDetail } from '@/pages/RecipeDetail';
+import { BestBihon } from '@/pages/BestBihon';
+import { WhereToBuy } from '@/pages/WhereToBuy';
 import { NotFound } from '@/pages/NotFound';
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
           <Route path="/wholesale" element={<Wholesale />} />
           <Route path="/recipes" element={<Recipes />} />
           <Route path="/recipes/:slug" element={<RecipeDetail />} />
+          <Route path="/best-bihon-brand-philippines" element={<BestBihon />} />
+          <Route path="/where-to-buy" element={<WhereToBuy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

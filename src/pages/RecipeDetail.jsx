@@ -5,7 +5,7 @@ import { recipes, getRecipe } from '@/data/recipes';
 import { SEO_CONFIG } from '@/utils/constants';
 import { organizationNode, orgRef } from '@/utils/schema';
 import { NotFound } from '@/pages/NotFound';
-import { ChevronRight, Clock, Users, ArrowRight } from 'lucide-react';
+import { ChevronRight, Clock, Users, ArrowRight, ArrowDown, Heart, Store } from 'lucide-react';
 
 const isoMinutes = (minutes) => `PT${minutes}M`;
 
@@ -18,7 +18,7 @@ export const RecipeDetail = () => {
   }
 
   const canonicalUrl = `${SEO_CONFIG.siteUrl}/recipes/${recipe.slug}`;
-  const imageUrl = `${SEO_CONFIG.siteUrl}${recipe.image}`;
+  const imageUrl = encodeURI(`${SEO_CONFIG.siteUrl}${recipe.image}`);
   const totalMinutes = recipe.prepMinutes + recipe.cookMinutes;
   const allIngredients = recipe.ingredientGroups.flatMap((group) => group.items);
 
@@ -65,7 +65,7 @@ export const RecipeDetail = () => {
   return (
     <>
       <Seo
-        title={`${recipe.name} Recipe`}
+        title={recipe.seoTitle || `${recipe.name} Recipe`}
         description={recipe.description}
         canonical={canonicalUrl}
         ogImage={imageUrl}
@@ -92,9 +92,21 @@ export const RecipeDetail = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-gray-900 mb-6 leading-tight">
               {recipe.headline}
             </h1>
-            <p className="text-xl text-gray-700 leading-relaxed mb-8 font-medium">
+            {recipe.tagline && (
+              <p className="text-2xl text-primary-700 leading-snug mb-4 font-heading font-semibold">
+                {recipe.tagline}
+              </p>
+            )}
+            <p className="text-xl text-gray-700 leading-relaxed mb-6 font-medium">
               {recipe.description}
             </p>
+            <a
+              href="#recipe"
+              className="inline-flex items-center gap-2 mb-8 bg-primary-600 text-white px-5 py-3 rounded-xl font-bold hover:bg-primary-700 transition-colors"
+            >
+              <ArrowDown className="w-4 h-4" />
+              Jump to recipe
+            </a>
 
             <dl className="flex flex-wrap gap-x-8 gap-y-4 text-sm border-y border-gray-100 py-5">
               <div className="flex items-center gap-2">
@@ -142,7 +154,7 @@ export const RecipeDetail = () => {
         </Section>
 
         <Section className="pt-0">
-          <div className="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-10 lg:gap-16 max-w-6xl">
+          <div id="recipe" className="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-10 lg:gap-16 max-w-6xl scroll-mt-28">
             <div>
               <h2 className="text-3xl font-bold font-heading text-gray-900 mb-6">Ingredients</h2>
               <div className="space-y-6">
@@ -201,6 +213,60 @@ export const RecipeDetail = () => {
           </Section>
         )}
 
+        {(recipe.forLove || recipe.forBusiness) && (
+          <Section className="pt-0">
+            <div className="grid md:grid-cols-2 gap-6 max-w-6xl">
+              {recipe.forLove && (
+                <div className="rounded-3xl border border-rose-100 bg-rose-50/60 p-7">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-rose-600 shadow-sm">
+                      <Heart className="w-5 h-5" />
+                    </span>
+                    <h2 className="text-2xl font-bold font-heading text-gray-900">{recipe.forLove.title}</h2>
+                  </div>
+                  <div className="space-y-3 text-gray-700 leading-relaxed">
+                    {recipe.forLove.body.map((para) => (
+                      <p key={para.slice(0, 40)}>{para}</p>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {recipe.forBusiness && (
+                <div className="rounded-3xl border border-amber-100 bg-amber-50/60 p-7">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-amber-700 shadow-sm">
+                      <Store className="w-5 h-5" />
+                    </span>
+                    <h2 className="text-2xl font-bold font-heading text-gray-900">{recipe.forBusiness.title}</h2>
+                  </div>
+                  <div className="space-y-3 text-gray-700 leading-relaxed">
+                    {recipe.forBusiness.body.map((para) => (
+                      <p key={para.slice(0, 40)}>{para}</p>
+                    ))}
+                  </div>
+                  {recipe.forBusiness.points && (
+                    <ul className="mt-4 space-y-2">
+                      {recipe.forBusiness.points.map((point) => (
+                        <li key={point.slice(0, 40)} className="flex gap-3 text-gray-700 leading-relaxed">
+                          <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-amber-600 flex-shrink-0"></span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <p className="mt-5 text-sm text-gray-600">
+                    Buying noodles in bulk for your business?{' '}
+                    <Link to="/wholesale" className="text-primary-600 font-semibold hover:underline">
+                      See wholesale and distributor orders
+                    </Link>
+                    .
+                  </p>
+                </div>
+              )}
+            </div>
+          </Section>
+        )}
+
         <Section className="pt-0">
           <div className="bg-gradient-to-br from-primary-50 to-white border border-primary-100 rounded-3xl p-8 md:p-10 max-w-5xl">
             <h2 className="text-2xl md:text-3xl font-bold font-heading text-gray-900 mb-3">
@@ -226,7 +292,7 @@ export const RecipeDetail = () => {
 
         <Section className="pt-0 pb-24">
           <h2 className="text-2xl md:text-3xl font-bold font-heading text-gray-900 mb-6">More recipes</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-6xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl">
             {otherRecipes.map((r) => (
               <Link
                 key={r.slug}

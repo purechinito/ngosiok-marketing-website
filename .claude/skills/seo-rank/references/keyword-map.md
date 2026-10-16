@@ -126,6 +126,9 @@ sessions do not duplicate or cannibalise.
 | Pancit Bam-i | `/recipes/pancit-bam-i` | pancit bam-i recipe | 2026-10-16 |
 | Pancit Palabok | `/recipes/pancit-palabok` | pancit palabok recipe | 2026-10-16 |
 | Chicken Sotanghon Soup | `/recipes/chicken-sotanghon-soup` | chicken sotanghon soup recipe | 2026-10-16 |
+| Pancit Canton Guisado | `/recipes/pancit-canton-guisado` | pancit canton recipe | 2026-10-16 |
+| Best Bihon Brand (buyer's guide) | `/best-bihon-brand-philippines` | best bihon brand in the philippines | 2026-10-16 |
+| Where to Buy + stock report | `/where-to-buy` | where to buy super q bihon | 2026-10-16 |
 
 **Claimed by the pillar** — do not build separate pages for these; they are
 sections within `/bihon-guide` and should stay there:
@@ -147,12 +150,37 @@ until Search Console shows they earn impressions on their own:
 targeting the same dish name. `pancit bihon guisado` lives in the recipe, not
 in `/bihon-guide`, which links to it.
 
-**Queued, blocked on owner input:**
-- Bihon buyer's guide / brand comparison — criteria agreed: worldwide
-  availability, yield, weighing accuracy. Blocked on: competitor pack facts
-  (owner supplying), measured weights, and any survey's source. See the
-  net-weight tolerance note in `brand-facts.md`.
-- Where-to-buy / stockist pages — blocked on the owner's distributor list.
+**Claimed by the buyer's guide** (sections, not separate pages):
+`golden q bihon`, `super q vs golden q`, `super q bihon grams`,
+`bihon price per gram`, `how many people does 500g bihon feed`.
+
+**Claimed by where-to-buy:** `where to buy super q`, `super q out of stock`.
+Per-city stockist pages stay blocked until the owner supplies the distributor
+list. Do not create city pages without real stockists.
+
+**Still blocked on owner input:**
+- Head-to-head brand comparisons naming Wai Wai, Hobe or others: needs the
+  owner's competitor pack facts.
+- Any survey or popularity claim: needs source, sample size, date and method.
+
+## Search Console evidence (owner screenshots, 2026-10-16)
+
+Last 3 months: 115 clicks, 8.5K impressions, 1.4% CTR, average position 6.2.
+Impressions climbed from near zero in July to roughly 200–250 a day by
+October, after prerendering shipped. Top queries in the last 28 days:
+
+| Query | Clicks | Note |
+|---|---|---|
+| super q | 6 | +20% |
+| super q pancit canton | 3 | new; answered by `/recipes/pancit-canton-guisado` |
+| best bihon brand in the philippines | 1 | new; answered by `/best-bihon-brand-philippines` |
+| golden q bihon | 1 | new; answered by `#golden-q` on the buyer's guide |
+| super q bihon | 1 | new |
+
+**Rule:** before building a new page, check this table and the Search Console
+export. Double down on queries that already earn impressions; a query with
+impressions but no clicks is a title or description problem, not a content gap.
+
 
 ## Cannibalisation guard
 

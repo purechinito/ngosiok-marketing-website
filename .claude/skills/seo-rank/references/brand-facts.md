@@ -156,6 +156,42 @@ entry in `products.js` has an `srp`. Without a price, review or rating Google
 flags the Product snippet as invalid, and reviews must never be fabricated. To
 give another product rich results, get its SRP confirmed and add `srp`.
 
+## Owner-confirmed, 2026-10-16
+
+- **Availability:** Super Q is sold in wet markets and grocery stores across the
+  Philippines. Stores sometimes sell out between deliveries; the owner wants
+  out-of-stock locations reported (form at `/where-to-buy`, emails sales@).
+  Publish as "across the Philippines", not "every store".
+- **Pack weight vs competitors:** in Metro Manila, competing bihon packs are
+  usually 454 g (16 oz) or less. The Super Q Golden Bihon ½ kg pack is 500 g,
+  about 10% (46 g) more. The owner invites the public to weigh packs themselves.
+  Do not name competitor brands for this claim until the owner supplies
+  brand-specific pack facts.
+- **Scope the 500 g claim to the ½ kg pack.** Super Q Golden Bihon also ships a
+  454 g pack: the photo `public/images/products/newproducts/goldenbihon.jpg`
+  shows a Super Q "BUDGET PACK 16 oz" labeled 454 g, and export packaging lists
+  454 g. Never write "Super Q packs are 500 g".
+- **Tolerance math:** some packs print ±5%. 500 g × 0.95 = 475 g, still above a
+  454 g pack at full weight. Safe to publish as worked arithmetic.
+- **Price per gram:** ₱50 SRP ÷ 500 g = ₱0.10/g; ÷ 5 servings = ₱10 or less of
+  noodles per serving. Derived only from the SRP and the owner-confirmed yield.
+
+## Read off packaging photos, 2026-10-16
+
+- **Golden Q Special Bihon** (`public/images/products/newproducts/specialbihon.jpg`):
+  "APPROX. NET WT. 200g / 7.05 Oz (±5%)"; Cebuano taglines "Lami Kai'ni!" and
+  "Saktong timbang, dekalidad ug limpyo" (exact weight, quality and clean).
+  Composition is not stated — do not call it cornstarch or rice.
+- **Super Q Golden Bihon "the Original!"** is printed on the pack in
+  `public/images/products/ngosiok (1).jpg`.
+- The Super Q Special Pancit Canton pack shows a **GMP mark** and another logo.
+  **Not published.** Certifications stay unverified until the owner confirms.
+
+## Not citable on the site
+
+- The owner reports Gemini's AI Overview names Super Q for "best bihon"
+  (2026-10-16). Useful signal, but AI Overviews change and are not a source.
+
 ## Known unverified — do NOT publish without owner confirmation
 
 - Any certification (FDA, HACCP, ISO, halal, GMP)

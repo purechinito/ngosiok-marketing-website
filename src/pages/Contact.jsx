@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Seo } from '@/components/common/Seo';
 import { Section } from '@/components/common/Section';
 import { Card, CardHeader, CardBody } from '@/components/common/Card';
@@ -114,6 +115,13 @@ export const Contact = () => {
               </a>
               <p className="text-gray-500 text-sm mt-4">
                 For general inquiries and distributor information.
+                <span className="block mt-2">
+                  Store out of Super Q?{' '}
+                  <Link to="/where-to-buy" className="text-primary-600 font-semibold hover:underline">
+                    Report it here
+                  </Link>
+                  .
+                </span>
               </p>
             </div>
 
