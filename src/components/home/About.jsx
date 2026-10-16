@@ -230,7 +230,6 @@ export const About = () => {
               {[
                 'HACCP Certified',
                 'Halal (IDCP) on selected products',
-                'GMP Certified',
                 'FDA Approved'
               ].map((cert, index) => (
                 <div key={index} className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 px-3 py-1.5 rounded-lg border border-green-200 shadow-sm text-xs sm:text-sm font-semibold">

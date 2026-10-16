@@ -212,7 +212,15 @@ give another product rich results, get its SRP confirmed and add `srp`.
 - **Halal: NOT brand-wide.** "Not all halal." Never claim Super Q or Ngosiok is
   halal. The only published line is that not every product is halal and buyers
   should confirm per product with sales.
-- **FDA: still unconfirmed.** Do not add new FDA claims.
+- **Export markets: confirmed** (owner, 2026-10-16: "available in almost every
+  part of the world"). Published as "in many countries abroad, including the
+  United States, Canada and Australia", the three backed by retailer listings
+  anyone can check. Do not publish "every part of the world" as a bare claim.
+- **GMP: NOT current.** The owner has not renewed it. The homepage "GMP
+  Certified" badge was removed on 2026-10-16. Never claim GMP. (The GMP mark
+  printed on older pancit canton packs is the owner's packaging, not a site claim.)
+- **FDA: owner believes current** ("I think yes"), not confirmed. The existing
+  homepage badge stays; do not add new FDA claims until the owner confirms.
 - **Pre-existing homepage badges** (`src/components/home/About.jsx`, added
   2026-03-19 by the owner's team): "HACCP Certified", "GMP Certified",
   "FDA Approved" and a halal badge. The halal badge was narrowed on 2026-10-16
