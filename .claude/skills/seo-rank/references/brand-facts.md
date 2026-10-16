@@ -203,6 +203,34 @@ give another product rich results, get its SRP confirmed and add `srp`.
   "Non-fried, Healthy Choice!" about one product. That is a health claim:
   never repeat it.
 
+## Owner-confirmed, 2026-10-16 (later)
+
+- **HACCP: confirmed.** "We are HACCP certified." Published as "Ngosiok Marketing
+  is HACCP-certified" (wholesale FAQ, buyer's guide, Organization
+  `hasCertification`, llms.txt). The certifier (TÜV SÜD on the logo) is not
+  separately confirmed, so it is not named.
+- **Halal: NOT brand-wide.** "Not all halal." Never claim Super Q or Ngosiok is
+  halal. The only published line is that not every product is halal and buyers
+  should confirm per product with sales.
+- **FDA: still unconfirmed.** Do not add new FDA claims.
+- **Pre-existing homepage badges** (`src/components/home/About.jsx`, added
+  2026-03-19 by the owner's team): "HACCP Certified", "GMP Certified",
+  "FDA Approved" and a halal badge. The halal badge was narrowed on 2026-10-16
+  from "Halal Certified by IDCP" to "Halal (IDCP) on selected products" because
+  the owner said not all products are halal. GMP and FDA were left as the
+  owner's own claims; ask the owner to confirm them.
+- **Grandmother's name:** the owner said there is no need to credit her by name.
+
+## Third-party retail listings found abroad (not owner-confirmed)
+
+Super Q appears on: Walmart US (16 oz cornstarch sticks), Weee! US (Golden Bihon
+16 oz), Voilà by Sobeys, Canada (Golden Bihon 454 g, Golden Palabok 454 g), an
+Australian grocer (Golden Bihon 500 g), and a Spanish Asian market (Pancit
+Canton 227 g, listed as halal by that retailer — do not repeat). Export country
+names stay unpublished until the owner confirms them as markets. Voilà's copy
+of the Golden Bihon pack method (simmer 2 minutes, then 2 more, then loosen)
+agrees with the official 4-minute method.
+
 ## Official cooking method — Super Q Golden Bihon
 
 Source: the brand's own YouTube channel (@SuperQBihon), the thumbnail of the
@@ -232,9 +260,12 @@ starting to loosen. Serve."
 | Clara's Carenderia | 1:11 | 2K | 9y |
 | How to Cook SuperQ Bihon (Halal) | 8:12 | 4.5K | 9y |
 
-- Video IDs are **not yet confirmed** per title. The owner sent `ehHgFiHwaDg`
-  (title unknown); the screenshot's status bar suggests `u3ZBiV5JeQM` is the
-  "magic sarap" video. Get all five URLs and upload dates before embedding, so
+- **Confirmed:** `u3ZBiV5JeQM` = "The secret of cooking Super Q Bihon - magic sarap"
+  (search result title). Embedded on `/recipes/pancit-bihon-guisado`.
+- The palabok video's full title is "The Secret of cooking Super Q Special
+  Palabok (Pancit Malabon) - Mama Sita's"; its ID is not yet known.
+- The owner also sent `ehHgFiHwaDg` (title unknown). The other three IDs are not
+  yet known. Get all five URLs and upload dates before embedding, so
   each video lands on the right recipe and VideoObject schema is accurate.
 - Thumbnails show third-party seasoning brands (Knorr, Mama Sita's, Magic Sarap,
   Datu Puti). Fine on YouTube; on recipe pages, never imply a partnership.

@@ -91,6 +91,16 @@ const faqs = [
     answer:
       'Yes. Super Q Golden Bihon is sold locally and internationally, and Super Q Special Palabok and Super Q Pancit Canton are produced in export pack sizes with dedicated carton barcodes.',
   },
+  {
+    question: 'Is Ngosiok Marketing HACCP-certified?',
+    answer:
+      'Yes. Ngosiok Marketing is HACCP-certified, and Super Q noodles are produced in a controlled environment that minimises foreign matter from human handling and sun drying.',
+  },
+  {
+    question: 'Are Super Q products halal?',
+    answer:
+      'Not all of them. If you need halal products, tell our sales team which product and pack size you are ordering and we will confirm before you buy.',
+  },
 ];
 
 const inquiryChecklist = [

@@ -229,7 +229,7 @@ export const About = () => {
             <div className="flex flex-wrap gap-2">
               {[
                 'HACCP Certified',
-                'Halal Certified by IDCP',
+                'Halal (IDCP) on selected products',
                 'GMP Certified',
                 'FDA Approved'
               ].map((cert, index) => (

@@ -242,7 +242,7 @@ export const BestBihon = () => {
                 Super Q Golden Bihon is made from cornstarch, not rice. Its natural yellow colour
                 comes from the cornstarch itself. Cooked, it turns soft, smooth and bouncy while
                 keeping a distinct bite, and it is produced in a controlled environment rather
-                than sun-dried in the open.
+                than sun-dried in the open, by a HACCP-certified manufacturer.
               </p>
               <p>
                 For what to look for in any brand, from strand consistency to how it was dried,
