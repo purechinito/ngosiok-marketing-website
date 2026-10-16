@@ -34,7 +34,7 @@ const faqs = [
   {
     question: 'Do you need to soak bihon before cooking?',
     answer:
-      'Most cooks soften bihon briefly before it goes into the pan, but soaking times vary by brand and strand thickness, so follow the instructions on the pack. The goal is pliable, not fully softened — the noodle should finish cooking in the sauce, not in the soaking water.',
+      'It depends on the bihon. Super Q Golden Bihon needs no soaking: bring 1 liter of soup stock to the boil for every 250 g of bihon, add the bihon straight from the pack, and let it boil for 4 minutes before you start loosening it. Other bihon, especially rice bihon, may need a short soak, so follow the instructions on its pack.',
   },
 ];
 
@@ -332,10 +332,11 @@ export const BihonGuide = () => {
                 <li className="flex gap-4">
                   <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary-600 text-white font-bold flex items-center justify-center text-sm">1</span>
                   <span>
-                    <strong className="text-gray-900">Soften, don&rsquo;t saturate.</strong>{' '}
-                    Soaking times differ by brand and strand thickness, so follow the
-                    pack. You want the strands pliable, not fully softened — they will
-                    finish cooking in the sauce.
+                    <strong className="text-gray-900">Check whether it needs soaking at all.</strong>{' '}
+                    Super Q Golden Bihon does not. It goes into boiling soup stock straight
+                    from the pack, 1 liter for every 250 g, and boils for 4 minutes before
+                    you loosen it. If another brand&rsquo;s pack says to soak, keep it short:
+                    pliable, not soft.
                   </span>
                 </li>
                 <li className="flex gap-4">
