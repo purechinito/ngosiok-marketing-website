@@ -187,6 +187,58 @@ give another product rich results, get its SRP confirmed and add `srp`.
 - The Super Q Special Pancit Canton pack shows a **GMP mark** and another logo.
   **Not published.** Certifications stay unverified until the owner confirms.
 
+- **Super Q Golden Bihon** packs are printed **"Cornstarch Sticks"**
+  (`public/images/products/ngosiok (9).jpg`, `public/images/superqprods.jpg`).
+- **Super Q Special Palabok** 227 g pack: **"Cornstarch Sticks"**, ±5%, tagline
+  **"Super Q pa rin!"** (`public/images/products/ngosiok (5).jpg`, unused so far).
+- **Super Q Misua** pack: **"Wheat Flour Vermicelli"**, 160 g (±5%)
+  (`public/images/products/newproducts/superqmisua.jpg`, `misua.jpg`).
+- **Certification logos — PENDING OWNER CONFIRMATION, do not publish:**
+  `public/images/superqprods.jpg` shows **HACCP (TÜV SÜD)**, **Halal (IDCP —
+  Islamic Da'wah Council of the Philippines)** and **FDA Philippines** marks.
+  These would be strong trust signals for shoppers and export buyers. Ask the
+  owner whether each is current, and for certificate numbers or dates, before
+  any page, schema or llms.txt line mentions them.
+- A trade-fair booth poster (`public/images/products/2018.jpg`) says
+  "Non-fried, Healthy Choice!" about one product. That is a health claim:
+  never repeat it.
+
+## Official cooking method — Super Q Golden Bihon
+
+Source: the brand's own YouTube channel (@SuperQBihon), the thumbnail of the
+video "Clara's Carenderia", read from the owner's screenshot on 2026-10-16:
+"The secret of cooking Super Q Golden Bihon. No Soaking in water needed.
+1/4 kg bihon = 1 liter of water (Soup Stock). Boil for 4 minutes before
+starting to loosen. Serve."
+
+- **No soaking.** Golden Bihon goes into boiling soup stock straight from the pack.
+- **Ratio:** 1 liter of soup stock per 250 g of bihon (500 g : 2 L; 1 kg : 4 L).
+- **Boil 4 minutes before loosening** the strands.
+- This method is for Golden Bihon only. Palabok, canton, sotanghon and misua have
+  no published method, so their steps defer to the pack.
+
+## YouTube channel — @SuperQBihon (owner screenshot, 2026-10-16)
+
+- The videos were made by the owner's grandmother; the channel was her project
+  (owner, 2026-10-16). Her name has not been given — never invent one, and ask
+  before crediting her by name on the site.
+- 8.83K subscribers, 5 videos at the time of the screenshot:
+
+| Title (as shown) | Length | Views | Age |
+|---|---|---|---|
+| The Secret of cooking Super Q Golden Bihon for Lenten … | 7:11 | 35K | 8y |
+| The Secret of cooking Super Q Special Palabok (Pancit … | 13:37 | 1.2M | 8y |
+| The secret of cooking Super Q Bihon - magic sarap | — | 160K | 9y |
+| Clara's Carenderia | 1:11 | 2K | 9y |
+| How to Cook SuperQ Bihon (Halal) | 8:12 | 4.5K | 9y |
+
+- Video IDs are **not yet confirmed** per title. The owner sent `ehHgFiHwaDg`
+  (title unknown); the screenshot's status bar suggests `u3ZBiV5JeQM` is the
+  "magic sarap" video. Get all five URLs and upload dates before embedding, so
+  each video lands on the right recipe and VideoObject schema is accurate.
+- Thumbnails show third-party seasoning brands (Knorr, Mama Sita's, Magic Sarap,
+  Datu Puti). Fine on YouTube; on recipe pages, never imply a partnership.
+
 ## Not citable on the site
 
 - The owner reports Gemini's AI Overview names Super Q for "best bihon"

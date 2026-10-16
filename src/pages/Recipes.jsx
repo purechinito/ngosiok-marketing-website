@@ -42,7 +42,7 @@ export const Recipes = () => {
     <>
       <Seo
         title="Pancit Bihon & Canton Recipes for Love & Negosyo"
-        description="Filipino pancit recipes from the makers of Super Q: pancit bihon, canton, bam-i, palabok and sotanghon soup. Cook them for someone you love, or to sell."
+        description="Filipino pancit recipes from the makers of Super Q: bihon, canton, bilao, bam-i, palabok, misua and sotanghon. Cook them for someone you love, or to sell."
         canonical={canonicalUrl}
         ogImage={SEO_CONFIG.defaultOgImage}
         schema={[organizationNode, collectionSchema, breadcrumbSchema]}

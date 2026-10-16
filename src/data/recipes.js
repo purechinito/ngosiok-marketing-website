@@ -8,8 +8,10 @@
  *
  * Accuracy rules (see .claude/skills/seo-rank/references/brand-facts.md):
  * - No nutrition figures, calorie counts or health claims. None are verified.
- * - No soak or cook time stated as official for a Super Q product. Soaking
- *   varies by pack and strand, so steps defer to the pack instructions.
+ * - Super Q Golden Bihon has an official method, published on the brand's own
+ *   YouTube channel (@SuperQBihon): no soaking; 1 liter of soup stock for every
+ *   250 g of bihon; boil 4 minutes before loosening. Golden Bihon steps follow it.
+ * - Every other noodle has no published method, so steps defer to the pack.
  * - `image` must be a real file under public/ and `imageAlt` must describe
  *   what that photo actually shows, not what the recipe is about.
  * - `forBusiness` may only put a peso figure on the page when it is derived
@@ -49,7 +51,7 @@ export const recipes = [
           '2 medium carrots, cut into matchsticks',
           '1 cup green beans, sliced on the diagonal',
           '¼ small cabbage, shredded',
-          '3 to 4 cups chicken broth',
+          '2 liters (about 8 cups) chicken broth or soup stock',
           '4 tbsp soy sauce',
           '2 tbsp oyster sauce (optional)',
           '2 tbsp cooking oil',
@@ -59,10 +61,6 @@ export const recipes = [
       },
     ],
     steps: [
-      {
-        name: 'Soften the bihon',
-        text: 'Soak the Super Q Golden Bihon following the instructions on the pack, until the strands are pliable but not fully soft. Drain well and set aside. The noodles finish cooking in the sauce, not in the soaking water.',
-      },
       {
         name: 'Prepare the chicken',
         text: 'Boil the chicken breast until cooked through. Reserve the broth, then shred the meat.',
@@ -77,11 +75,11 @@ export const recipes = [
       },
       {
         name: 'Build the sauce',
-        text: 'Pour the broth into the same pan. Add the soy sauce and oyster sauce, season with salt and pepper, and bring to a simmer. Taste now — the noodles will absorb whatever this liquid tastes like.',
+        text: 'Pour the broth into the same pan. That is the Super Q ratio: 1 liter of soup stock for every 250 g of Golden Bihon. Add the soy sauce and oyster sauce, season with salt and pepper, and bring to a boil. Taste now — the noodles will absorb whatever this liquid tastes like.',
       },
       {
         name: 'Add the noodles',
-        text: 'Add the drained bihon. Fold it through with tongs and let it take up the liquid, about three to five minutes. Toss gently rather than stirring hard, which shreds the strands.',
+        text: 'Add the Super Q Golden Bihon straight from the pack. No soaking is needed. Let it boil for 4 minutes before you start loosening the strands, then fold it through with tongs until it has taken up the liquid. Toss gently rather than stirring hard, which shreds the strands.',
       },
       {
         name: 'Finish',
@@ -89,6 +87,7 @@ export const recipes = [
       },
     ],
     tips: [
+      'Never soak Super Q Golden Bihon. It goes into the boiling stock straight from the pack: 1 liter for every 250 g, 4 minutes before you loosen it.',
       'Cooking for a buffet or handaan? Stop a minute early. Pancit keeps softening on the serving table.',
       'Super Q Golden Bihon is cornstarch-based, so it holds its bite longer than rice bihon once the sauce goes in.',
     ],
@@ -108,6 +107,112 @@ export const recipes = [
         'Cook the sauce in batches and add the noodles per order, so every plate still has bite.',
         'For bilao and party orders, stop cooking a minute early. Pancit keeps softening on the table.',
         'The ½ kg pack is 500 g. Weigh it yourself on your shop scale and cost your plates from the real weight.',
+      ],
+    },
+  },
+
+  {
+    slug: 'pancit-bilao',
+    name: 'Pancit Bilao',
+    headline: 'Pancit Bilao (Party Tray Pancit Bihon)',
+    seoTitle: 'Pancit Bilao Recipe for Parties & Pang-Negosyo',
+    tagline: 'The party tray that feeds the whole handaan, made to share or made to sell.',
+    description:
+      'Pancit bihon for a party tray. One kilo of Super Q Golden Bihon feeds at least ten, lined with banana leaves and ready for the handaan or your customer.',
+    image: '/images/products/ngosiok (9).jpg',
+    imageAlt:
+      'A pack of Super Q Golden Bihon labeled "Cornstarch Sticks" beside a plate of pancit bihon with Chinese sausage, shrimp, meat, cabbage and spring onions',
+    product: { name: 'Super Q Golden Bihon', slug: 'super-q-golden-bihon' },
+    category: 'Main course',
+    cuisine: 'Filipino',
+    servings: '10 servings',
+    prepMinutes: 30,
+    cookMinutes: 35,
+    published: '2026-10-16',
+    intro: `A bilao is the round woven tray that pancit arrives in at Filipino parties, and a favourite way to sell pancit from home. This is our pancit bihon guisado scaled up for a crowd, with the steps that matter when the noodles have to sit, travel and still look good when the cling wrap comes off.\n\nThe rule of the bilao is timing. Cook the noodles slightly underdone, because they keep softening in the tray.`,
+    ingredientGroups: [
+      {
+        title: 'Pancit',
+        items: [
+          '1 kg Super Q Golden Bihon (two 500 g packs)',
+          '500 g pork belly or shoulder, sliced thin',
+          '500 g chicken breast, boiled and shredded (keep the broth)',
+          '300 g shrimp, peeled',
+          '3 pieces Chinese sausage, sliced on the diagonal',
+          '8 cloves garlic, minced',
+          '2 medium onions, sliced',
+          '3 medium carrots, cut into matchsticks',
+          '2 cups green beans, sliced on the diagonal',
+          '½ medium cabbage, shredded',
+          '4 liters (about 16 cups) chicken broth or soup stock',
+          '½ cup soy sauce',
+          '¼ cup oyster sauce',
+          '¼ cup cooking oil',
+          'Salt and ground pepper, to taste',
+        ],
+      },
+      {
+        title: 'For the bilao',
+        items: [
+          'Banana leaves, wiped clean and passed briefly over a low flame to soften',
+          '4 hard-boiled eggs, sliced',
+          'Calamansi, halved',
+          'Spring onions, chopped',
+          'Cling wrap',
+        ],
+      },
+    ],
+    steps: [
+      {
+        name: 'Line the bilao',
+        text: 'Wipe the banana leaves clean and pass them briefly over a low flame until they turn glossy and flexible. Line the bilao with them, shiny side up, letting the edges overlap.',
+      },
+      {
+        name: 'Cook the meats',
+        text: 'Heat the oil in your widest pan. Sauté the garlic and onions until fragrant, then brown the pork. Add the shredded chicken and the Chinese sausage. Add the shrimp and cook just until pink. Lift everything out and set it aside, keeping the shrimp separate for the top.',
+      },
+      {
+        name: 'Cook the vegetables separately',
+        text: 'Stir-fry the carrots and green beans for about two minutes, then add the cabbage and toss briefly. Set the vegetables aside so they stay crisp and bright for the tray.',
+      },
+      {
+        name: 'Build the sauce',
+        text: 'In a large pot, combine the broth, soy sauce and oyster sauce, season with salt and pepper and bring to a boil. Taste it now; the noodles will take on exactly this flavour. Super Q Golden Bihon takes 1 liter of stock for every 250 g, so a full kilo needs all 4 liters.',
+      },
+      {
+        name: 'Cook the noodles in two batches',
+        text: 'A full kilo rarely fits one pan. Ladle half the hot stock into your wide pan and bring it back to the boil. Add one 500 g pack of Super Q Golden Bihon straight from the pack, with no soaking. Let it boil for 4 minutes before you start loosening the strands, then fold in half of the meats with tongs until the liquid is absorbed. Take it off the heat while the noodles are still slightly firm. Repeat with the second pack, the rest of the stock and the rest of the meats.',
+      },
+      {
+        name: 'Assemble the bilao',
+        text: 'Spread the noodles over the banana leaves. Arrange the vegetables, shrimp and egg slices on top in neat rows or wedges, tuck calamansi halves around the edge and scatter the spring onions.',
+      },
+      {
+        name: 'Wrap it',
+        text: 'Let the steam escape for a few minutes before covering with cling wrap. Wrapping it while it is still steaming traps water that drips back onto the noodles.',
+      },
+    ],
+    tips: [
+      'Two batches beat one crowded pan. Crowded noodles steam instead of stir-fry and turn soft.',
+      'A bilao is judged the moment the wrap comes off. Clear rows of toppings look generous; a heap looks rushed.',
+    ],
+    forLove: {
+      title: 'Cooking it for someone you love',
+      body: [
+        "Turning up at your partner's family party with a full bilao is the Filipino way of bringing flowers to every relative at once.",
+        'It is also one of the kindest things to bring a family with a new baby, a wake or a big move: food for everyone, and no plates to return.',
+      ],
+    },
+    forBusiness: {
+      title: 'Selling it: pancit bilao pang-negosyo',
+      body: [
+        'Using two 500 g packs of Super Q Golden Bihon at the ₱50 SRP, the noodles for this bilao cost about ₱100, or ₱10 or less per serving for at least ten. Add your meat, vegetables, banana leaves, tray, gas and labour, then set your price per bilao.',
+      ],
+      points: [
+        'Take bilao orders at least a day ahead, so you buy exactly what each order needs.',
+        'Cook slightly underdone. The noodles keep softening during delivery.',
+        'Tape a small bag of calamansi and your contact card to the cling wrap. Every bilao at a party can bring in the next order.',
+        'Photograph every bilao before it leaves and post it. Your next customer is often someone who saw the last one.',
       ],
     },
   },
@@ -146,7 +251,7 @@ export const recipes = [
           '1 medium onion, sliced',
           '2 medium carrots, cut into matchsticks',
           '¼ small cabbage, shredded',
-          '4 to 5 cups pork or chicken broth',
+          '1.5 liters (about 6 cups) pork or chicken broth',
           '4 tbsp soy sauce',
           '2 tbsp oyster sauce',
           '2 tbsp cooking oil',
@@ -157,8 +262,8 @@ export const recipes = [
     ],
     steps: [
       {
-        name: 'Soak the noodles and mushrooms',
-        text: 'Soak the Super Q Golden Bihon following the pack instructions until pliable, then drain. Soak the dried wood ear mushrooms in warm water until soft, then slice. Keep the pancit canton dry for now.',
+        name: 'Soak the mushrooms, not the noodles',
+        text: 'Soak the dried wood ear mushrooms in warm water until soft, then slice. Keep both noodles dry: Super Q Golden Bihon needs no soaking and goes in straight from the pack.',
       },
       {
         name: 'Render the sausage and pork',
@@ -170,15 +275,15 @@ export const recipes = [
       },
       {
         name: 'Build the sauce',
-        text: 'Pour in the broth, add the soy sauce and oyster sauce, season, and bring to a simmer.',
+        text: 'Pour in the broth, add the soy sauce and oyster sauce, season, and bring to a boil. The broth covers both noodles: 1 liter for the 250 g of bihon, following the Super Q ratio, plus extra for the canton.',
       },
       {
         name: 'Cook the canton first',
-        text: 'Add the Super Q Pancit Canton to the simmering sauce. It is the thicker noodle and needs the longer time — let it soften and take up liquid before the bihon joins it.',
+        text: 'Add the Super Q Pancit Canton to the boiling sauce. It is the thicker noodle and needs the longer time — let it soften and take up some liquid before the bihon joins it.',
       },
       {
         name: 'Add the bihon',
-        text: 'Add the drained bihon and fold the two noodles together with tongs. Add a little more broth if the pan goes dry.',
+        text: 'Add the Super Q Golden Bihon straight from the pack. Let it boil for 4 minutes before you start loosening it, then fold the two noodles together with tongs. Add a little more broth if the pan goes dry.',
       },
       {
         name: 'Finish',
@@ -484,6 +589,92 @@ export const recipes = [
       points: [
         'Store the noodles and broth separately and combine them per bowl, so the last order is as good as the first.',
         'Offer it as a rainy-day special on your page. Timing does the marketing for you.',
+      ],
+    },
+  },
+  {
+    slug: 'birthday-misua-soup',
+    name: 'Birthday Misua Soup',
+    headline: 'Birthday Misua Soup with Chicken and Patola',
+    seoTitle: 'Misua Soup Recipe for Birthdays and Long Life',
+    tagline: 'Long strands for long life, a round coil for family coming together. The bowl to cook on a birthday.',
+    description:
+      'Misua soup with chicken and patola, made with Super Q Misua. Long strands for long life, and a whole egg in every bowl for the birthday celebrant.',
+    image: '/images/products/newproducts/misua2.jpg',
+    imageAlt:
+      'Two packs of Super Q Misua beside a bowl of misua soup with shredded chicken, patola and spring onions',
+    product: { name: 'Super Q Misua', slug: 'super-q-misua' },
+    category: 'Soup',
+    cuisine: 'Filipino',
+    servings: '4 servings',
+    prepMinutes: 15,
+    cookMinutes: 35,
+    published: '2026-10-16',
+    intro: `Misua is a birthday noodle. In Chinese tradition its long strands stand for long life, and the round coil it is formed into stands for family coming together. Super Q Misua is a fine wheat-flour noodle shaped exactly that way.\n\nIt cooks very quickly, so the whole soup is built first and the misua goes in last, just before everyone sits down.`,
+    ingredientGroups: [
+      {
+        title: null,
+        items: [
+          '160 g Super Q Misua (one pack)',
+          '1 chicken breast or 2 chicken thighs',
+          '7 cups water',
+          '1 medium patola (sponge gourd), peeled and sliced',
+          '4 cloves garlic, minced',
+          '1 medium onion, sliced',
+          '1 thumb ginger, sliced',
+          '2 tbsp fish sauce',
+          '2 tbsp cooking oil',
+          'Salt and ground pepper, to taste',
+          '4 hard-boiled eggs, peeled, one for each bowl',
+          'Spring onions and fried garlic, to serve',
+        ],
+      },
+    ],
+    steps: [
+      {
+        name: 'Make the broth',
+        text: 'Simmer the chicken with the ginger in the water until tender, about 25 minutes. Lift the chicken out, shred the meat and keep the broth.',
+      },
+      {
+        name: 'Sauté',
+        text: 'Heat the oil in a pot and sauté the garlic and onion until fragrant. Add the shredded chicken and stir for a minute.',
+      },
+      {
+        name: 'Season the soup',
+        text: 'Pour the broth back in, add the fish sauce, season with salt and pepper and bring to a boil.',
+      },
+      {
+        name: 'Add the patola',
+        text: 'Add the patola and simmer until just tender, two to three minutes. It should still hold its shape.',
+      },
+      {
+        name: 'Add the misua last',
+        text: 'Lower the heat and add the Super Q Misua whole. Stir gently so the strands stay long, and cook only as long as the pack directs. Misua cooks very fast.',
+      },
+      {
+        name: 'Serve straight away',
+        text: 'Ladle into bowls, put a whole peeled egg in each one, and finish with spring onions and fried garlic.',
+      },
+    ],
+    tips: [
+      'On a birthday, do not break or cut the misua. The long, unbroken strands are the wish.',
+      'Misua keeps drinking the broth as it sits, and the soup thickens. Cook the noodles only when everyone is ready to eat.',
+    ],
+    forLove: {
+      title: 'Cooking it for someone you love',
+      body: [
+        'Wake someone up on their birthday with a bowl of misua and an egg. It is a small breakfast that says a big thing: live long, and keep coming home to us.',
+        'Cook it for a parent, a lola or a lolo. For the people who taught you this tradition, it is the bowl that means the most.',
+      ],
+    },
+    forBusiness: {
+      title: 'Selling it: misua soup pang-negosyo',
+      body: [
+        'Misua soup is quick to serve because the noodle cooks so fast. Keep the broth hot through service and cook the misua per bowl as orders come in.',
+      ],
+      points: [
+        'Offer a "birthday bowl" with a whole egg for customers ordering for a celebrant.',
+        'Keep the broth and the misua apart until each order, so the last bowl is as good as the first.',
       ],
     },
   },

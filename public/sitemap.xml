@@ -106,6 +106,18 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 </image:image>
 </url>
 
+<!-- Recipe: pancit-bilao -->
+<url>
+<loc>https://www.superq.ph/recipes/pancit-bilao</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+<image:image>
+<image:loc>https://www.superq.ph/images/products/ngosiok%20(9).jpg</image:loc>
+<image:title>Super Q Golden Bihon pack with a plate of pancit bihon for a party tray</image:title>
+</image:image>
+</url>
+
 <!-- Recipe: pancit-bam-i -->
 <url>
 <loc>https://www.superq.ph/recipes/pancit-bam-i</loc>
@@ -151,6 +163,18 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <image:image>
 <image:loc>https://www.superq.ph/images/products/newproducts/sotanghon_vermicelli.jpg</image:loc>
 <image:title>Super Q Sotanghon packs with a bowl of chicken sotanghon soup</image:title>
+</image:image>
+</url>
+
+<!-- Recipe: birthday-misua-soup -->
+<url>
+<loc>https://www.superq.ph/recipes/birthday-misua-soup</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+<image:image>
+<image:loc>https://www.superq.ph/images/products/newproducts/misua2.jpg</image:loc>
+<image:title>Super Q Misua packs with a bowl of misua soup with chicken and patola</image:title>
 </image:image>
 </url>
 
