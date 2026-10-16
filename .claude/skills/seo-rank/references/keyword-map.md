@@ -129,6 +129,8 @@ sessions do not duplicate or cannibalise.
 | Pancit Canton Guisado | `/recipes/pancit-canton-guisado` | pancit canton recipe | 2026-10-16 |
 | Pancit Bilao | `/recipes/pancit-bilao` | pancit bilao recipe | 2026-10-16 |
 | Birthday Misua Soup | `/recipes/birthday-misua-soup` | misua soup recipe | 2026-10-16 |
+| Seafood Pancit Bihon | `/recipes/seafood-pancit-bihon` | seafood pancit bihon | 2026-10-16 |
+| Misua with Sardines | `/recipes/misua-with-sardines` | misua with sardines | 2026-10-16 |
 | Best Bihon Brand (buyer's guide) | `/best-bihon-brand-philippines` | best bihon brand in the philippines | 2026-10-16 |
 | Where to Buy + stock report | `/where-to-buy` | where to buy super q bihon | 2026-10-16 |
 

@@ -5,7 +5,8 @@ import { recipes, getRecipe } from '@/data/recipes';
 import { SEO_CONFIG } from '@/utils/constants';
 import { organizationNode, orgRef } from '@/utils/schema';
 import { NotFound } from '@/pages/NotFound';
-import { ChevronRight, Clock, Users, ArrowRight, ArrowDown, Heart, Store } from 'lucide-react';
+import { YouTubeVideo } from '@/components/common/YouTubeVideo';
+import { ChevronRight, Clock, Users, ArrowRight, ArrowDown, Heart, Store, PlayCircle } from 'lucide-react';
 
 const isoMinutes = (minutes) => `PT${minutes}M`;
 
@@ -100,13 +101,24 @@ export const RecipeDetail = () => {
             <p className="text-xl text-gray-700 leading-relaxed mb-6 font-medium">
               {recipe.description}
             </p>
-            <a
-              href="#recipe"
-              className="inline-flex items-center gap-2 mb-8 bg-primary-600 text-white px-5 py-3 rounded-xl font-bold hover:bg-primary-700 transition-colors"
-            >
-              <ArrowDown className="w-4 h-4" />
-              Jump to recipe
-            </a>
+            <div className="flex flex-wrap gap-3 mb-8">
+              <a
+                href="#recipe"
+                className="inline-flex items-center gap-2 bg-primary-600 text-white px-5 py-3 rounded-xl font-bold hover:bg-primary-700 transition-colors"
+              >
+                <ArrowDown className="w-4 h-4" />
+                Jump to recipe
+              </a>
+              {recipe.video && (
+                <a
+                  href="#video"
+                  className="inline-flex items-center gap-2 bg-white text-gray-800 border-2 border-gray-200 px-5 py-3 rounded-xl font-bold hover:border-primary-600 hover:text-primary-600 transition-colors"
+                >
+                  <PlayCircle className="w-4 h-4" />
+                  Jump to video
+                </a>
+              )}
+            </div>
 
             <dl className="flex flex-wrap gap-x-8 gap-y-4 text-sm border-y border-gray-100 py-5">
               <div className="flex items-center gap-2">
@@ -194,6 +206,15 @@ export const RecipeDetail = () => {
             </div>
           </div>
         </Section>
+
+        {recipe.video && (
+          <Section className="pt-0" id="video">
+            <div className="max-w-4xl scroll-mt-28">
+              <h2 className="text-3xl font-bold font-heading text-gray-900 mb-6">Watch it cooked</h2>
+              <YouTubeVideo id={recipe.video.id} title={recipe.video.title} />
+            </div>
+          </Section>
+        )}
 
         {recipe.tips && recipe.tips.length > 0 && (
           <Section className="pt-0">

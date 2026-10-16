@@ -31,6 +31,7 @@ export const recipes = [
     imageAlt:
       'A pack of Super Q Golden Bihon beside a plate of pancit bihon with Chinese sausage, shrimp, meat, cabbage and spring onions',
     product: { name: 'Super Q Golden Bihon', slug: 'super-q-golden-bihon' },
+    video: { id: 'u3ZBiV5JeQM', title: 'The secret of cooking Super Q Bihon' },
     category: 'Main course',
     cuisine: 'Filipino',
     servings: '5 servings',
@@ -213,6 +214,95 @@ export const recipes = [
         'Cook slightly underdone. The noodles keep softening during delivery.',
         'Tape a small bag of calamansi and your contact card to the cling wrap. Every bilao at a party can bring in the next order.',
         'Photograph every bilao before it leaves and post it. Your next customer is often someone who saw the last one.',
+      ],
+    },
+  },
+
+  {
+    slug: 'seafood-pancit-bihon',
+    name: 'Seafood Pancit Bihon',
+    headline: 'Seafood Pancit Bihon',
+    seoTitle: 'Seafood Pancit Bihon Recipe with Shrimp & Squid',
+    tagline: 'Shrimp, squid and mussels over golden bihon. The pancit for Lenten Fridays, no pork needed.',
+    description:
+      'Pancit bihon with shrimp, squid and mussels, made with one 454 g pack of Super Q Golden Bihon and a stock made from the shrimp heads. The pancit for Lent.',
+    image: '/images/products/newproducts/goldenbihon.jpg',
+    imageAlt:
+      'A pack of Super Q Golden Bihon beside a plate of bihon with shrimp, mussels, squid and mushrooms',
+    product: { name: 'Super Q Golden Bihon', slug: 'super-q-golden-bihon' },
+    category: 'Main course',
+    cuisine: 'Filipino',
+    servings: '4 to 5 servings',
+    prepMinutes: 20,
+    cookMinutes: 25,
+    published: '2026-10-16',
+    intro: `Seafood pancit bihon is what goes on the table when the family keeps Lenten Fridays, and whenever there is good seafood at the market. This version uses one 454 g (16 oz) pack of Super Q Golden Bihon, the size sold in many Filipino stores abroad.\n\nThe flavour comes from the stock. Simmer the shrimp heads and shells instead of throwing them away, and the bihon drinks all of it.`,
+    ingredientGroups: [
+      {
+        title: null,
+        items: [
+          '454 g Super Q Golden Bihon (one 16 oz pack)',
+          '250 g shrimp, peeled, heads and shells kept for the stock',
+          '200 g squid, cleaned and sliced into rings',
+          '250 g mussels, scrubbed',
+          '4 dried shiitake mushrooms, soaked and sliced',
+          '4 cloves garlic, minced',
+          '1 medium onion, sliced',
+          '1 medium carrot, cut into matchsticks',
+          '¼ small cabbage, shredded',
+          '2 liters water, for the shrimp stock',
+          '3 tbsp soy sauce',
+          '2 tbsp fish sauce',
+          '2 tbsp cooking oil',
+          'Ground pepper, to taste',
+          'Spring onions and calamansi wedges, to serve',
+        ],
+      },
+    ],
+    steps: [
+      {
+        name: 'Make the shrimp stock',
+        text: 'Simmer the shrimp heads and shells in the water for about 15 minutes, pressing the heads to release their flavour. Strain and keep about 1.8 liters of stock: that is the Super Q ratio of 1 liter for every 250 g of Golden Bihon.',
+      },
+      {
+        name: 'Cook the seafood',
+        text: 'Heat the oil and sauté the garlic and onion until fragrant. Add the mussels, cover and cook until they open, discarding any that stay closed. Add the squid and shrimp and cook just until done, then lift all the seafood out.',
+      },
+      {
+        name: 'Cook the vegetables',
+        text: 'Add the carrot and mushrooms to the pan and stir-fry for two minutes, then add the cabbage and toss briefly. Set the vegetables aside.',
+      },
+      {
+        name: 'Build the sauce',
+        text: 'Pour the shrimp stock into the pan, add the soy sauce and fish sauce, season with pepper and bring to a boil. Taste it now; the noodles will take on this flavour.',
+      },
+      {
+        name: 'Add the bihon',
+        text: 'Add the Super Q Golden Bihon straight from the pack, with no soaking. Let it boil for 4 minutes before you start loosening the strands, then fold with tongs until the stock is absorbed.',
+      },
+      {
+        name: 'Finish',
+        text: 'Fold the vegetables through, then arrange the shrimp, squid and mussels on top so every plate shows the seafood. Serve with spring onions and calamansi.',
+      },
+    ],
+    tips: [
+      'The shrimp heads are most of the flavour. Never throw them away when you are making seafood pancit.',
+      'Add the seafood back only at the end. Seafood cooked twice turns rubbery.',
+    ],
+    forLove: {
+      title: 'Cooking it for someone you love',
+      body: [
+        'Cooking for a lola who keeps Lenten Fridays? This is the pancit she can share with everyone else, with no pork on the plate.',
+      ],
+    },
+    forBusiness: {
+      title: 'Selling it: seafood pancit pang-negosyo',
+      body: [
+        'Seafood pancit sells as a Lenten special. Put it on the menu every Friday of Lent and post it early in the week, so customers can order ahead.',
+      ],
+      points: [
+        'Arrange the shrimp and mussels on top of every order. Customers pay for the seafood they can see.',
+        'Keep shrimp heads from your other dishes in the freezer. They become the stock that makes this pancit taste expensive.',
       ],
     },
   },
@@ -675,6 +765,86 @@ export const recipes = [
       points: [
         'Offer a "birthday bowl" with a whole egg for customers ordering for a celebrant.',
         'Keep the broth and the misua apart until each order, so the last bowl is as good as the first.',
+      ],
+    },
+  },
+  {
+    slug: 'misua-with-sardines',
+    name: 'Misua with Sardines',
+    headline: 'Misua with Sardines (Misua at Sardinas)',
+    seoTitle: 'Misua with Sardines Recipe (Sardinas with Misua)',
+    tagline: 'The petsa de peligro classic: one can of sardines, one pack of misua, dinner in 20 minutes.',
+    description:
+      'Misua with sardines in tomato sauce, made with Super Q Misua. A quick Filipino soup from pantry staples, on the table in about 20 minutes.',
+    image: '/images/products/newproducts/misua1.jpg',
+    imageAlt:
+      'Two packs of Super Q Misua beside a plate of misua with sardines in tomato sauce, garnished with spring onions and parsley',
+    product: { name: 'Super Q Misua', slug: 'super-q-misua' },
+    category: 'Soup',
+    cuisine: 'Filipino',
+    servings: '3 to 4 servings',
+    prepMinutes: 5,
+    cookMinutes: 15,
+    published: '2026-10-16',
+    intro: `Misua with sardines is the dinner Filipino households make from the pantry: a can of sardines in tomato sauce, a pack of misua, garlic and onion. It is quick, warm and filling, and it has carried a lot of families through the days before payday.\n\nSuper Q Misua is a fine wheat-flour noodle that cooks very fast, so it goes in last, right before serving.`,
+    ingredientGroups: [
+      {
+        title: null,
+        items: [
+          '160 g Super Q Misua (one pack)',
+          '2 small cans sardines in tomato sauce',
+          '4 cloves garlic, minced',
+          '1 medium onion, chopped',
+          '1 medium tomato, chopped (optional)',
+          '5 cups water',
+          '1 tbsp fish sauce',
+          '2 tbsp cooking oil',
+          'Ground pepper, to taste',
+          '1 egg, beaten (optional)',
+          'Spring onions, chopped, to serve',
+        ],
+      },
+    ],
+    steps: [
+      {
+        name: 'Sauté',
+        text: 'Heat the oil and sauté the garlic, onion and tomato until soft.',
+      },
+      {
+        name: 'Add the sardines',
+        text: 'Add the sardines with all their sauce. Break them into pieces gently and cook for about two minutes.',
+      },
+      {
+        name: 'Make the soup',
+        text: 'Pour in the water, season with the fish sauce and pepper, and bring to a boil.',
+      },
+      {
+        name: 'Add the misua last',
+        text: 'Add the Super Q Misua and cook only as long as the pack directs. Misua cooks very fast. If you are using the egg, swirl it in now.',
+      },
+      {
+        name: 'Serve hot',
+        text: 'Ladle into bowls and top with spring onions.',
+      },
+    ],
+    tips: [
+      'Add the misua only when everyone is ready to eat. It keeps drinking the soup and thickens as it sits.',
+      'A beaten egg swirled in at the end makes it more filling without another trip to the store.',
+    ],
+    forLove: {
+      title: 'Cooking it for someone you love',
+      body: [
+        'This is the dish someone made you when money was tight, and you never noticed. Make it for the people who made it for you.',
+      ],
+    },
+    forBusiness: {
+      title: 'Selling it: misua with sardines pang-negosyo',
+      body: [
+        'Misua with sardines uses pantry ingredients that keep, which makes it an easy everyday item for a carinderia or a breakfast stall.',
+      ],
+      points: [
+        'Keep the sardine soup hot and add the misua per order.',
+        'Offer it as a rainy-day or breakfast bowl. It is the kind of comfort food people want early and when it pours.',
       ],
     },
   },

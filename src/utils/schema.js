@@ -51,6 +51,10 @@ export const organizationNode = {
     '@type': 'QuantitativeValue',
     value: COMPANY_INFO.employees,
   },
+  hasCertification: {
+    '@type': 'Certification',
+    name: 'HACCP',
+  },
   knowsAbout: [
     'Bihon',
     'Cornstarch noodles',

@@ -118,6 +118,18 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 </image:image>
 </url>
 
+<!-- Recipe: seafood-pancit-bihon -->
+<url>
+<loc>https://www.superq.ph/recipes/seafood-pancit-bihon</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+<image:image>
+<image:loc>https://www.superq.ph/images/products/newproducts/goldenbihon.jpg</image:loc>
+<image:title>Super Q Golden Bihon pack with a plate of seafood bihon</image:title>
+</image:image>
+</url>
+
 <!-- Recipe: pancit-bam-i -->
 <url>
 <loc>https://www.superq.ph/recipes/pancit-bam-i</loc>
@@ -175,6 +187,18 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <image:image>
 <image:loc>https://www.superq.ph/images/products/newproducts/misua2.jpg</image:loc>
 <image:title>Super Q Misua packs with a bowl of misua soup with chicken and patola</image:title>
+</image:image>
+</url>
+
+<!-- Recipe: misua-with-sardines -->
+<url>
+<loc>https://www.superq.ph/recipes/misua-with-sardines</loc>
+<lastmod>2026-10-16</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+<image:image>
+<image:loc>https://www.superq.ph/images/products/newproducts/misua1.jpg</image:loc>
+<image:title>Super Q Misua packs with misua and sardines in tomato sauce</image:title>
 </image:image>
 </url>
 
