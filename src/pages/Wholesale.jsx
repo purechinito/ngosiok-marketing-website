@@ -89,7 +89,7 @@ const faqs = [
   {
     question: 'Do you export?',
     answer:
-      'Yes. Super Q Golden Bihon is sold locally and internationally, and Super Q Special Palabok and Super Q Pancit Canton are produced in export pack sizes with dedicated carton barcodes.',
+      'Yes. Super Q is sold across the Philippines and in many countries abroad, including the United States, Canada and Australia. Super Q Golden Bihon, Super Q Special Palabok and Super Q Pancit Canton are produced in export pack sizes with dedicated carton barcodes.',
   },
   {
     question: 'Is Ngosiok Marketing HACCP-certified?',

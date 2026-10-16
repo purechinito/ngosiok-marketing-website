@@ -25,7 +25,7 @@ const faqs = [
   {
     question: 'Is Super Q sold outside the Philippines?',
     answer:
-      `Yes. Super Q noodles are exported internationally. For export orders or to find out about availability in your country, contact our sales team at ${COMPANY_INFO.email}.`,
+      `Yes. Super Q noodles are sold in many countries abroad, including the United States, Canada and Australia. For export orders or to find out about availability in your country, contact our sales team at ${COMPANY_INFO.email}.`,
   },
 ];
 
@@ -115,7 +115,8 @@ export const WhereToBuy = () => {
               <Globe className="w-6 h-6 text-primary-600 mb-3" />
               <h2 className="text-xl font-bold text-gray-900 mb-2">Outside the Philippines</h2>
               <p className="text-gray-600 leading-relaxed">
-                Super Q is exported internationally. Email{' '}
+                Super Q is sold in many countries, including the United States, Canada
+                and Australia. Email{' '}
                 <a href={`mailto:${COMPANY_INFO.email}`} className="text-primary-600 font-semibold hover:underline break-all">
                   {COMPANY_INFO.email}
                 </a>{' '}

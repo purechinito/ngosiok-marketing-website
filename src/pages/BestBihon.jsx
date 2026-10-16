@@ -35,7 +35,7 @@ const faqs = [
   {
     question: 'Where can I buy Super Q bihon?',
     answer:
-      'Super Q is sold in wet markets and grocery stores across the Philippines. If your store has run out, you can report it on the Where to Buy page.',
+      'Super Q is sold in wet markets and grocery stores across the Philippines, and in many countries abroad, including the United States, Canada and Australia. If your store has run out, you can report it on the Where to Buy page.',
   },
 ];
 
@@ -218,7 +218,7 @@ export const BestBihon = () => {
             <div className="space-y-5 text-lg text-gray-600 leading-relaxed">
               <p>
                 The best bihon is no use if your store never has it. Super Q is sold in wet markets
-                and grocery stores across the Philippines, and exported internationally.
+                and grocery stores across the Philippines, and in many countries abroad, including the United States, Canada and Australia.
               </p>
               <p>
                 Stores do sell out between deliveries. When yours has,{' '}
